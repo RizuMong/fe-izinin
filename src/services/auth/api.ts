@@ -21,6 +21,16 @@ const handleError = (error: any): never => {
     error?.message ||
     "Request failed"
 
+  if (
+    message === "Invalid or expired token" ||
+    error?.response?.status === 401
+  ) {
+    if (typeof window !== "undefined") {
+      window.location.replace("/auth/login")
+    }
+    throw new Error("Session expired, please login again")
+  }
+
   throw new Error(message)
 }
 
