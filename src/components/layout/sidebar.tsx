@@ -19,16 +19,33 @@ export function AppSidebar() {
   const pathname = usePathname()
 
   return (
-    <Sidebar collapsible="icon">
-
-      {/* LOGO */}
+    <Sidebar
+      collapsible="icon"
+      className="
+        border-r
+        transition-all
+      "
+    >
+      {/* HEADER */}
       <SidebarHeader>
-        <div className="flex items-center gap-3 px-3 py-3">
-          <div className="w-9 h-9 bg-black text-white flex items-center justify-center rounded-md">
+        <div
+          className="
+            flex items-center gap-3 p-3
+            group-data-[collapsible=icon]:justify-center
+          "
+        >
+          {/* LOGO */}
+          <div className="w-9 h-9 bg-black text-white flex items-center justify-center rounded-md shrink-0">
             I
           </div>
 
-          <div className="flex flex-col leading-tight">
+          {/* TEXT */}
+          <div
+            className="
+              flex flex-col leading-tight
+              group-data-[collapsible=icon]:hidden
+            "
+          >
             <span className="text-sm font-semibold">Izinin</span>
             <span className="text-xs text-muted-foreground">
               Manajemen Cuti
@@ -37,14 +54,22 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
 
-      {/* MENU */}
-      <SidebarContent className="px-2">
+      {/* CONTENT */}
+      <SidebarContent>
         {sidebarMenu.map((section, i) => (
-          <SidebarGroup key={i}>
-            <SidebarGroupLabel className="px-2 text-xs text-muted-foreground">
+          <SidebarGroup key={i} className="mt-2">
+
+            {/* LABEL */}
+            <SidebarGroupLabel
+              className="
+                px-3 text-xs text-muted-foreground
+                group-data-[collapsible=icon]:hidden
+              "
+            >
               {section.label}
             </SidebarGroupLabel>
 
+            {/* MENU */}
             <SidebarMenu>
               {section.children.map((item, j) => {
                 const Icon = item.icon
@@ -55,13 +80,30 @@ export function AppSidebar() {
                       asChild
                       isActive={pathname === item.href}
                       tooltip={item.label}
+                      className="
+                        rounded-md transition-all
+                        data-[active=true]:bg-secondary
+                        data-[active=true]:text-primary
+                        hover:bg-muted
+                      "
                     >
                       <Link
                         href={item.href}
-                        className="flex items-center gap-2"
+                        className="
+                          flex items-center gap-3 px-2 py-2
+                          group-data-[collapsible=icon]:justify-center
+                        "
                       >
-                        <Icon className="w-4 h-4" />
-                        <span className="truncate">
+                        {/* ICON */}
+                        <Icon className="w-5 h-5 shrink-0" />
+
+                        {/* TEXT */}
+                        <span
+                          className="
+                            truncate
+                            group-data-[collapsible=icon]:hidden
+                          "
+                        >
                           {item.label}
                         </span>
                       </Link>
@@ -70,10 +112,10 @@ export function AppSidebar() {
                 )
               })}
             </SidebarMenu>
+
           </SidebarGroup>
         ))}
       </SidebarContent>
-
     </Sidebar>
   )
 }
