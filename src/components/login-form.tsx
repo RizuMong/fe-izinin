@@ -16,6 +16,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import Link from 'next/link'
+import { useUserStore } from '@/store/user.store'
 
 export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<'div'>) {
   const [email, setEmail] = useState('')
@@ -23,27 +24,34 @@ export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRe
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const { setUser } = useUserStore()
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const supabase = createClient()
-    setIsLoading(true)
-    setError(null)
 
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
-      if (error) throw error
-      // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push('/leave/submission')
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
-    } finally {
-      setIsLoading(false)
-    }
+const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault()
+
+  const supabase = createClient()
+
+  setIsLoading(true)
+  setError(null)
+
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (error) throw error
+
+    setUser(data.user)
+    router.replace("/leave/submission")
+
+  } catch (error: unknown) {
+    setError(error instanceof Error ? error.message : "Login gagal")
+  } finally {
+    setIsLoading(false)
   }
+}
 
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>

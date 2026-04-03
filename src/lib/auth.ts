@@ -3,13 +3,9 @@ import type { User } from "@supabase/supabase-js"
 
 
 export const getCurrentUser = async () => {
-  console.log("👉 getCurrentUser called")
-
   const supabase = createClient()
 
   const { data, error } = await supabase.auth.getSession()
-
-  console.log("👉 session result:", data, error)
 
   return data.session?.user ?? null
 }

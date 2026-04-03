@@ -1,18 +1,33 @@
-'use client'
+"use client"
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation"
+import { signOut } from "@/lib/auth"
+import { useUserStore } from "@/store/user.store"
 
-import { createClient } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/button'
-
-export function LogoutButton() {
+export const LogoutButton = () => {
   const router = useRouter()
+  const setUser = useUserStore((s) => s.setUser)
 
-  const logout = async () => {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push('/auth/login')
+  const handleLogout = async () => {
+    try {
+      await signOut()
+
+      // clear state
+      setUser(null)
+
+      // redirect
+      router.replace("/auth/login")
+    } catch (error) {
+      console.error("Sign out failed:", error)
+    }
   }
 
-  return <Button onClick={logout}>Logout</Button>
+  return (
+    <button
+      onClick={handleLogout}
+      className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
+    >
+      Logout
+    </button>
+  )
 }

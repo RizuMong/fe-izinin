@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import { getCurrentUser } from "@/lib/auth"
 import { useUserStore } from "@/store/user.store"
+import { createClient } from "@/lib/supabase/client"
 
 export const AuthProvider = ({
   children,
@@ -30,9 +31,18 @@ export const AuthProvider = ({
     }
 
     init()
+    
+    const supabase = createClient()
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
 
     return () => {
       mounted = false
+      subscription.unsubscribe()
     }
   }, [])
 
