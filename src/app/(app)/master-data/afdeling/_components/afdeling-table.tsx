@@ -1,8 +1,10 @@
 "use client"
 
+import { useEffect, useRef } from "react"
+import { useRouter } from "next/navigation"
 import { useAfdelingList } from "@/services/master-data/afdeling/hook"
 import { formatDate } from "@/lib/utils"
-import { Pencil, Trash2 } from "lucide-react"
+import { toast } from "sonner"
 
 import {
     Table,
@@ -12,42 +14,49 @@ import {
     TableBody,
     TableCell,
 } from "@/components/ui/table"
+import { Card, CardContent } from "@/components/ui/card"
 
 import { AfdelingFormModal } from "./afdeling-form-modal"
 import { AfdelingDeleteDialog } from "./afdeling-delete-dialog"
 
 export function AfdelingTable() {
-    const { data, isLoading } = useAfdelingList()
+    const router = useRouter()
+    const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+    const fallbackRef = useRef<NodeJS.Timeout | null>(null)
+
+    const { data, isLoading, error, refetch } = useAfdelingList()
 
     if (isLoading) return <div>Loading...</div>
 
     return (
-        <div className="border rounded-lg overflow-hidden bg-white">
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead>Nama</TableHead>
-                        <TableHead>Created At</TableHead>
-                        <TableHead>Updated At</TableHead>
-                        <TableHead className="w-25">Action</TableHead>
-                    </TableRow>
-                </TableHeader>
-
-                <TableBody>
-                    {data?.map((item) => (
-                        <TableRow key={item.id}>
-                            <TableCell>{item.name}</TableCell>
-                            <TableCell>{formatDate(item.created_at)}</TableCell>
-                            <TableCell>{formatDate(item.updated_at)}</TableCell>
-
-                            <TableCell className="flex gap-2">
-                                <AfdelingFormModal initialData={item} />
-                                <AfdelingDeleteDialog id={item.id} />
-                            </TableCell>
+        <Card className="p-0 overflow-hidden">
+            <CardContent className="p-0">
+                <Table className="min-w-full">
+                    <TableHeader className="bg-muted/50">
+                        <TableRow>
+                            <TableHead>Nama</TableHead>
+                            <TableHead>Created At</TableHead>
+                            <TableHead>Updated At</TableHead>
+                            <TableHead className="w-25">Action</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </div>
+                    </TableHeader>
+
+                    <TableBody>
+                        {data?.map((item) => (
+                            <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>{formatDate(item.created_at)}</TableCell>
+                                <TableCell>{formatDate(item.updated_at)}</TableCell>
+
+                                <TableCell className="flex gap-2">
+                                    <AfdelingFormModal initialData={item} />
+                                    <AfdelingDeleteDialog id={item.id} />
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </CardContent>
+        </Card>
     )
 }

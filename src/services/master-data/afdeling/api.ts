@@ -34,11 +34,31 @@ export const updateAfdeling = async (payload: UpdateAfdelingPayload) => {
   const res = await client.put(`/afdeling/${payload.id}`, {
     name: payload.name,
   })
+
+  // handle error dari backend
+  if (res.data?.error) {
+    throw {
+      response: {
+        data: res.data,
+      },
+    }
+  }
+
   return res.data
 }
 
 // DELETE
 export const deleteAfdeling = async (payload: DeleteAfdelingPayload) => {
   const res = await client.delete(`/afdeling/${payload.id}`)
+
+  // handle error dari backend
+  if (res.data?.error) {
+    throw {
+      response: {
+        data: res.data,
+      },
+    }
+  }
+
   return res.data
 }

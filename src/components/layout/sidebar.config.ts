@@ -69,6 +69,11 @@ export const sidebarMenu: SidebarSection[] = [
         icon: MapPin,
       },
       {
+        label: "Master Holiday",
+        href: "/master-data/holiday",
+        icon: User,
+      },
+      {
         label: "Master Afdeling",
         href: "/master-data/afdeling",
         icon: Building,
@@ -88,11 +93,11 @@ export const sidebarMenu: SidebarSection[] = [
         href: "/users/employee",
         icon: Users,
       },
-      {
-        label: "Data User",
-        href: "/users/user",
-        icon: User,
-      },
+      // {
+      //   label: "Data User",
+      //   href: "/users/user",
+      //   icon: User,
+      // }
     ],
   },
 ]

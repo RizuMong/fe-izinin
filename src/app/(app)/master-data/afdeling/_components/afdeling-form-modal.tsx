@@ -1,5 +1,3 @@
-"use client"
-
 import {
     Dialog,
     DialogTrigger,
@@ -11,7 +9,6 @@ import {
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { toast } from "sonner"
 import { Pencil, Plus } from "lucide-react"
 
 import {
@@ -27,6 +24,7 @@ export function AfdelingFormModal({
     initialData?: { id: number; name: string }
 }) {
     const [name, setName] = useState("")
+    const [open, setOpen] = useState(false)
 
     const { mutate: create, isPending: loadingCreate } = useCreateAfdeling()
     const { mutate: update, isPending: loadingUpdate } = useUpdateAfdeling()
@@ -43,14 +41,24 @@ export function AfdelingFormModal({
         if (!name) return
 
         if (isEdit) {
-            update({ id: initialData!.id, name })
+            update({ id: initialData!.id, name }, {
+                onSuccess: () => {
+                    setOpen(false)
+                    setName("")
+                }
+            })
         } else {
-            create({ name })
+            create({ name }, {
+                onSuccess: () => {
+                    setOpen(false)
+                    setName("")
+                }
+            })
         }
     }
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 {isEdit ? (
                     <Button variant="outline" size="sm">

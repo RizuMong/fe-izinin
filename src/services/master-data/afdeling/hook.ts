@@ -6,12 +6,15 @@ import {
   updateAfdeling,
   deleteAfdeling,
 } from "./api"
+import { toast } from "sonner"
 
 // GET LIST
 export const useAfdelingList = () => {
   return useQuery<Afdeling[]>({
     queryKey: ["afdeling"],
     queryFn: getAfdelingList,
+    refetchOnWindowFocus: true,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   })
 }
 
@@ -22,8 +25,14 @@ export const useCreateAfdeling = () => {
   return useMutation({
     mutationFn: createAfdeling,
 
-    onSuccess: () => {
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["afdeling"] })
+      toast.success(data.message || "Afdeling berhasil dibuat")
+    },
+
+    onError: (error: any) => {
+      const message = error?.response?.data?.message || error?.response?.data?.error || "Terjadi kesalahan"
+      toast.error(message)
     },
   })
 }
@@ -34,8 +43,14 @@ export const useUpdateAfdeling = () => {
 
   return useMutation({
     mutationFn: updateAfdeling,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["afdeling-list"] })
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["afdeling"] })
+      toast.success(data.message || "Afdeling berhasil diupdate")
+    },
+
+    onError: (error: any) => {
+      const message = error?.response?.data?.message || error?.response?.data?.error || "Terjadi kesalahan"
+      toast.error(message)
     },
   })
 }
@@ -46,8 +61,14 @@ export const useDeleteAfdeling = () => {
 
   return useMutation({
     mutationFn: deleteAfdeling,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["afdeling-list"] })
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["afdeling"] })
+      toast.success(data.message || "Afdeling berhasil dihapus")
+    },
+
+    onError: (error: any) => {
+      const message = error?.response?.data?.message || error?.response?.data?.error || "Terjadi kesalahan"
+      toast.error(message)
     },
   })
 }

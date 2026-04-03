@@ -14,12 +14,22 @@ import { Trash2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { useDeleteAfdeling } from "@/services/master-data/afdeling/hook"
+import { useState } from "react"
 
 export function AfdelingDeleteDialog({ id }: { id: number }) {
+  const [open, setOpen] = useState(false)
   const { mutate, isPending } = useDeleteAfdeling()
 
+  const handleDelete = () => {
+    mutate({ id }, {
+      onSuccess: () => {
+        setOpen(false)
+      }
+    })
+  }
+
   return (
-    <AlertDialog>
+    <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button variant="destructive" size="sm">
           <Trash2/>
@@ -36,7 +46,7 @@ export function AfdelingDeleteDialog({ id }: { id: number }) {
         <AlertDialogFooter>
           <AlertDialogCancel>Batal</AlertDialogCancel>
           <AlertDialogAction
-            onClick={() => mutate({ id })}
+            onClick={handleDelete}
             disabled={isPending}
           >
             {isPending ? "Deleting..." : "Hapus"}

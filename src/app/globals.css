@@ -133,3 +133,16 @@
     @apply font-sans;
   }
 }
+
+/* Toast colors */
+.cn-toast[data-type="success"] {
+  background-color: #22c55e !important; /* green-500 */
+  color: white !important;
+  border-color: #22c55e !important;
+}
+
+.cn-toast[data-type="error"] {
+  background-color: #ef4444 !important; /* red-500 */
+  color: white !important;
+  border-color: #ef4444 !important;
+}
