@@ -1,8 +1,17 @@
 import { client } from "./client"
+import { createClient } from "@/lib/supabase/client"
 
 export type ApiResponse<T> = {
   data: T
   message?: string
+}
+
+export const getCurrentUser = async () => {
+  const supabase = createClient()
+
+  const { data } = await supabase.auth.getSession()
+
+  return data.session?.user ?? null
 }
 
 // helper error handler
