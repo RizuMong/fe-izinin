@@ -1,52 +1,70 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { Site } from "./types"
-import { getSiteList, createSite, updateSite, deleteSite } from "./api"
+import {
+  getSiteList,
+  createSite,
+  updateSite,
+  deleteSite,
+} from "./api"
 import { toast } from "sonner"
 
+interface ApiError {
+  response?: {
+    data?: {
+      message?: string
+      error?: string
+    }
+  }
+}
+
+// GET LIST
 export const useSiteList = () => {
   return useQuery<Site[]>({
     queryKey: ["site"],
     queryFn: getSiteList,
     refetchOnWindowFocus: true,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 5 * 60 * 1000, // 5 minutes
   })
 }
 
+// CREATE
 export const useCreateSite = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: createSite,
+
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["site"] })
-      toast.success(data?.message || "Site berhasil dibuat")
+      toast.success(data.message || "Site berhasil dibuat")
     },
-    onError: (error: any) => {
-      const message =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Terjadi kesalahan"
+
+    onError: (error: ApiError) => {
+      const message = error?.response?.data?.message || error?.response?.data?.error || "Terjadi kesalahan"
       toast.error(message)
     },
   })
 }
 
-export const useUpdateSite = () => {export const useUpdateSite = () => {export const  useMutation({
+// UPDATE
+export const useUpdateSite = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
     mutationFn: updateSite,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["site"] })
-      toast.success(data?.message || "Site berhasil diupdate")
+      toast.success(data.message || "Site berhasil diupdate")
     },
-    onError: (error: any) => {
-      const message =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Terjadi kesalahan"
+
+    onError: (error: ApiError) => {
+      const message = error?.response?.data?.message || error?.response?.data?.error || "Terjadi kesalahan"
       toast.error(message)
     },
   })
 }
 
+// DELETE
 export const useDeleteSite = () => {
   const queryClient = useQueryClient()
 
@@ -54,13 +72,11 @@ export const useDeleteSite = () => {
     mutationFn: deleteSite,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["site"] })
-      toast.success(data?.message || "Site berhasil dihapus")
+      toast.success(data.message || "Site berhasil dihapus")
     },
-    onError: (error: any) => {
-      const message =
-        error?.response?.data?.message ||
-        error?.response?.data?.error ||
-        "Terjadi kesalahan"
+
+    onError: (error: ApiError) => {
+      const message = error?.response?.data?.message || error?.response?.data?.error || "Terjadi kesalahan"
       toast.error(message)
     },
   })
