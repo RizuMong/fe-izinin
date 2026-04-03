@@ -4,14 +4,20 @@ const nextConfig = {
   },
 
   async rewrites() {
-    const rawUrl =
-      process.env.NEXT_PUBLIC_API_URL
-    const baseUrl = rawUrl.replace(/\/$/, "")
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL
+
+    if (!baseUrl) {
+      throw new Error(
+        "NEXT_PUBLIC_API_URL is not defined. Please set it in your environment variables."
+      )
+    }
+
+    const normalized = baseUrl.replace(/\/$/, "")
 
     return [
       {
         source: "/api/:path*",
-        destination: `${baseUrl}/:path*`,
+        destination: `${normalized}/:path*`,
       },
     ]
   },
