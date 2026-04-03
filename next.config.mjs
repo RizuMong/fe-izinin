@@ -1,14 +1,17 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   turbopack: {
     root: process.cwd(),
   },
 
   async rewrites() {
+    const rawUrl =
+      process.env.NEXT_PUBLIC_API_URL
+    const baseUrl = rawUrl.replace(/\/$/, "")
+
     return [
       {
         source: "/api/:path*",
-       destination: `${process.env.NEXT_PUBLIC_API_URL}/:path*`,
+        destination: `${baseUrl}/:path*`,
       },
     ]
   },
