@@ -55,7 +55,7 @@ export const sidebarMenu: SidebarSection[] = [
       },
       {
         label: "Master Cuti Employee",
-        href: "/master-data/employee",
+        href: "/master-data/leave-employee",
         icon: Users,
       },
       {
