@@ -60,7 +60,7 @@ export const sidebarMenu: SidebarSection[] = [
       },
       {
         label: "Master Posisi",
-        href: "/master-data/position",
+        href: "/master-data/job-position",
         icon: Briefcase,
       },
       {
