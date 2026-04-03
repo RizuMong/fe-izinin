@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import { AppSidebar } from "@/components/layout/sidebar"
 import { Header } from "@/components/layout/header"
 import { ProtectedLayout } from "@/components/layout/protected-layout"
+import { Toaster } from "@/components/ui/sonner"
 import {
   SidebarProvider,
   SidebarInset,
@@ -36,6 +37,7 @@ export default function AppLayout({
 
               <main className="flex-1 w-full p-6 bg-gray-50 overflow-auto">
                 {children}
+                 <Toaster />
               </main>
 
             </SidebarInset>

@@ -2,7 +2,7 @@ import axios from "axios"
 import { createClient } from "@/lib/supabase/client"
 
 export const client = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL
+  baseURL: "/api",
 })
 
 // inject access token ke setiap request
