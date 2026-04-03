@@ -1,9 +1,5 @@
 import { create } from "zustand"
-
-type User = {
-  id: string
-  email: string
-}
+import type { User } from "@supabase/supabase-js"
 
 type UserStore = {
   user: User | null
@@ -16,5 +12,5 @@ export const useUserStore = create<UserStore>((set) => ({
   user: null,
   isLoading: true,
   setUser: (user) => set({ user }),
-  setLoading: (val) => set({ isLoading: val })
+  setLoading: (val) => set({ isLoading: val }),
 }))

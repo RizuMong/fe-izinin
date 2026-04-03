@@ -4,25 +4,21 @@ import { useUserStore } from "@/store/user.store"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
-export const ProtectedLayout = ({
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode
-}) => {
+}) {
   const { user, isLoading } = useUserStore()
   const router = useRouter()
 
   useEffect(() => {
-    if (!isLoading && !user) {
-      router.replace("/auth/login")
+    if (!isLoading && user) {
+      router.replace("/leave/submission")
     }
   }, [user, isLoading, router])
 
-  if (isLoading) {
-    return <div className="p-6">Loading...</div>
-  }
-
-  if (!user) return null
+  if (isLoading) return null
 
   return <>{children}</>
 }
