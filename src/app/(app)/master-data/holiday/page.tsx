@@ -1,13 +1,29 @@
 "use client"
 
+import { HolidayTable } from "./_components/holiday-table"
+import { HolidayFormModal } from "./_components/holiday-form-modal"
+
 export default function Page() {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Master Holiday</h1>
-        <p className="text-sm text-muted-foreground">Kelola data Holiday</p>
+
+      {/* HEADER */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold">
+            Master Holiday
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Kelola data holiday
+          </p>
+        </div>
+
+        <HolidayFormModal />
       </div>
-      <div className="rounded-lg border p-4">Coming soon</div>
+
+      {/* TABLE */}
+      <HolidayTable />
+
     </div>
   )
 }
