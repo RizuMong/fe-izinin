@@ -31,11 +31,17 @@ export function LeaveEmployeeTable() {
 
   // Helper functions to get names
   const getEmployeeName = (id: number) => {
-    return employeeData?.data?.find((emp) => emp.id === id)?.full_name || `ID: ${id}`
+    return (
+      employeeData?.data?.find((emp: { id: number; full_name: string }) => emp.id === id)
+        ?.full_name || `ID: ${id}`
+    )
   }
 
   const getTimeOffName = (id: number) => {
-    return timeoffData?.data?.find((t) => t.id === id)?.name || `ID: ${id}`
+    return (
+      timeoffData?.data?.find((t: { id: number; name: string }) => t.id === id)
+        ?.name || `ID: ${id}`
+    )
   }
 
   return (

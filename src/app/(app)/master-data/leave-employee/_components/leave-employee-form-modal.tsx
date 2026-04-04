@@ -136,10 +136,12 @@ export function LeaveEmployeeFormModal({
 
   // Find employee name by ID
   const selectedEmployee = employeeData?.data?.find(
-    (emp) => emp.id === employeeId
+    (emp: { id: number; full_name: string }) => emp.id === employeeId
   )
   // Find timeoff name by ID
-  const selectedTimeOff = timeoffData?.data?.find((t) => t.id === timeoffId)
+  const selectedTimeOff = timeoffData?.data?.find(
+    (t: { id: number; name: string }) => t.id === timeoffId
+  )
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
