@@ -189,7 +189,7 @@ export function LeaveEmployeeFormModal({
                   />
                 </SelectTrigger>
                 <SelectContent>
-                  {employeeData?.data?.map((emp) => (
+                  {employeeData?.data?.map((emp: { id: number; full_name: string }) => (
                     <SelectItem key={emp.id} value={emp.id.toString()}>
                       {emp.full_name}
                     </SelectItem>
@@ -215,7 +215,7 @@ export function LeaveEmployeeFormModal({
                   />
                 </SelectTrigger>
                 <SelectContent>
-                  {timeoffData?.data?.map((timeoff) => (
+                  {timeoffData?.data?.map((timeoff: { id: number; name: string }) => (
                     <SelectItem key={timeoff.id} value={timeoff.id.toString()}>
                       {timeoff.name}
                     </SelectItem>
