@@ -6,11 +6,13 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
+    DialogDescription,
     DialogFooter,
 } from "@/components/ui/dialog"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Pencil, Plus } from "lucide-react"
 
 import {
@@ -25,73 +27,117 @@ export function SiteFormModal({
 }: {
     initialData?: { id: number; name: string }
 }) {
-    const [name, setName] = useState(initialData?.name || "")
+    const [name, setName] = useState("")
     const [open, setOpen] = useState(false)
+    const [errors, setErrors] = useState<{ name?: string }>({})
 
     const { mutate: create, isPending: loadingCreate } = useCreateSite()
     const { mutate: update, isPending: loadingUpdate } = useUpdateSite()
 
     const isEdit = !!initialData
+    const isLoading = loadingCreate || loadingUpdate
 
     useEffect(() => {
-        if (open && initialData) {
-            setName(initialData.name)
-        } else if (open && !initialData) {
-            setName("")
+        if (open) {
+            if (initialData) {
+                setName(initialData.name)
+            } else {
+                setName("")
+            }
+            setErrors({})
         }
     }, [open, initialData])
 
+    const validateForm = () => {
+        const newErrors: { name?: string } = {}
+        if (!name.trim()) {
+            newErrors.name = "Nama site harus diisi"
+        }
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
     const handleSubmit = () => {
-        if (!name) return
+        if (!validateForm()) return
 
         if (isEdit) {
             update({ id: initialData!.id, name }, {
                 onSuccess: () => {
                     setOpen(false)
-                    setName("")
                 }
             })
         } else {
             create({ name }, {
                 onSuccess: () => {
                     setOpen(false)
-                    setName("")
                 }
             })
         }
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+        setErrors({})
     }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 {isEdit ? (
-                    <Button variant="outline" size="sm">
-                        <Pencil />
+                    <Button variant="outline" size="sm" title="Edit Site">
+                        <Pencil className="w-4 h-4" />
                     </Button>
                 ) : (
-                    <Button> <Plus /> Tambah Site</Button>
+                    <Button>
+                        <Plus className="w-4 h-4" /> Tambah Site
+                    </Button>
                 )}
             </DialogTrigger>
 
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Site" : "Tambah Site"}
-                    </DialogTitle>
-                </DialogHeader>
+                        {isEdit ? "Edit Site" : "Tambah Site Baru"}
+                    </DialogTitle>                    <DialogDescription>
+                        {isEdit ? "Ubah data site yang sudah ada" : "Tambahkan site baru ke dalam sistem"}
+                    </DialogDescription>                </DialogHeader>
 
-                <Input
-                    placeholder="Nama site"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
+                <div className="space-y-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="name" className="text-sm font-medium">
+                            Nama Site <span className="text-red-500">*</span>
+                        </Label>
+                        <Input
+                            id="name"
+                            placeholder="Masukkan nama site"
+                            value={name}
+                            onChange={(e) => {
+                                setName(e.target.value)
+                                if (errors.name) setErrors({})
+                            }}
+                            disabled={isLoading}
+                            className={errors.name ? "border-red-500" : ""}
+                        />
+                        {errors.name && (
+                            <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+                        )}
+                    </div>
+                </div>
 
-                <DialogFooter>
+                <DialogFooter className="gap-2">
+                    <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleClose}
+                        disabled={isLoading}
+                    >
+                        Batal
+                    </Button>
                     <Button
                         onClick={handleSubmit}
-                        disabled={loadingCreate || loadingUpdate}
+                        disabled={isLoading}
                     >
-                        {(loadingCreate || loadingUpdate) ? "Loading..." : "Simpan"}
+                        {isLoading ? "Menyimpan..." : "Simpan"}
                     </Button>
                 </DialogFooter>
             </DialogContent>

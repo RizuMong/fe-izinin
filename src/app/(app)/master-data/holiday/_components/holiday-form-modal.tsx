@@ -4,6 +4,7 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
+    DialogDescription,
     DialogFooter,
 } from "@/components/ui/dialog"
 
@@ -36,43 +37,47 @@ export function HolidayFormModal({
         date: string
     }
 }) {
-    const [name, setName] = useState(initialData?.name || "")
-    const [isNationalHoliday, setIsNationalHoliday] = useState(initialData?.is_national_holiday || false)
-    const [date, setDate] = useState(initialData?.date || "")
+    const [name, setName] = useState("")
+    const [isNationalHoliday, setIsNationalHoliday] = useState(false)
+    const [date, setDate] = useState("")
     const [open, setOpen] = useState(false)
+    const [errors, setErrors] = useState<{ name?: string; date?: string }>({})
 
-    const resetForm = () => {
-        setName("")
-        setIsNationalHoliday(false)
-        setDate("")
-    }
-
-    const handleSuccess = () => {
-        setOpen(false)
-        resetForm()
-    }
-
-    const { mutate: create, isPending: loadingCreate } = useCreateHoliday(handleSuccess)
-    const { mutate: update, isPending: loadingUpdate } = useUpdateHoliday(handleSuccess)
+    const { mutate: create, isPending: loadingCreate } = useCreateHoliday()
+    const { mutate: update, isPending: loadingUpdate } = useUpdateHoliday()
 
     const isEdit = !!initialData
+    const isLoading = loadingCreate || loadingUpdate
 
     useEffect(() => {
         if (open) {
             if (initialData) {
-                // Editing existing data
                 setName(initialData.name)
                 setIsNationalHoliday(initialData.is_national_holiday)
                 setDate(initialData.date)
             } else {
-                // Creating new data
-                resetForm()
+                setName("")
+                setIsNationalHoliday(false)
+                setDate("")
             }
+            setErrors({})
         }
     }, [open, initialData])
 
+    const validateForm = () => {
+        const newErrors: { name?: string; date?: string } = {}
+        if (!name.trim()) {
+            newErrors.name = "Nama holiday harus diisi"
+        }
+        if (!date) {
+            newErrors.date = "Tanggal harus diisi"
+        }
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
+
     const handleSubmit = () => {
-        if (!name || !date) return
+        if (!validateForm()) return
 
         if (isEdit) {
             update({
@@ -80,79 +85,126 @@ export function HolidayFormModal({
                 name,
                 is_national_holiday: isNationalHoliday,
                 date
+            }, {
+                onSuccess: () => {
+                    setOpen(false)
+                }
             })
         } else {
             create({
                 name,
                 is_national_holiday: isNationalHoliday,
                 date
+            }, {
+                onSuccess: () => {
+                    setOpen(false)
+                }
             })
         }
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+        setErrors({})
     }
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 {isEdit ? (
-                    <Button variant="outline" size="sm">
-                        <Pencil />
+                    <Button variant="outline" size="sm" title="Edit Holiday">
+                        <Pencil className="w-4 h-4" />
                     </Button>
                 ) : (
-                    <Button> <Plus /> Tambah Holiday</Button>
+                    <Button>
+                        <Plus className="w-4 h-4" /> Tambah Holiday
+                    </Button>
                 )}
             </DialogTrigger>
 
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Holiday" : "Tambah Holiday"}
-                    </DialogTitle>
-                </DialogHeader>
+                        {isEdit ? "Edit Holiday" : "Tambah Holiday Baru"}
+                    </DialogTitle>                    <DialogDescription>
+                        {isEdit ? "Ubah data holiday yang sudah ada" : "Tambahkan holiday baru ke dalam sistem"}
+                    </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">
-                    <div>
-                        <Label htmlFor="name">Nama</Label>
+                    <div className="space-y-2">
+                        <Label htmlFor="name" className="text-sm font-medium">
+                            Nama Holiday <span className="text-red-500">*</span>
+                        </Label>
                         <Input
                             id="name"
-                            placeholder="Nama holiday"
+                            placeholder="Masukkan nama holiday"
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(e) => {
+                                setName(e.target.value)
+                                if (errors.name) setErrors({ ...errors, name: undefined })
+                            }}
+                            disabled={isLoading}
+                            className={errors.name ? "border-red-500" : ""}
                         />
+                        {errors.name && (
+                            <p className="text-xs text-red-500 mt-1">{errors.name}</p>
+                        )}
                     </div>
 
-                    <div>
-                        <Label htmlFor="national">National Holiday</Label>
+                    <div className="space-y-2">
+                        <Label htmlFor="national" className="text-sm font-medium">
+                            National Holiday
+                        </Label>
                         <Select
                             value={isNationalHoliday ? "true" : "false"}
                             onValueChange={(value) => setIsNationalHoliday(value === "true")}
+                            disabled={isLoading}
                         >
                             <SelectTrigger>
-                                <SelectValue placeholder="Pilih" />
+                                <SelectValue placeholder="Pilih opsi" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="true">Yes</SelectItem>
-                                <SelectItem value="false">No</SelectItem>
+                                <SelectItem value="true">Ya</SelectItem>
+                                <SelectItem value="false">Tidak</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
 
-                    <div>
-                        <Label htmlFor="date">Date</Label>
+                    <div className="space-y-2">
+                        <Label htmlFor="date" className="text-sm font-medium">
+                            Tanggal <span className="text-red-500">*</span>
+                        </Label>
                         <Input
                             id="date"
                             type="date"
                             value={date}
-                            onChange={(e) => setDate(e.target.value)}
+                            onChange={(e) => {
+                                setDate(e.target.value)
+                                if (errors.date) setErrors({ ...errors, date: undefined })
+                            }}
+                            disabled={isLoading}
+                            className={errors.date ? "border-red-500" : ""}
                         />
+                        {errors.date && (
+                            <p className="text-xs text-red-500 mt-1">{errors.date}</p>
+                        )}
                     </div>
                 </div>
 
-                <DialogFooter>
+                <DialogFooter className="gap-2">
+                    <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleClose}
+                        disabled={isLoading}
+                    >
+                        Batal
+                    </Button>
                     <Button
                         onClick={handleSubmit}
-                        disabled={loadingCreate || loadingUpdate}
+                        disabled={isLoading}
                     >
-                        {(loadingCreate || loadingUpdate) ? "Loading..." : "Simpan"}
+                        {isLoading ? "Menyimpan..." : "Simpan"}
                     </Button>
                 </DialogFooter>
             </DialogContent>
