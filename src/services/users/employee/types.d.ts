@@ -1,3 +1,8 @@
+export type IDName = {
+  id: number
+  name: string  
+}
+
 export type Employee = {
   id: number
   full_name: string
@@ -5,6 +10,9 @@ export type Employee = {
   site_id: number
   afdeling_id: number
   job_position_id: number
+  site: IDName
+  afdeling: IDName
+  job_position: IDName
   tmk: string
   created_at: string
   updated_at: string

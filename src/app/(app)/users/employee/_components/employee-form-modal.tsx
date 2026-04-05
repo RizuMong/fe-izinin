@@ -24,6 +24,7 @@ import {
     useCreateEmployee,
     useUpdateEmployee,
 } from "@/services/users/employee/hook"
+import type { Employee } from "@/services/users/employee"
 
 import { useSiteList } from "@/services/master-data/site/hook"
 import { useAfdelingList } from "@/services/master-data/afdeling/hook"
@@ -34,15 +35,7 @@ import { useState, useEffect } from "react"
 export function EmployeeFormModal({
     initialData,
 }: {
-    initialData?: {
-        id: number
-        full_name: string
-        npk: string
-        site_id: number | null
-        afdeling_id: number | null
-        job_position_id: number | null
-        tmk: string
-    }
+    initialData?: Employee
 }) {
     const [fullName, setFullName] = useState("")
     const [npk, setNpk] = useState("")
