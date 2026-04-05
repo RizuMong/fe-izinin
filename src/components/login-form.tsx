@@ -44,7 +44,7 @@ const handleLogin = async (e: React.FormEvent) => {
     if (error) throw error
 
     setUser(data.user)
-    router.replace("/leave/submission")
+    router.replace("/time-off/request")
 
   } catch (error: unknown) {
     setError(error instanceof Error ? error.message : "Login gagal")

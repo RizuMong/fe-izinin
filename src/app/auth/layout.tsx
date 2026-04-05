@@ -14,7 +14,7 @@ export default function AuthLayout({
 
   useEffect(() => {
     if (!isLoading && user) {
-      router.replace("/leave/submission")
+      router.replace("/time-off/request")
     }
   }, [user, isLoading, router])
 
