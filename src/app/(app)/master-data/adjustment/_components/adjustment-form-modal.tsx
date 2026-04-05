@@ -25,7 +25,7 @@ import {
   useUpdateAdjustment,
 } from "@/services/master-data/adjustment"
 import { useEmployeeList } from "@/services/users/employee"
-import { useTimeOffList } from "@/services/master-data/leave/timeoff"
+import { useTimeOffList } from "@/services/master-data/time-off/timeoff"
 import type {
   Adjustment,
   AdjustmentPayload,

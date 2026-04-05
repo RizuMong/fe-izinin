@@ -1,6 +1,6 @@
 "use client"
 
-import { useLeaveList } from "@/services/master-data/leave/hook"
+import { useTimeOffList } from "@/services/master-data/time-off/hook"
 
 import {
     Table,
@@ -12,11 +12,11 @@ import {
 } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
 
-import { LeaveFormModal } from "./leave-form-modal"
-import { LeaveDeleteDialog } from "./leave-delete-dialog"
+import { TimeOffFormModal } from "./time-off-form-modal"
+import { TimeOffDeleteDialog } from "./time-off-delete-dialog"
 
-export function LeaveTable() {
-    const { data, isLoading, error } = useLeaveList()
+export function TimeOffTable() {
+    const { data, isLoading, error } = useTimeOffList()
 
     if (isLoading) return <div>Loading...</div>
 
@@ -41,8 +41,8 @@ export function LeaveTable() {
                                 <TableCell>{item.timeoff_type}</TableCell>
 
                                 <TableCell className="flex gap-2">
-                                    <LeaveFormModal initialData={item} />
-                                    {/* <LeaveDeleteDialog id={item.id} /> */}
+                                    <TimeOffFormModal initialData={item} />
+                                    {/* <TimeOffDeleteDialog id={item.id} /> */}
                                 </TableCell>
                             </TableRow>
                         ))}

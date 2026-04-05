@@ -50,12 +50,12 @@ export const sidebarMenu: SidebarSection[] = [
     children: [
       {
         label: "Master Cuti",
-        href: "/master-data/leave", // master-data/time-off (Nanti diganti)
+        href: "/master-data/time-off",
         icon: Database,
       },
       {
         label: "Master Cuti Employee",
-        href: "/master-data/leave-employee", // master-data/time-off-employee (Nanti diganti)
+        href: "/master-data/time-off-employee",
         icon: Users,
       },
       {

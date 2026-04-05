@@ -1,7 +1,7 @@
 "use client"
 
-import { LeaveEmployeeTable } from "./_components/leave-employee-table"
-import { LeaveEmployeeFormModal } from "./_components/leave-employee-form-modal"
+import { TimeOffEmployeeTable } from "./_components/time-off-employee-table"
+import { TimeOffEmployeeFormModal } from "./_components/time-off-employee-form-modal"
 
 export default function Page() {
   return (
@@ -15,11 +15,11 @@ export default function Page() {
           </p>
         </div>
 
-        {/* <LeaveEmployeeFormModal /> */}
+        {/* <TimeOffEmployeeFormModal /> */}
       </div>
 
       {/* TABLE */}
-      <LeaveEmployeeTable />
+      <TimeOffEmployeeTable />
     </div>
   )
 }

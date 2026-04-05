@@ -1,25 +1,25 @@
 import { client } from "@/services/auth/client"
 import type {
-  LeaveEmployee,
-  LeaveEmployeeResponse,
-  CreateLeaveEmployeePayload,
-  UpdateLeaveEmployeePayload,
-  DeleteLeaveEmployeePayload,
+  TimeOffEmployee,
+  TimeOffEmployeeResponse,
+  CreateTimeOffEmployeePayload,
+  UpdateTimeOffEmployeePayload,
+  DeleteTimeOffEmployeePayload,
 } from "./types"
 
 // GET LIST
-export const getLeaveEmployees = async (params?: {
+export const getTimeOffEmployees = async (params?: {
   page?: number
   limit?: number
-}): Promise<LeaveEmployeeResponse> => {
+}): Promise<TimeOffEmployeeResponse> => {
   const res = await client.get("/time-off/employee", { params })
 
   return res.data
 }
 
 // CREATE
-export const createLeaveEmployee = async (
-  payload: CreateLeaveEmployeePayload
+export const createTimeOffEmployee = async (
+  payload: CreateTimeOffEmployeePayload
 ) => {
   const res = await client.post("/time-off/employee", payload)
 
@@ -36,8 +36,8 @@ export const createLeaveEmployee = async (
 }
 
 // UPDATE
-export const updateLeaveEmployee = async (
-  payload: UpdateLeaveEmployeePayload
+export const updateTimeOffEmployee = async (
+  payload: UpdateTimeOffEmployeePayload
 ) => {
   const res = await client.put(`/time-off/employee/${payload.id}`, {
     employee_id: payload.employee_id,
@@ -61,8 +61,8 @@ export const updateLeaveEmployee = async (
 }
 
 // DELETE
-export const deleteLeaveEmployee = async (
-  payload: DeleteLeaveEmployeePayload
+export const deleteTimeOffEmployee = async (
+  payload: DeleteTimeOffEmployeePayload
 ) => {
   const res = await client.delete(`/time-off/employee/${payload.id}`)
 

@@ -13,24 +13,24 @@ export type PaginationMeta = {
   totalPages: number
 }
 
-export type LeaveResponse = {
+export type TimeOffResponse = {
   data: Leave[]
   meta: PaginationMeta
   message: string
   error: boolean
 }
 
-export type CreateLeavePayload = {
+export type CreateTimeOffPayload = {
   name: string
   timeoff_type: string
 }
 
-export type UpdateLeavePayload = {
+export type UpdateTimeOffPayload = {
   id: number
   name: string
   timeoff_type: string
 }
 
-export type DeleteLeavePayload = {
+export type DeleteTimeOffPayload = {
   id: number
 }

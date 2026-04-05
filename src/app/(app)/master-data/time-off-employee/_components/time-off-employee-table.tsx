@@ -1,10 +1,10 @@
 "use client"
 
 import {
-  useLeaveEmployeeList,
+  useTimeOffEmployeeList,
   useEmployeeList,
   useTimeOffList,
-} from "@/services/master-data/leave-employee/hook"
+} from "@/services/master-data/time-off-employee/hook"
 import { formatYear } from "@/lib/utils"
 
 import {
@@ -17,11 +17,11 @@ import {
 } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
 
-import { LeaveEmployeeFormModal } from "./leave-employee-form-modal"
-import { LeaveEmployeeDeleteDialog } from "./leave-employee-delete-dialog"
+import { TimeOffEmployeeFormModal } from "./leave-employee-form-modal"
+import { TimeOffEmployeeDeleteDialog } from "./leave-employee-delete-dialog"
 
-export function LeaveEmployeeTable() {
-  const { data, isLoading, error } = useLeaveEmployeeList()
+export function TimeOffEmployeeTable() {
+  const { data, isLoading, error } = useTimeOffEmployeeList()
   const { data: employeeData } = useEmployeeList()
   const { data: timeoffData } = useTimeOffList()
 
@@ -71,8 +71,8 @@ export function LeaveEmployeeTable() {
                 <TableCell>{item.used_quota}</TableCell>
 
                 {/* <TableCell className="flex gap-2">
-                  <LeaveEmployeeFormModal initialData={item} />
-                  <LeaveEmployeeDeleteDialog id={item.id} />
+                  <TimeOffEmployeeFormModal initialData={item} />
+                  <TimeOffEmployeeDeleteDialog id={item.id} />
                 </TableCell> */}
               </TableRow>
             ))}

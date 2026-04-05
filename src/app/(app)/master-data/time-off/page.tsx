@@ -1,7 +1,7 @@
 "use client"
 
-import { LeaveTable } from "./_components/leave-table"
-import { LeaveFormModal } from "./_components/leave-form-modal"
+import { TimeOffTable } from "./_components/time-off-table"
+import { TimeOffFormModal } from "./_components/time-off-form-modal"
 
 export default function Page() {
   return (
@@ -22,7 +22,7 @@ export default function Page() {
       </div>
 
       {/* TABLE */}
-      <LeaveTable />
+      <TimeOffTable />
 
     </div>
   )

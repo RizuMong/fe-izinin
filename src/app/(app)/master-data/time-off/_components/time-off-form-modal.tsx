@@ -21,9 +21,9 @@ import {
 import { Pencil, Plus } from "lucide-react"
 
 import {
-    useCreateLeave,
-    useUpdateLeave,
-} from "@/services/master-data/leave/hook"
+    useCreateTimeOff,
+    useUpdateTimeOff,
+} from "@/services/master-data/time-off/hook"
 
 import { useState, useEffect } from "react"
 
@@ -35,7 +35,7 @@ const LEAVE_TYPES = [
   "CUTI MENIKAH",
 ]
 
-export function LeaveFormModal({
+export function TimeOffFormModal({
     initialData,
 }: {
     initialData?: {
@@ -49,8 +49,8 @@ export function LeaveFormModal({
     const [open, setOpen] = useState(false)
     const [errors, setErrors] = useState<{ name?: string; timeoffType?: string }>({})
 
-    const { mutate: create, isPending: loadingCreate } = useCreateLeave()
-    const { mutate: update, isPending: loadingUpdate } = useUpdateLeave()
+    const { mutate: create, isPending: loadingCreate } = useCreateTimeOff()
+    const { mutate: update, isPending: loadingUpdate } = useUpdateTimeOff()
 
     const isEdit = !!initialData
     const isLoading = loadingCreate || loadingUpdate

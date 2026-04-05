@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { LeaveResponse } from "./types"
+import { TimeOffResponse } from "./types"
 import {
   getLeaves,
   createLeave,
@@ -9,8 +9,8 @@ import {
 import { toast } from "sonner"
 
 // GET LIST
-export const useLeaveList = (params?: { page?: number; limit?: number }) => {
-  return useQuery<LeaveResponse>({
+export const useTimeOffList = (params?: { page?: number; limit?: number }) => {
+  return useQuery<TimeOffResponse>({
     queryKey: ["leave", params],
     queryFn: () => getLeaves(params),
     refetchOnWindowFocus: true,
@@ -19,7 +19,7 @@ export const useLeaveList = (params?: { page?: number; limit?: number }) => {
 }
 
 // CREATE
-export const useCreateLeave = () => {
+export const useCreateTimeOff = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -38,7 +38,7 @@ export const useCreateLeave = () => {
 }
 
 // UPDATE
-export const useUpdateLeave = () => {
+export const useUpdateTimeOff = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -56,7 +56,7 @@ export const useUpdateLeave = () => {
 }
 
 // DELETE
-export const useDeleteLeave = () => {
+export const useDeleteTimeOff = () => {
   const queryClient = useQueryClient()
 
   return useMutation({

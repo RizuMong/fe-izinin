@@ -1,21 +1,7 @@
 "use client"
 
-import { Input } from "@/components/ui/input"
-import {
-  Card,
-  CardContent,
-} from "@/components/ui/card"
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select"
-import { Badge } from "@/components/ui/badge"
-
-import { LeaveForm } from "./_components/request-form"
-import { LeaveTable } from "./_components/request-table"
+import { TimeOffForm } from "./_components/request-form"
+import { TimeOffTable } from "./_components/request-table"
 
 export default function Page() {
   return (
@@ -31,13 +17,13 @@ export default function Page() {
             Kelola dan ajukan cuti Anda dengan mudah
           </p>
         </div>
-        <LeaveForm />
+        <TimeOffForm />
       </div>
 
       {/* FILTER */}
 
       {/* TABLE */}
-      <LeaveTable />
+      <TimeOffTable />
 
     </div>
   )

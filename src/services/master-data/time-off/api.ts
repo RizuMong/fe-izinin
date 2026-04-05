@@ -1,24 +1,24 @@
 import { client } from "@/services/auth/client"
 import type {
   Leave,
-  LeaveResponse,
-  CreateLeavePayload,
-  UpdateLeavePayload,
-  DeleteLeavePayload,
+  TimeOffResponse,
+  CreateTimeOffPayload,
+  UpdateTimeOffPayload,
+  DeleteTimeOffPayload,
 } from "./types"
 
 // GET LIST
 export const getLeaves = async (params?: {
   page?: number
   limit?: number
-}): Promise<LeaveResponse> => {
+}): Promise<TimeOffResponse> => {
   const res = await client.get("/time-off", { params })
 
   return res.data
 }
 
 // CREATE
-export const createLeave = async (payload: CreateLeavePayload) => {
+export const createLeave = async (payload: CreateTimeOffPayload) => {
   const res = await client.post("/time-off", payload)
 
   // handle error dari backend
@@ -34,7 +34,7 @@ export const createLeave = async (payload: CreateLeavePayload) => {
 }
 
 // UPDATE
-export const updateLeave = async (payload: UpdateLeavePayload) => {
+export const updateLeave = async (payload: UpdateTimeOffPayload) => {
   const res = await client.put(`/time-off/${payload.id}`, {
     name: payload.name,
     timeoff_type: payload.timeoff_type,
@@ -53,7 +53,7 @@ export const updateLeave = async (payload: UpdateLeavePayload) => {
 }
 
 // DELETE
-export const deleteLeave = async (payload: DeleteLeavePayload) => {
+export const deleteLeave = async (payload: DeleteTimeOffPayload) => {
   const res = await client.delete(`/time-off/${payload.id}`)
 
   // handle error dari backend

@@ -11,7 +11,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-export const LeaveTable = () => {
+export const TimeOffTable = () => {
   return (
     <Card className="p-0 overflow-hidden">
       <CardContent className="p-0">

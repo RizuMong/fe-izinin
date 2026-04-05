@@ -23,15 +23,15 @@ import {
 import { Pencil, Plus } from "lucide-react"
 
 import {
-  useCreateLeaveEmployee,
-  useUpdateLeaveEmployee,
+  useCreateTimeOffEmployee,
+  useUpdateTimeOffEmployee,
   useEmployeeList,
   useTimeOffList,
-} from "@/services/master-data/leave-employee/hook"
+} from "@/services/master-data/time-off-employee/hook"
 
 import { useState, useEffect } from "react"
 
-export function LeaveEmployeeFormModal({
+export function TimeOffEmployeeFormModal({
   initialData,
 }: {
   initialData?: {
@@ -53,9 +53,9 @@ export function LeaveEmployeeFormModal({
   const [open, setOpen] = useState(false)
 
   const { mutate: create, isPending: loadingCreate } =
-    useCreateLeaveEmployee()
+    useCreateTimeOffEmployee()
   const { mutate: update, isPending: loadingUpdate } =
-    useUpdateLeaveEmployee()
+    useUpdateTimeOffEmployee()
 
   // Fetch dropdown data
   const { data: employeeData } = useEmployeeList()

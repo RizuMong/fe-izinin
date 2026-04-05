@@ -1,4 +1,4 @@
-export type LeaveEmployee = {
+export type TimeOffEmployee = {
   id: number
   employee_id: number
   timeoff_id: number
@@ -17,14 +17,14 @@ export type PaginationMeta = {
   totalPages: number
 }
 
-export type LeaveEmployeeResponse = {
-  data: LeaveEmployee[]
+export type TimeOffEmployeeResponse = {
+  data: TimeOffEmployee[]
   meta: PaginationMeta
   message: string
   error: boolean
 }
 
-export type CreateLeaveEmployeePayload = {
+export type CreateTimeOffEmployeePayload = {
   employee_id: number
   timeoff_id: number
   period: string
@@ -33,7 +33,7 @@ export type CreateLeaveEmployeePayload = {
   used_quota: number
 }
 
-export type UpdateLeaveEmployeePayload = {
+export type UpdateTimeOffEmployeePayload = {
   id: number
   employee_id: number
   timeoff_id: number
@@ -43,6 +43,6 @@ export type UpdateLeaveEmployeePayload = {
   used_quota: number
 }
 
-export type DeleteLeaveEmployeePayload = {
+export type DeleteTimeOffEmployeePayload = {
   id: number
 }

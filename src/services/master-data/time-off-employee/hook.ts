@@ -1,34 +1,34 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { LeaveEmployeeResponse } from "./types"
+import { TimeOffEmployeeResponse } from "./types"
 import {
-  getLeaveEmployees,
-  createLeaveEmployee,
-  updateLeaveEmployee,
-  deleteLeaveEmployee,
+  getTimeOffEmployees,
+  createTimeOffEmployee,
+  updateTimeOffEmployee,
+  deleteTimeOffEmployee,
   getEmployees,
   getTimeOffs,
 } from "./api"
 import { toast } from "sonner"
 
 // GET LIST
-export const useLeaveEmployeeList = (params?: {
+export const useTimeOffEmployeeList = (params?: {
   page?: number
   limit?: number
 }) => {
-  return useQuery<LeaveEmployeeResponse>({
+  return useQuery<TimeOffEmployeeResponse>({
     queryKey: ["leave-employee", params],
-    queryFn: () => getLeaveEmployees(params),
+    queryFn: () => getTimeOffEmployees(params),
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000, // 5 minutes
   })
 }
 
 // CREATE
-export const useCreateLeaveEmployee = () => {
+export const useCreateTimeOffEmployee = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: createLeaveEmployee,
+    mutationFn: createTimeOffEmployee,
 
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["leave-employee"] })
@@ -46,11 +46,11 @@ export const useCreateLeaveEmployee = () => {
 }
 
 // UPDATE
-export const useUpdateLeaveEmployee = () => {
+export const useUpdateTimeOffEmployee = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: updateLeaveEmployee,
+    mutationFn: updateTimeOffEmployee,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["leave-employee"] })
       toast.success(data.message || "Leave Employee berhasil diupdate")
@@ -67,11 +67,11 @@ export const useUpdateLeaveEmployee = () => {
 }
 
 // DELETE
-export const useDeleteLeaveEmployee = () => {
+export const useDeleteTimeOffEmployee = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: deleteLeaveEmployee,
+    mutationFn: deleteTimeOffEmployee,
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["leave-employee"] })
       toast.success(data.message || "Leave Employee berhasil dihapus")
