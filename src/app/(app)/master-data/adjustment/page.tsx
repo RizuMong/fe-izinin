@@ -1,13 +1,23 @@
 "use client"
 
+import { AdjustmentTable } from "./_components/adjustment-table"
+import { AdjustmentFormModal } from "./_components/adjustment-form-modal"
+
 export default function Page() {
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-semibold">Master Adjustment</h1>
-        <p className="text-sm text-muted-foreground">Kelola data adjustment</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-semibold">Adjustment Cuti</h1>
+          <p className="text-sm text-muted-foreground">
+            Kelola adjustment cuti karyawan
+          </p>
+        </div>
+
+        <AdjustmentFormModal />
       </div>
-      <div className="rounded-lg border p-4">Coming soon</div>
+
+      <AdjustmentTable />
     </div>
   )
 }
