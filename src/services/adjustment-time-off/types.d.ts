@@ -1,7 +1,18 @@
+export type EmployeeId  = {
+  id: number,
+  full_name: string
+}
+
+export type IDName = {
+  id: number,
+  name: string
+} 
+
+
 export type Adjustment = {
   id: number
-  employee_id: number
-  timeoff_id: number
+  employee_id: EmployeeId
+  timeoff_id: IDName
   total_quota: number
   period: string
   operation: "PENAMBAHAN" | "PENGURANGAN"
