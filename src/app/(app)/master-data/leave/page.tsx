@@ -18,7 +18,7 @@ export default function Page() {
           </p>
         </div>
 
-        <LeaveFormModal />
+        {/* <LeaveFormModal /> */}
       </div>
 
       {/* TABLE */}

@@ -31,9 +31,9 @@ export function EmployeeTable() {
                         <TableRow>
                             <TableHead>Full Name</TableHead>
                             <TableHead>NPK</TableHead>
-                            <TableHead>Site ID</TableHead>
-                            <TableHead>Afdeling ID</TableHead>
-                            <TableHead>Job Position ID</TableHead>
+                            <TableHead>Site</TableHead>
+                            <TableHead>Afdeling</TableHead>
+                            <TableHead>Job Position</TableHead>
                             <TableHead>TMK</TableHead>
                             <TableHead className="w-25">Action</TableHead>
                         </TableRow>
@@ -44,9 +44,9 @@ export function EmployeeTable() {
                             <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
                                 <TableCell>{item.full_name}</TableCell>
                                 <TableCell>{item.npk}</TableCell>
-                                <TableCell>{item.site_id}</TableCell>
-                                <TableCell>{item.afdeling_id}</TableCell>
-                                <TableCell>{item.job_position_id}</TableCell>
+                                <TableCell>{item.site.name}</TableCell>
+                                <TableCell>{item.afdeling.name}</TableCell>
+                                <TableCell>{item.job_position.name}</TableCell>
                                 <TableCell>{formatDate(item.tmk)}</TableCell>
 
                                 <TableCell className="flex gap-2">

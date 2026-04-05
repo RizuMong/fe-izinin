@@ -191,12 +191,12 @@ export function LeaveFormModal({
                     >
                         Batal
                     </Button>
-                    <Button
+                    {/* <Button
                         onClick={handleSubmit}
                         disabled={isLoading}
                     >
                         {isLoading ? "Menyimpan..." : "Simpan"}
-                    </Button>
+                    </Button> */}
                 </DialogFooter>
             </DialogContent>
         </Dialog>

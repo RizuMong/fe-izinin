@@ -93,11 +93,11 @@ export const sidebarMenu: SidebarSection[] = [
         href: "/users/employee",
         icon: Users,
       },
-      // {
-      //   label: "Data User",
-      //   href: "/users/user",
-      //   icon: User,
-      // }
+      {
+        label: "Data User",
+        href: "/users/user",
+        icon: User,
+      }
     ],
   },
 ]

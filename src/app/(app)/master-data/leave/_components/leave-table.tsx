@@ -42,7 +42,7 @@ export function LeaveTable() {
 
                                 <TableCell className="flex gap-2">
                                     <LeaveFormModal initialData={item} />
-                                    <LeaveDeleteDialog id={item.id} />
+                                    {/* <LeaveDeleteDialog id={item.id} /> */}
                                 </TableCell>
                             </TableRow>
                         ))}

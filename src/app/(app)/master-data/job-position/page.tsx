@@ -8,8 +8,8 @@ export default function Page() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">Master Job Position</h1>
-          <p className="text-sm text-muted-foreground">Kelola data job position</p>
+          <h1 className="text-2xl font-semibold">Master Posisi</h1>
+          <p className="text-sm text-muted-foreground">Kelola data posisi</p>
         </div>
 
         <JobPositionFormModal />
