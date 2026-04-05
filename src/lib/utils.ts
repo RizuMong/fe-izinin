@@ -14,3 +14,9 @@ export const formatDate = (date: string) => {
     minute: "2-digit",
   }).format(new Date(date))
 }
+
+export const formatYear = (date: string) => {
+  return new Intl.DateTimeFormat("id-ID", {
+    year: "numeric",
+  }).format(new Date(date));
+};

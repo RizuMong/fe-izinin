@@ -5,7 +5,7 @@ import {
   useEmployeeList,
   useTimeOffList,
 } from "@/services/master-data/leave-employee/hook"
-import { formatDate } from "@/lib/utils"
+import { formatYear } from "@/lib/utils"
 
 import {
   Table,
@@ -65,7 +65,7 @@ export function LeaveEmployeeTable() {
               <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
                 <TableCell>{getEmployeeName(item.employee_id)}</TableCell>
                 <TableCell>{getTimeOffName(item.timeoff_id)}</TableCell>
-                <TableCell>{formatDate(item.period)}</TableCell>
+                <TableCell>{formatYear(item.period)}</TableCell>
                 <TableCell>{item.total_quota}</TableCell>
                 <TableCell>{item.remaining_balance}</TableCell>
                 <TableCell>{item.used_quota}</TableCell>

@@ -8,7 +8,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-import { useDeleteAdjustment } from "@/services/adjustment-time-off"
+import { useDeleteAdjustment } from "@/services/master-data/adjustment"
 
 interface AdjustmentDeleteDialogProps {
   id: number

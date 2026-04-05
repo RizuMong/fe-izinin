@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { useAdjustmentList } from "@/services/adjustment-time-off"
+import { useAdjustmentList } from "@/services/master-data/adjustment"
 import {
   Table,
   TableBody,
@@ -25,7 +25,7 @@ import { Edit, Trash2 } from "lucide-react"
 import { AdjustmentFormModal } from "./adjustment-form-modal"
 import { AdjustmentDeleteDialog } from "./adjustment-delete-dialog"
 import { formatDate } from "@/lib/utils"
-import type { Adjustment } from "@/services/adjustment-time-off"
+import type { Adjustment } from "@/services/master-data/adjustment"
 
 export function AdjustmentTable() {
   const router = useRouter()
@@ -108,9 +108,9 @@ export function AdjustmentTable() {
                   className="hover:bg-muted/40 transition-colors"
                 >
                   <TableCell className="font-medium">
-                    {adjustment.employee_id}
+                    {adjustment.employee.full_name}
                   </TableCell>
-                  <TableCell>{adjustment.timeoff_id}</TableCell>
+                  <TableCell>{adjustment.time_off.name}</TableCell>
                   <TableCell>{adjustment.total_quota}</TableCell>
                   <TableCell>{adjustment.period}</TableCell>
                   <TableCell>

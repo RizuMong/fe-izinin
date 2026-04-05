@@ -23,13 +23,13 @@ import { Plus, Edit, Loader2 } from "lucide-react"
 import {
   useCreateAdjustment,
   useUpdateAdjustment,
-} from "@/services/adjustment-time-off"
+} from "@/services/master-data/adjustment"
 import { useEmployeeList } from "@/services/users/employee"
-import { useTimeOffList } from "@/services/master-data/timeoff"
+import { useTimeOffList } from "@/services/master-data/leave/timeoff"
 import type {
   Adjustment,
   AdjustmentPayload,
-} from "@/services/adjustment-time-off"
+} from "@/services/master-data/adjustment"
 
 interface AdjustmentFormModalProps {
   initialData?: Adjustment
