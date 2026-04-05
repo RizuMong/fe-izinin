@@ -14,9 +14,8 @@ import {
 } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 
-import { LeaveForm } from "./_components/leave-form"
-import { LeaveFilter } from "./_components/leave-filter"
-import { LeaveTable } from "./_components/leave-table"
+import { LeaveForm } from "./_components/request-form"
+import { LeaveTable } from "./_components/request-table"
 
 export default function Page() {
   return (
@@ -36,7 +35,6 @@ export default function Page() {
       </div>
 
       {/* FILTER */}
-      <LeaveFilter/>
 
       {/* TABLE */}
       <LeaveTable />

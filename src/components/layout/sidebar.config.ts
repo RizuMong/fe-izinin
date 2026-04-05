@@ -30,17 +30,17 @@ export const sidebarMenu: SidebarSection[] = [
     children: [
       {
         label: "Pengajuan Cuti",
-        href: "/leave/submission",
+        href: "/time-off/request",
         icon: FileText,
       },
       {
         label: "Persetujuan Cuti",
-        href: "/leave/approval",
+        href: "/time-off/approval",
         icon: CheckSquare,
       },
       {
         label: "History Cuti",
-        href: "/leave/history",
+        href: "/time-off/history",
         icon: History,
       },
     ],
@@ -50,12 +50,12 @@ export const sidebarMenu: SidebarSection[] = [
     children: [
       {
         label: "Master Cuti",
-        href: "/master-data/leave",
+        href: "/master-data/leave", // master-data/time-off (Nanti diganti)
         icon: Database,
       },
       {
         label: "Master Cuti Employee",
-        href: "/master-data/leave-employee",
+        href: "/master-data/leave-employee", // master-data/time-off-employee (Nanti diganti)
         icon: Users,
       },
       {
