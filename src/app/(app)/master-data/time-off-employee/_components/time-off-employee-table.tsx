@@ -17,8 +17,8 @@ import {
 } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
 
-import { TimeOffEmployeeFormModal } from "./leave-employee-form-modal"
-import { TimeOffEmployeeDeleteDialog } from "./leave-employee-delete-dialog"
+import { TimeOffEmployeeFormModal } from "./time-off-employee-form-modal"
+import { TimeOffEmployeeDeleteDialog } from "./time-off-employee-delete-dialog"
 
 export function TimeOffEmployeeTable() {
   const { data, isLoading, error } = useTimeOffEmployeeList()
