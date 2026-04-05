@@ -1,4 +1,5 @@
 export type IDName = {
+    [x: string]: ReactNode
     id: number
     name: string  
 }

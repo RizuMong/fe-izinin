@@ -28,7 +28,6 @@ import { formatDate } from "@/lib/utils"
 import type { Adjustment } from "@/services/master-data/adjustment"
 
 export function AdjustmentTable() {
-  const router = useRouter()
   const { data, isLoading, error, refetch } = useAdjustmentList()
   const [editingAdjustment, setEditingAdjustment] = useState<Adjustment | null>(
     null
@@ -36,9 +35,6 @@ export function AdjustmentTable() {
   const [deleteId, setDeleteId] = useState<number | null>(null)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const adjustments = data?.data ?? []
-
-  // Loading stuck fix - auto refetch after 7 seconds
-  const [elapsedTime, setElapsedTime] = useState(0)
 
   if (isLoading) {
     return (
@@ -101,7 +97,7 @@ export function AdjustmentTable() {
                 <TableHead>Action</TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody> 
               {adjustments.map((adjustment) => (
                 <TableRow
                   key={adjustment.id}

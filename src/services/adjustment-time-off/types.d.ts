@@ -11,8 +11,10 @@ export type IDName = {
 
 export type Adjustment = {
   id: number
-  employee_id: EmployeeId
-  timeoff_id: IDName
+  employee_id: number
+  timeoff_id: number
+  employee: EmployeeId
+  time_off: IDName
   total_quota: number
   period: string
   operation: "PENAMBAHAN" | "PENGURANGAN"
