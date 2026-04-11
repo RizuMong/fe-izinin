@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { useAdjustmentList } from "@/services/master-data/adjustment"
 import {
   Table,
@@ -94,7 +93,7 @@ export function AdjustmentTable() {
                 <TableHead>Operation</TableHead>
                 <TableHead>Created At</TableHead>
                 <TableHead>Updated At</TableHead>
-                <TableHead>Action</TableHead>
+                {/* <TableHead>Action</TableHead> */}
               </TableRow>
             </TableHeader>
             <TableBody> 
@@ -126,7 +125,7 @@ export function AdjustmentTable() {
                   <TableCell className="text-sm">
                     {formatDate(adjustment.updated_at)}
                   </TableCell>
-                  <TableCell>
+                  {/* <TableCell>
                     <div className="flex items-center gap-2">
                       <AdjustmentFormModal
                         initialData={adjustment}
@@ -159,7 +158,7 @@ export function AdjustmentTable() {
                         />
                       </AlertDialog>
                     </div>
-                  </TableCell>
+                  </TableCell> */}
                 </TableRow>
               ))}
             </TableBody>

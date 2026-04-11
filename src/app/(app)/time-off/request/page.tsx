@@ -1,7 +1,7 @@
 "use client"
 
-import { TimeOffForm } from "./_components/request-form"
-import { TimeOffTable } from "./_components/request-table"
+import { RequestTimeOffFormModal } from "./_components/request-time-off-form-modal"
+import { RequestTimeOffTable } from "./_components/request-time-off-table"
 
 export default function Page() {
   return (
@@ -17,13 +17,13 @@ export default function Page() {
             Kelola dan ajukan cuti Anda dengan mudah
           </p>
         </div>
-        <TimeOffForm />
+        <RequestTimeOffFormModal />
       </div>
 
       {/* FILTER */}
 
       {/* TABLE */}
-      <TimeOffTable />
+      <RequestTimeOffTable />
 
     </div>
   )

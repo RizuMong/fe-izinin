@@ -1,3 +1,8 @@
+export type IDName = {
+  id: number
+  name: string
+}
+
 export type TimeOffEmployee = {
   id: number
   employee_id: number
@@ -6,6 +11,8 @@ export type TimeOffEmployee = {
   total_quota: number
   remaining_balance: number
   used_quota: number
+  employee: IDName
+  time_off: IDName
   created_at: string
   updated_at: string
 }
