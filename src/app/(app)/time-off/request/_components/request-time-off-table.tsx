@@ -133,7 +133,7 @@ export function RequestTimeOffTable() {
                         <AlertDialogHeader>
                           <AlertDialogTitle>Submit Pengajuan Cuti?</AlertDialogTitle>
                           <AlertDialogDescription>
-                            Apakah Anda yakin ingin melakukan submit pengajuan cuti ini? Status akan berubah menjadi PENDING dan akan diteruskan ke approver terkait.
+                            Apakah Anda yakin ingin melakukan submit pengajuan cuti ini?
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -144,7 +144,7 @@ export function RequestTimeOffTable() {
                             onClick={() => submitMutation.mutate(request.id)}
                             disabled={submitMutation.isPending}
                           >
-                            Ya, Submit
+                            Submit
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>

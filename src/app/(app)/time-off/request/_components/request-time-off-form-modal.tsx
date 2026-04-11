@@ -74,13 +74,13 @@ export function RequestTimeOffFormModal() {
       <DialogTrigger asChild>
         <Button>
           <Plus className="h-4 w-4 mr-2" />
-          Request Time Off
+          Pengajuan Cuti
         </Button>
       </DialogTrigger>
       
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Request Time Off</DialogTitle>
+          <DialogTitle>Pengajuan Cuti</DialogTitle>
           <DialogDescription>
             Ajukan pengajuan cuti baru untuk karyawan
           </DialogDescription>
