@@ -4,6 +4,7 @@ export type IDName = {
 }
 
 export type RequestTimeOff = {
+  status: string
   id: number
   employee_id: number
   timeoff_id: number
