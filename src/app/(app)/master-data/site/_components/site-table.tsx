@@ -12,14 +12,14 @@ import {
     TableCell,
 } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
+import { TableSkeleton } from "@/components/ui/table-skeleton"
+import { EmptyState } from "@/components/ui/empty-state"
 
 import { SiteFormModal } from "./site-form-modal"
 import { SiteDeleteDialog } from "./site-delete-dialog"
 
 export function SiteTable() {
     const { data, isLoading, error, refetch } = useSiteList()
-
-    if (isLoading) return <div>Loading...</div>
 
     if (error) {
         return (
@@ -53,17 +53,27 @@ export function SiteTable() {
                     </TableHeader>
 
                     <TableBody>
-                        {data?.map((item) => (
-                            <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>{formatDate(item.created_at)}</TableCell>
-                                <TableCell>{formatDate(item.updated_at)}</TableCell>
-                                <TableCell className="flex gap-2">
-                                    <SiteFormModal initialData={item} />
-                                    <SiteDeleteDialog id={item.id} />
+                        {isLoading ? (
+                            <TableSkeleton columns={4} />
+                        ) : !data || data.length === 0 ? (
+                            <TableRow className="hover:bg-transparent">
+                                <TableCell colSpan={4} className="p-0">
+                                    <EmptyState title="Tidak ada data site" description="Belum ada data site (lokasi) yang ditambahkan." />
                                 </TableCell>
                             </TableRow>
-                        ))}
+                        ) : (
+                            data.map((item) => (
+                                <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>{formatDate(item.created_at)}</TableCell>
+                                    <TableCell>{formatDate(item.updated_at)}</TableCell>
+                                    <TableCell className="flex gap-2">
+                                        <SiteFormModal initialData={item} />
+                                        <SiteDeleteDialog id={item.id} />
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        )}
                     </TableBody>
                 </Table>
             </CardContent>

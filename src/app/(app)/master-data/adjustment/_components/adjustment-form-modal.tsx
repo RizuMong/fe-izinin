@@ -108,30 +108,30 @@ export function AdjustmentFormModal({
         ) : (
           <Button>
             <Plus className="h-4 w-4 mr-2" />
-            Tambah Adjustment
+            Tambah Penyesuaian
           </Button>
         )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {isEditMode ? "Edit Adjustment" : "Tambah Adjustment"}
+            {isEditMode ? "Edit Penyesuaian" : "Tambah Penyesuaian"}
           </DialogTitle>
           <DialogDescription>
             {isEditMode
-              ? "Ubah data adjustment"
-              : "Tambahkan adjustment baru"}
+              ? "Ubah data penyesuaian"
+              : "Tambahkan penyesuaian baru"}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Employee */}
           <div className="space-y-2">
-            <Label htmlFor="employee_id">Employee</Label>
+            <Label htmlFor="employee_id">Karyawan</Label>
             {employeesLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Loading employees...
+                Memuat data karyawan...
               </div>
             ) : (
               <Select
@@ -144,7 +144,7 @@ export function AdjustmentFormModal({
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Employee" />
+                  <SelectValue placeholder="Pilih Karyawan" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {employeeData?.data?.map((employee: any) => (
@@ -159,11 +159,11 @@ export function AdjustmentFormModal({
 
           {/* Time Off */}
           <div className="space-y-2">
-            <Label htmlFor="timeoff_id">Time Off</Label>
+            <Label htmlFor="timeoff_id">Cuti</Label>
             {timeoffsLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Loading time offs...
+                Memuat data cuti...
               </div>
             ) : (
               <Select
@@ -176,7 +176,7 @@ export function AdjustmentFormModal({
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Time Off" />
+                  <SelectValue placeholder="Pilih Cuti" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {timeoffData?.data?.map((timeoff: any) => (
@@ -191,11 +191,11 @@ export function AdjustmentFormModal({
 
           {/* Total Quota */}
           <div className="space-y-2">
-            <Label htmlFor="total_quota">Total Quota</Label>
+            <Label htmlFor="total_quota">Total Kuota</Label>
             <Input
               id="total_quota"
               type="number"
-              placeholder="Total Quota"
+              placeholder="Total Kuota"
               className="w-full appearance-none"
               value={formData.total_quota ? formData.total_quota : ""}
               onChange={(e) =>
@@ -210,7 +210,7 @@ export function AdjustmentFormModal({
 
           {/* Period */}
           <div className="space-y-2">
-            <Label htmlFor="period">Period</Label>
+            <Label htmlFor="period">Periode</Label>
             <Select
               value={formData.period ? formData.period.slice(0, 4) : ""}
               onValueChange={(value) =>
@@ -238,7 +238,7 @@ export function AdjustmentFormModal({
 
           {/* Operation */}
           <div className="space-y-2">
-            <Label htmlFor="operation">Operation</Label>
+            <Label htmlFor="operation">Operasi</Label>
             <Select
               value={formData.operation}
               onValueChange={(value) =>
@@ -259,7 +259,7 @@ export function AdjustmentFormModal({
           </div>
 
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Loading..." : isEditMode ? "Update" : "Simpan"}
+            {isLoading ? "Memuat..." : isEditMode ? "Perbarui" : "Simpan"}
           </Button>
         </form>
       </DialogContent>

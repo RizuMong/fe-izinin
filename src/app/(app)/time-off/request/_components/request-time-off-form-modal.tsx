@@ -89,11 +89,11 @@ export function RequestTimeOffFormModal() {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Employee Reference */}
           <div className="space-y-2">
-            <Label htmlFor="employee_id">Employee</Label>
+            <Label htmlFor="employee_id">Karyawan</Label>
             {employeesLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Loading employees...
+                Memuat karyawan...
               </div>
             ) : (
               <Select
@@ -106,7 +106,7 @@ export function RequestTimeOffFormModal() {
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Employee" />
+                  <SelectValue placeholder="Pilih Karyawan" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {employeeData?.data?.map((employee: any) => (
@@ -121,11 +121,11 @@ export function RequestTimeOffFormModal() {
 
           {/* Time Off Reference */}
           <div className="space-y-2">
-            <Label htmlFor="timeoff_id">Time Off Type</Label>
+            <Label htmlFor="timeoff_id">Tipe Cuti</Label>
             {timeoffsLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Loading time offs...
+                Memuat tipe cuti...
               </div>
             ) : (
               <Select
@@ -138,7 +138,7 @@ export function RequestTimeOffFormModal() {
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Tipe Time Off" />
+                  <SelectValue placeholder="Pilih Tipe Cuti" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {timeoffData?.data?.map((timeoff: any) => (
@@ -153,7 +153,7 @@ export function RequestTimeOffFormModal() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="start_date">Start Date</Label>
+              <Label htmlFor="start_date">Tanggal Mulai</Label>
               <Input
                 id="start_date"
                 type="date"
@@ -165,7 +165,7 @@ export function RequestTimeOffFormModal() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="end_date">End Date</Label>
+              <Label htmlFor="end_date">Tanggal Selesai</Label>
               <Input
                 id="end_date"
                 type="date"
@@ -179,7 +179,7 @@ export function RequestTimeOffFormModal() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="reason">Reason</Label>
+            <Label htmlFor="reason">Alasan</Label>
             <Textarea
               id="reason"
               placeholder="Berikan alasan pengajuan cuti"
@@ -191,7 +191,7 @@ export function RequestTimeOffFormModal() {
           </div>
 
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Loading..." : "Simpan Pengajuan"}
+            {isLoading ? "Memuat..." : "Simpan Pengajuan"}
           </Button>
         </form>
       </DialogContent>

@@ -23,6 +23,8 @@ import { AlertDialog, AlertDialogTrigger } from "@/components/ui/alert-dialog"
 import { Edit, Trash2 } from "lucide-react"
 import { AdjustmentFormModal } from "./adjustment-form-modal"
 import { AdjustmentDeleteDialog } from "./adjustment-delete-dialog"
+import { TableSkeleton } from "@/components/ui/table-skeleton"
+import { EmptyState } from "@/components/ui/empty-state"
 import { formatDate } from "@/lib/utils"
 import type { Adjustment } from "@/services/master-data/adjustment"
 
@@ -35,23 +37,6 @@ export function AdjustmentTable() {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const adjustments = data?.data ?? []
 
-  if (isLoading) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Data Adjustment</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-            <Skeleton className="h-12 w-full" />
-          </div>
-        </CardContent>
-      </Card>
-    )
-  }
-
   if (error) {
     return (
       <Card>
@@ -61,19 +46,6 @@ export function AdjustmentTable() {
         </CardHeader>
         <CardContent>
           <Button onClick={() => refetch()}>Coba Lagi</Button>
-        </CardContent>
-      </Card>
-    )
-  }
-
-  if (adjustments.length === 0) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Data Adjustment</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">Tidak ada data</p>
         </CardContent>
       </Card>
     )
@@ -97,11 +69,20 @@ export function AdjustmentTable() {
               </TableRow>
             </TableHeader>
             <TableBody> 
-              {adjustments.map((adjustment) => (
-                <TableRow
-                  key={adjustment.id}
-                  className="hover:bg-muted/40 transition-colors"
-                >
+              {isLoading ? (
+                <TableSkeleton columns={7} />
+              ) : adjustments.length === 0 ? (
+                <TableRow className="hover:bg-transparent">
+                  <TableCell colSpan={7} className="p-0">
+                    <EmptyState title="Tidak ada data adjustment" description="Belum ada data adjustment kuota cuti." />
+                  </TableCell>
+                </TableRow>
+              ) : (
+                adjustments.map((adjustment) => (
+                  <TableRow
+                    key={adjustment.id}
+                    className="hover:bg-muted/40 transition-colors"
+                  >
                   <TableCell className="font-medium">
                     {adjustment.employee.full_name}
                   </TableCell>
@@ -160,7 +141,7 @@ export function AdjustmentTable() {
                     </div>
                   </TableCell> */}
                 </TableRow>
-              ))}
+              )))}
             </TableBody>
           </Table>
         </div>

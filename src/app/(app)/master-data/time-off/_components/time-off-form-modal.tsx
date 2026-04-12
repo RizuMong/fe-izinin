@@ -129,7 +129,7 @@ export function TimeOffFormModal({
                     <DialogTitle>
                         {isEdit ? "Edit Cuti" : "Tambah Cuti Baru"}
                     </DialogTitle>                    <DialogDescription>
-                        {isEdit ? "Ubah data leave yang sudah ada" : "Tambahkan leave baru ke dalam sistem"}
+                        {isEdit ? "Ubah data cuti yang sudah ada" : "Tambahkan cuti baru ke dalam sistem"}
                     </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">

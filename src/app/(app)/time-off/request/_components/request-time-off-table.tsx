@@ -72,13 +72,13 @@ export function RequestTimeOffTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Employee</TableHead>
-            <TableHead>Time Off Type</TableHead>
-            <TableHead>Start Date</TableHead>
-            <TableHead>End Date</TableHead>
+            <TableHead>Karyawan</TableHead>
+            <TableHead>Tipe Cuti</TableHead>
+            <TableHead>Tanggal Mulai</TableHead>
+            <TableHead>Tanggal Selesai</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Reason</TableHead>
-            <TableHead className="text-center w-30">Action</TableHead>
+            <TableHead>Alasan</TableHead>
+            <TableHead className="text-center w-30">Aksi</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -124,16 +124,16 @@ export function RequestTimeOffTable() {
                           ) : (
                             <>
                               <Send className="h-3 w-3 mr-2" />
-                              Submit
+                              Kirim
                             </>
                           )}
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>Submit Pengajuan Cuti?</AlertDialogTitle>
+                          <AlertDialogTitle>Kirim Pengajuan Cuti?</AlertDialogTitle>
                           <AlertDialogDescription>
-                            Apakah Anda yakin ingin melakukan submit pengajuan cuti ini?
+                            Apakah Anda yakin ingin mengirim pengajuan cuti ini?
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -144,7 +144,7 @@ export function RequestTimeOffTable() {
                             onClick={() => submitMutation.mutate(request.id)}
                             disabled={submitMutation.isPending}
                           >
-                            Submit
+                            Kirim
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>

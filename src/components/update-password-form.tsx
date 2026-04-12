@@ -24,35 +24,34 @@ export function UpdatePasswordForm({
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [errors, setErrors] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [isValidSession, setIsValidSession] = useState<boolean | null>(null)
   const router = useRouter()
 
-  const validatePassword = (password: string) => {
-    const minLength = 6
-    const hasUpper = /[A-Z]/.test(password)
-    const hasLower = /[a-z]/.test(password)
-    const hasNumber = /[0-9]/.test(password)
-    const hasSymbol = /[^A-Za-z0-9]/.test(password)
-
-    if (password.length < minLength) {
-      return 'Password must be at least 6 characters'
+  const validateInput = (pass: string, confirm: string): string[] => {
+    const errs: string[] = []
+    
+    if (pass.length < 6) {
+      errs.push('Kata sandi minimal 6 karakter')
     }
-    if (!hasUpper) {
-      return 'Password must include at least one uppercase letter'
+    if (!/[A-Z]/.test(pass)) {
+      errs.push('Kata sandi harus mengandung huruf besar')
     }
-    if (!hasLower) {
-      return 'Password must include at least one lowercase letter'
+    if (!/[a-z]/.test(pass)) {
+      errs.push('Kata sandi harus mengandung huruf kecil')
     }
-    if (!hasNumber) {
-      return 'Password must include at least one number'
+    if (!/[0-9]/.test(pass)) {
+      errs.push('Kata sandi harus mengandung angka')
     }
-    if (!hasSymbol) {
-      return 'Password must include at least one symbol'
+    if (!/[^A-Za-z0-9]/.test(pass)) {
+      errs.push('Kata sandi harus mengandung simbol')
     }
-
-    return null
+    if (confirm && pass !== confirm) {
+      errs.push('Kata sandi tidak cocok')
+    }
+    
+    return errs
   }
 
   useEffect(() => {
@@ -73,16 +72,11 @@ export function UpdatePasswordForm({
 
   const handleUpdatePassword = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError(null)
+    setErrors([])
 
-    const validationError = validatePassword(password)
-    if (validationError) {
-      setError(validationError)
-      return
-    }
-
-    if (password !== confirmPassword) {
-      setError("Passwords do not match")
+    const validationErrors = validateInput(password, confirmPassword)
+    if (validationErrors.length > 0) {
+      setErrors(validationErrors)
       return
     }
 
@@ -90,13 +84,13 @@ export function UpdatePasswordForm({
     setIsLoading(true)
 
     try {
-      const { error } = await supabase.auth.updateUser({ password })
-      if (error) throw error
+      const { error: supabaseError } = await supabase.auth.updateUser({ password })
+      if (supabaseError) throw supabaseError
 
       await supabase.auth.signOut()
       router.replace("/auth/login")
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred")
+      setErrors([error instanceof Error ? error.message : "Terjadi kesalahan"])
     } finally {
       setIsLoading(false)
     }
@@ -108,30 +102,38 @@ export function UpdatePasswordForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-          <CardDescription>Please enter your new password below.</CardDescription>
+          <CardTitle className="text-2xl">Atur Ulang Kata Sandi</CardTitle>
+          <CardDescription>Silakan masukkan kata sandi baru Anda di bawah ini.</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleUpdatePassword}>
             <div className="flex flex-col gap-6">
               {/* New Password Field */}
               <div className="grid gap-2">
-                <Label htmlFor="password">New password</Label>
+                <Label htmlFor="password">Kata sandi baru</Label>
                 <div className="relative">
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="New password"
+                    placeholder="Kata sandi baru"
                     required
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value
+                      setPassword(val)
+                      if (val || confirmPassword) {
+                        setErrors(validateInput(val, confirmPassword))
+                      } else {
+                        setErrors([])
+                      }
+                    }}
                     className="pr-10" // Add padding to prevent text overlap with the icon
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -140,32 +142,46 @@ export function UpdatePasswordForm({
 
               {/* Confirm Password Field */}
               <div className="grid gap-2">
-                <Label htmlFor="confirm-password">Confirm new password</Label>
+                <Label htmlFor="confirm-password">Konfirmasi kata sandi baru</Label>
                 <div className="relative">
                   <Input
                     id="confirm-password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Repeat new password"
+                    placeholder="Ulangi kata sandi baru"
                     required
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) => {
+                      const val = e.target.value
+                      setConfirmPassword(val)
+                      if (password || val) {
+                        setErrors(validateInput(password, val))
+                      } else {
+                        setErrors([])
+                      }
+                    }}
                     className="pr-10"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
               </div>
 
-              {error && <p className="text-sm text-red-500 font-medium">{error}</p>}
+              {errors.length > 0 && (
+                <ul className="text-sm text-red-500 font-medium list-disc ml-4 space-y-1">
+                  {errors.map((err, idx) => (
+                    <li key={idx}>{err}</li>
+                  ))}
+                </ul>
+              )}
 
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Saving..." : "Save new password"}
+                {isLoading ? "Menyimpan..." : "Simpan kata sandi baru"}
               </Button>
             </div>
           </form>

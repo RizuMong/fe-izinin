@@ -12,6 +12,8 @@ import {
     TableCell,
 } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
+import { TableSkeleton } from "@/components/ui/table-skeleton"
+import { EmptyState } from "@/components/ui/empty-state"
 
 import { EmployeeFormModal } from "./employee-form-modal"
 import { EmployeeDeleteDialog } from "./employee-delete-dialog"
@@ -19,9 +21,7 @@ import { EmployeeDeleteDialog } from "./employee-delete-dialog"
 export function EmployeeTable() {
     const { data, isLoading, error } = useEmployeeList()
 
-    if (isLoading) return <div>Loading...</div>
-
-    if (error) return <div>Error loading employees</div>
+    if (error) return <div>Gagal memuat daftar karyawan</div>
 
     return (
         <Card className="p-0 overflow-hidden">
@@ -29,19 +29,28 @@ export function EmployeeTable() {
                 <Table className="min-w-full">
                     <TableHeader className="bg-muted/50">
                         <TableRow>
-                            <TableHead>Full Name</TableHead>
+                            <TableHead>Nama Lengkap</TableHead>
                             <TableHead>NPK</TableHead>
                             <TableHead>Site</TableHead>
                             <TableHead>Afdeling</TableHead>
-                            <TableHead>Job Position</TableHead>
+                            <TableHead>Posisi Pekerjaan</TableHead>
                             <TableHead>TMK</TableHead>
-                            <TableHead className="w-25">Action</TableHead>
+                            <TableHead className="w-25">Aksi</TableHead>
                         </TableRow>
                     </TableHeader>
 
                     <TableBody>
-                        {data?.data?.map((item) => (
-                            <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
+                        {isLoading ? (
+                            <TableSkeleton columns={7} />
+                        ) : !data?.data || data.data.length === 0 ? (
+                            <TableRow className="hover:bg-transparent">
+                                <TableCell colSpan={7} className="p-0">
+                                    <EmptyState title="Tidak ada karyawan" description="Data karyawan belum ditambahkan." />
+                                </TableCell>
+                            </TableRow>
+                        ) : (
+                            data.data.map((item) => (
+                                <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
                                 <TableCell>{item.full_name}</TableCell>
                                 <TableCell>{item.npk}</TableCell>
                                 <TableCell>{item.site.name}</TableCell>
@@ -54,7 +63,7 @@ export function EmployeeTable() {
                                     <EmployeeDeleteDialog id={item.id} />
                                 </TableCell>
                             </TableRow>
-                        ))}
+                        )))}
                     </TableBody>
                 </Table>
             </CardContent>

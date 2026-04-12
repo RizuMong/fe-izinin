@@ -21,6 +21,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Loader2, Download, FilterX } from "lucide-react"
+import { TableSkeleton } from "@/components/ui/table-skeleton"
+import { EmptyState } from "@/components/ui/empty-state"
 
 import { useRequestTimeOffListWithFilter } from "@/services/time-off/request/hook"
 import { useEmployeeList } from "@/services/users/employee"
@@ -164,7 +166,7 @@ export default function TimeOffReportPage() {
               onValueChange={(val) => setFilters({ ...filters, employee_id: val === "ALL" ? "" : val })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={isEmployeeLoading ? "Loading..." : "Semua Karyawan"} />
+                <SelectValue placeholder={isEmployeeLoading ? "Memuat..." : "Semua Karyawan"} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">Semua Karyawan</SelectItem>
@@ -184,7 +186,7 @@ export default function TimeOffReportPage() {
               onValueChange={(val) => setFilters({ ...filters, timeoff_id: val === "ALL" ? "" : val })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={isTimeoffLoading ? "Loading..." : "Semua Tipe Cuti"} />
+                <SelectValue placeholder={isTimeoffLoading ? "Memuat..." : "Semua Tipe Cuti"} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">Semua Tipe Cuti</SelectItem>
@@ -261,15 +263,11 @@ export default function TimeOffReportPage() {
           </TableHeader>
           <TableBody>
             {isLoading ? (
-              <TableRow>
-                <TableCell colSpan={6} className="h-32 text-center">
-                  <Loader2 className="h-8 w-8 animate-spin text-slate-300 mx-auto" />
-                </TableCell>
-              </TableRow>
+              <TableSkeleton columns={6} />
             ) : requests.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={6} className="h-32 text-center text-slate-500">
-                  Tidak ada data laporan cuti yang sesuai dengan filter.
+              <TableRow className="hover:bg-transparent">
+                <TableCell colSpan={6} className="p-0">
+                  <EmptyState title="Laporan Cuti Kosong" description="Tidak ada data laporan cuti yang sesuai dengan filter." />
                 </TableCell>
               </TableRow>
             ) : (

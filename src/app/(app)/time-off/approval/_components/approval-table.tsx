@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/table"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { TableSkeleton } from "@/components/ui/table-skeleton"
+import { EmptyState } from "@/components/ui/empty-state"
 import {
   Dialog,
   DialogContent,
@@ -91,14 +93,6 @@ export function ApprovalTable() {
     )
   }
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-48 border rounded-md bg-white">
-        <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
-      </div>
-    )
-  }
-
   if (isError) {
     return (
       <div className="flex justify-center items-center h-48 border rounded-md bg-white text-destructive">
@@ -114,20 +108,22 @@ export function ApprovalTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Employee</TableHead>
-            <TableHead>Time Off Type</TableHead>
-            <TableHead>Start Date</TableHead>
-            <TableHead>End Date</TableHead>
-            <TableHead>Total Days</TableHead>
+            <TableHead>Karyawan</TableHead>
+            <TableHead>Tipe Cuti</TableHead>
+            <TableHead>Tanggal Mulai</TableHead>
+            <TableHead>Tanggal Selesai</TableHead>
+            <TableHead>Total Hari</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead className="text-center min-w-70">Action</TableHead>
+            <TableHead className="text-center min-w-70">Aksi</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {requests.length === 0 ? (
-            <TableRow>
-              <TableCell colSpan={7} className="text-center h-24 text-muted-foreground">
-                Tidak ada data pengajuan cuti.
+          {isLoading ? (
+            <TableSkeleton columns={7} />
+          ) : requests.length === 0 ? (
+            <TableRow className="hover:bg-transparent">
+              <TableCell colSpan={7} className="p-0">
+                <EmptyState title="Tidak ada data persetujuan" description="Belum ada data pengajuan cuti untuk disetujui." />
               </TableCell>
             </TableRow>
           ) : (
@@ -157,14 +153,14 @@ export function ApprovalTable() {
                         className="bg-green-600 hover:bg-green-700 text-white"
                         onClick={() => setApproveRequest(request)}
                       >
-                        <CheckCircle className="h-4 w-4 mr-1" /> Approve
+                        <CheckCircle className="h-4 w-4 mr-1" /> Setujui
                       </Button>
                       <Button
                         variant="destructive"
                         size="sm"
                         onClick={() => setRejectRequest(request)}
                       >
-                        <XCircle className="h-4 w-4 mr-1" /> Reject
+                        <XCircle className="h-4 w-4 mr-1" /> Tolak
                       </Button>
                     </>
                   )}
@@ -190,7 +186,7 @@ export function ApprovalTable() {
       }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Approve Pengajuan Cuti</DialogTitle>
+            <DialogTitle>Setujui Pengajuan Cuti</DialogTitle>
             <DialogDescription>
               Berikan catatan persetujuan untuk cuti {approveRequest?.employee?.name || "Karyawan"}.
             </DialogDescription>
@@ -212,7 +208,7 @@ export function ApprovalTable() {
             </Button>
             <Button onClick={handleApproveSubmit} disabled={approveMutation.isPending} className="bg-green-600 hover:bg-green-700 text-white">
               {approveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
-              Submit Approve
+              Kirim Persetujuan
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -224,7 +220,7 @@ export function ApprovalTable() {
       }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Reject Pengajuan Cuti</DialogTitle>
+            <DialogTitle>Tolak Pengajuan Cuti</DialogTitle>
             <DialogDescription>
               Mohon berikan alasan penolakan untuk cuti {rejectRequest?.employee?.name || "Karyawan"}.
             </DialogDescription>
@@ -247,7 +243,7 @@ export function ApprovalTable() {
             </Button>
             <Button onClick={handleRejectSubmit} disabled={rejectMutation.isPending} variant="destructive">
               {rejectMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
-              Submit Reject
+              Kirim Penolakan
             </Button>
           </DialogFooter>
         </DialogContent>

@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/table"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { TableSkeleton } from "@/components/ui/table-skeleton"
+import { EmptyState } from "@/components/ui/empty-state"
 
 import { HolidayFormModal } from "./holiday-form-modal"
 import { HolidayDeleteDialog } from "./holiday-delete-dialog"
@@ -20,9 +22,7 @@ import { HolidayDeleteDialog } from "./holiday-delete-dialog"
 export function HolidayTable() {
     const { data, isLoading, error } = useHolidayList()
 
-    if (isLoading) return <div>Loading...</div>
-
-    if (error) return <div>Error loading holidays</div>
+    if (error) return <div>Gagal memuat daftar libur</div>
 
     return (
         <Card className="p-0 overflow-hidden">
@@ -31,19 +31,28 @@ export function HolidayTable() {
                     <TableHeader className="bg-muted/50">
                         <TableRow>
                             <TableHead>Nama</TableHead>
-                            <TableHead>National Holiday</TableHead>
-                            <TableHead>Date</TableHead>
-                            <TableHead className="w-25">Action</TableHead>
+                            <TableHead>Libur Nasional</TableHead>
+                            <TableHead>Tanggal</TableHead>
+                            <TableHead className="w-25">Aksi</TableHead>
                         </TableRow>
                     </TableHeader>
 
                     <TableBody>
-                        {data?.map((item) => (
-                            <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
+                        {isLoading ? (
+                            <TableSkeleton columns={4} />
+                        ) : !data || data.length === 0 ? (
+                            <TableRow className="hover:bg-transparent">
+                                <TableCell colSpan={4} className="p-0">
+                                    <EmptyState title="Tidak ada hari libur" description="Data hari libur belum ditambahkan." />
+                                </TableCell>
+                            </TableRow>
+                        ) : (
+                            data.map((item) => (
+                                <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
                                 <TableCell>{item.name}</TableCell>
                                 <TableCell>
                                     <Badge variant={item.is_national_holiday ? "default" : "secondary"}>
-                                        {item.is_national_holiday ? "Yes" : "No"}
+                                        {item.is_national_holiday ? "Ya" : "Tidak"}
                                     </Badge>
                                 </TableCell>
                                 <TableCell>{formatDate(item.date)}</TableCell>
@@ -53,7 +62,7 @@ export function HolidayTable() {
                                     <HolidayDeleteDialog id={item.id} />
                                 </TableCell>
                             </TableRow>
-                        ))}
+                        )))}
                     </TableBody>
                 </Table>
             </CardContent>

@@ -19,6 +19,8 @@ import { Button } from "@/components/ui/button"
 
 import { JobPositionFormModal } from "./job-position-form-modal"
 import { JobPositionDeleteDialog } from "./job-position-delete-dialog"
+import { TableSkeleton } from "@/components/ui/table-skeleton"
+import { EmptyState } from "@/components/ui/empty-state"
 
 export function JobPositionTable() {
     const router = useRouter()
@@ -28,12 +30,6 @@ export function JobPositionTable() {
     const [elapsedTime, setElapsedTime] = useState<number>(0)
 
     const { data, isLoading, error, refetch } = useJobPositionList()
-
-    if (isLoading) {
-        return (
-                <div className="text-base">Loading...</div>
-        )
-    }
 
     if (error) {
         return (
@@ -62,18 +58,28 @@ export function JobPositionTable() {
                     </TableHeader>
 
                     <TableBody>
-                        {data?.map((item) => (
-                            <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>{formatDate(item.created_at)}</TableCell>
-                                <TableCell>{formatDate(item.updated_at)}</TableCell>
-
-                                <TableCell className="flex gap-2">
-                                    <JobPositionFormModal initialData={item} />
-                                    <JobPositionDeleteDialog id={item.id} />
+                        {isLoading ? (
+                            <TableSkeleton columns={4} />
+                        ) : !data || data.length === 0 ? (
+                            <TableRow className="hover:bg-transparent">
+                                <TableCell colSpan={4} className="p-0">
+                                    <EmptyState title="Tidak ada data posisi" description="Belum ada data posisi pekerjaan yang ditambahkan." />
                                 </TableCell>
                             </TableRow>
-                        ))}
+                        ) : (
+                            data.map((item) => (
+                                <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>{formatDate(item.created_at)}</TableCell>
+                                    <TableCell>{formatDate(item.updated_at)}</TableCell>
+
+                                    <TableCell className="flex gap-2">
+                                        <JobPositionFormModal initialData={item} />
+                                        <JobPositionDeleteDialog id={item.id} />
+                                    </TableCell>
+                                </TableRow>
+                            ))
+                        )}
                     </TableBody>
                 </Table>
             </CardContent>
