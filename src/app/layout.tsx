@@ -16,10 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-          <QueryProvider>
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <QueryProvider>
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>
