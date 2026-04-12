@@ -1,8 +1,10 @@
 "use client"
 
 import { useUserStore } from "@/store/user.store"
-import { useRouter, useSearchParams, usePathname } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { useEffect } from "react"
+
+const RECOVERY_PATHS = ["/auth/update-password"]
 
 export default function AuthLayout({
   children,
@@ -11,29 +13,21 @@ export default function AuthLayout({
 }) {
   const { user, isLoading } = useUserStore()
   const router = useRouter()
-  const searchParams = useSearchParams()
   const pathname = usePathname()
 
-  const type = searchParams.get("type")
-  const accessToken = searchParams.get("access_token")
-
-  const isRecovery =
-    type === "recovery" || !!accessToken
-
-  const isResetPage = pathname.includes("reset-password")
+  const isRecoveryPage = RECOVERY_PATHS.includes(pathname)
 
   useEffect(() => {
-    if (isLoading) return
+    if (isRecoveryPage) return
 
-    if (isResetPage && !isRecovery) {
-      router.replace("/login")
-      return
-    }
-
-    if (user && !isRecovery) {
+    if (!isLoading && user) {
       router.replace("/time-off/request")
     }
-  }, [user, isLoading, isRecovery, isResetPage, router])
+  }, [user, isLoading, router, isRecoveryPage])
+
+  if (isLoading) return null
+
+  if (!isRecoveryPage && user) return null
 
   return <>{children}</>
 }
