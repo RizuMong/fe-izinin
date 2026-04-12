@@ -124,14 +124,14 @@ export function RequestTimeOffTable() {
                           ) : (
                             <>
                               <Send className="h-3 w-3 mr-2" />
-                              Kirim
+                              Submit
                             </>
                           )}
                         </Button>
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>Kirim Pengajuan Cuti?</AlertDialogTitle>
+                          <AlertDialogTitle>Submit Pengajuan Cuti?</AlertDialogTitle>
                           <AlertDialogDescription>
                             Apakah Anda yakin ingin mengirim pengajuan cuti ini?
                           </AlertDialogDescription>
@@ -144,7 +144,7 @@ export function RequestTimeOffTable() {
                             onClick={() => submitMutation.mutate(request.id)}
                             disabled={submitMutation.isPending}
                           >
-                            Kirim
+                            Submit
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>

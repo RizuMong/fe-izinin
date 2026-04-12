@@ -80,7 +80,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
                 </div>
                 {error && <p className="text-sm text-red-500">{error}</p>}
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Mengirim...' : 'Kirim email atur ulang'}
+                  {isLoading ? 'Mengirim...' : 'Submit email atur ulang'}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">

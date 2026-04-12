@@ -195,7 +195,7 @@ export function TimeOffFormModal({
                         onClick={handleSubmit}
                         disabled={isLoading}
                     >
-                        {isLoading ? "Menyimpan..." : "Simpan"}
+                        {isLoading ? "Menyimpan..." : "Submit"}
                     </Button> */}
                 </DialogFooter>
             </DialogContent>

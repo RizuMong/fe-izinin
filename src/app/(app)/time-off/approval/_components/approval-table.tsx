@@ -153,14 +153,14 @@ export function ApprovalTable() {
                         className="bg-green-600 hover:bg-green-700 text-white"
                         onClick={() => setApproveRequest(request)}
                       >
-                        <CheckCircle className="h-4 w-4 mr-1" /> Setujui
+                        <CheckCircle className="h-4 w-4 mr-1" /> Approve
                       </Button>
                       <Button
                         variant="destructive"
                         size="sm"
                         onClick={() => setRejectRequest(request)}
                       >
-                        <XCircle className="h-4 w-4 mr-1" /> Tolak
+                        <XCircle className="h-4 w-4 mr-1" /> Reject
                       </Button>
                     </>
                   )}
@@ -186,7 +186,7 @@ export function ApprovalTable() {
       }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Setujui Pengajuan Cuti</DialogTitle>
+            <DialogTitle>Approve Pengajuan Cuti</DialogTitle>
             <DialogDescription>
               Berikan catatan persetujuan untuk cuti {approveRequest?.employee?.name || "Karyawan"}.
             </DialogDescription>
@@ -208,7 +208,7 @@ export function ApprovalTable() {
             </Button>
             <Button onClick={handleApproveSubmit} disabled={approveMutation.isPending} className="bg-green-600 hover:bg-green-700 text-white">
               {approveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
-              Kirim Persetujuan
+              Approve
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -220,7 +220,7 @@ export function ApprovalTable() {
       }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Tolak Pengajuan Cuti</DialogTitle>
+            <DialogTitle>Reject Pengajuan Cuti</DialogTitle>
             <DialogDescription>
               Mohon berikan alasan penolakan untuk cuti {rejectRequest?.employee?.name || "Karyawan"}.
             </DialogDescription>
@@ -243,7 +243,7 @@ export function ApprovalTable() {
             </Button>
             <Button onClick={handleRejectSubmit} disabled={rejectMutation.isPending} variant="destructive">
               {rejectMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
-              Kirim Penolakan
+              Reject
             </Button>
           </DialogFooter>
         </DialogContent>

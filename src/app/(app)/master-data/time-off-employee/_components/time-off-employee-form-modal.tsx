@@ -307,8 +307,8 @@ export function TimeOffEmployeeFormModal({
             {loadingCreate || loadingUpdate
               ? "Loading..."
               : isEdit
-                ? "Simpan Perubahan"
-                : "Simpan"}
+                ? "Submit Perubahan"
+                : "Submit"}
           </Button>
         </DialogFooter>
       </DialogContent>

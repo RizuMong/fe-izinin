@@ -191,7 +191,7 @@ export function RequestTimeOffFormModal() {
           </div>
 
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Memuat..." : "Simpan Pengajuan"}
+            {isLoading ? "Memuat..." : "Submit Pengajuan"}
           </Button>
         </form>
       </DialogContent>

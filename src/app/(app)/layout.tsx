@@ -26,17 +26,19 @@ export default function AppLayout({
 
             <SidebarInset className="flex flex-col w-full">
 
-              <header className="flex items-center justify-between border-b px-4 h-14 bg-white">
+              <header className="flex items-center justify-between border-b px-6 lg:px-8 h-16 bg-white/80 backdrop-blur-md sticky top-0 z-30 transition-all">
                 <div className="flex items-center gap-2">
                   <SidebarTrigger />
-                  <span className="font-semibold">Izinin</span>
+                  <span className="font-semibold text-lg ml-2 text-slate-800">Izinin</span>
                 </div>
 
                 <Header />
               </header>
 
-              <main className="flex-1 w-full p-6 bg-gray-50 overflow-auto">
-                {children}
+              <main className="flex-1 w-full bg-background overflow-auto">
+                <div className="max-w-screen-xl mx-auto w-full p-6 lg:p-8 space-y-6">
+                  {children}
+                </div>
                  <Toaster />
               </main>
 

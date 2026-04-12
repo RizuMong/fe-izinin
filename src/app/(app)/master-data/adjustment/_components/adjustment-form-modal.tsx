@@ -259,7 +259,7 @@ export function AdjustmentFormModal({
           </div>
 
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Memuat..." : isEditMode ? "Perbarui" : "Simpan"}
+            {isLoading ? "Memuat..." : isEditMode ? "Perbarui" : "Submit"}
           </Button>
         </form>
       </DialogContent>

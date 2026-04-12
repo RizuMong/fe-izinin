@@ -46,10 +46,11 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
 }
 
 :root {
-  --background: oklch(1 0 0);
+  --background: oklch(0.97 0 0); /* Off-white canvas */
   --foreground: oklch(0.145 0 0);
 
   --card: oklch(1 0 0);
@@ -85,7 +86,7 @@
   --chart-4: oklch(0.4 0.08 230);
   --chart-5: oklch(0.3 0.06 220);
 
-  --radius: 0.625rem;
+  --radius: 0.75rem; /* Modern large radius */
 }
 
 .dark {

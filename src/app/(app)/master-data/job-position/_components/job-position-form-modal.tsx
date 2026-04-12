@@ -141,7 +141,7 @@ export function JobPositionFormModal({
             onClick={handleSubmit}
             disabled={isLoading}
           >
-            {isLoading ? "Menyimpan..." : "Simpan"}
+            {isLoading ? "Menyimpan..." : "Submit"}
           </Button>
         </DialogFooter>
       </DialogContent>

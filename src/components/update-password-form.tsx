@@ -181,7 +181,7 @@ export function UpdatePasswordForm({
               )}
 
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Menyimpan..." : "Simpan kata sandi baru"}
+                {isLoading ? "Menyimpan..." : "Submit kata sandi baru"}
               </Button>
             </div>
           </form>

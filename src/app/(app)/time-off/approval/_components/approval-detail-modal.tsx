@@ -56,62 +56,62 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Menggunakan p-0 agar kita bisa custom padding dalam sesuai HTML */}
-      <DialogContent className="p-0 sm:max-w-145 rounded-[20px] overflow-hidden gap-0 border-slate-200 shadow-xl" aria-describedby={undefined}>
+      <DialogContent className="p-0 sm:max-w-3xl w-full max-w-[calc(100%-2rem)] md:max-w-3xl rounded-[20px] overflow-hidden gap-0 border-slate-200 shadow-xl" aria-describedby={undefined}>
         <DialogTitle className="sr-only">Detail Pengajuan Cuti</DialogTitle>
 
-        <div className="p-7 pb-0">
+        <div className="p-7 pb-0 grid grid-cols-1 md:grid-cols-2 gap-8 overflow-y-auto max-h-[80vh]">
           
-          {/* HEADER: Avatar, Nama, Tipe Cuti & Status */}
-          <div className="flex items-start justify-between mb-5">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-full bg-blue-50 flex items-center justify-center font-medium text-sm text-blue-600 shrink-0">
-                {getInitials(request.employee?.name as string)}
-              </div>
-              <div>
-                <p className="font-medium text-base text-slate-900 m-0 leading-snug">
-                  {request.employee?.name || "-"}
-                </p>
-                <p className="text-[13px] text-slate-500 m-0">
-                  {request.time_off?.name || "-"}
-                </p>
-              </div>
-            </div>
-            <div className="pt-1">
-               {getStatusBadge(request.status)}
-            </div>
-          </div>
-
-          {/* GRID INFO: Tanggal, Total Hari, Tipe Cuti */}
-          <div className="border-t border-slate-200 pt-5 grid grid-cols-3 gap-2.5 mb-5">
-            <div className="bg-slate-50 rounded-lg p-3">
-              <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-[0.05em]">Tanggal</p>
-              <p className="text-[13px] font-medium text-slate-900 leading-snug">
-                {formatDate(request.start_date)} &mdash; {formatDate(request.end_date)}
-              </p>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-3">
-              <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-[0.05em]">Total hari</p>
-              <p className="text-[13px] font-medium text-slate-900">{request.total_days || 0} hari</p>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-3">
-              <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-[0.05em]">Tipe cuti</p>
-              <p className="text-[13px] font-medium text-slate-900 truncate" title={request.time_off?.name as string}>
-                {request.time_off?.name || "-"}
-              </p>
-            </div>
-          </div>
-
-          {/* ALASAN BOX */}
-          <div className="mb-6">
-            <p className="text-[11px] text-slate-500 mb-1.5 uppercase tracking-[0.05em]">Alasan</p>
-            <p className={`text-[13px] p-3 bg-slate-50 rounded-lg ${!request.reason ? 'italic text-slate-400' : 'text-slate-700'}`}>
-              {request.reason || "Tidak ada alasan"}
-            </p>
-          </div>
-
-          {/* APPROVAL LOGS TIMELINE */}
+          {/* KOLOM KIRI: Informasi & Detail Cuti */}
           <div>
-            <p className="text-[11px] text-slate-500 mb-3 uppercase tracking-[0.05em]">Approval logs</p>
+            {/* Nama & Profil Karyawan */}
+            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Informasi Karyawan</h4>
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="flex items-center gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center font-semibold text-base text-blue-700 shrink-0">
+                  {getInitials(request.employee?.name as string)}
+                </div>
+                <div>
+                  <p className="font-semibold text-sm text-slate-900 m-0 leading-tight">
+                    {request.employee?.name || "-"}
+                  </p>
+                  <p className="text-[12px] text-slate-500 m-0 mt-0.5">
+                    {request.time_off?.name || "-"}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Structured Detail Pengajuan */}
+            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Detail Pengajuan</h4>
+            <div className="space-y-4 mb-6">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+                  <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Tanggal</p>
+                  <p className="text-[12px] font-medium text-slate-900 leading-snug">
+                    {formatDate(request.start_date)} -<br/> {formatDate(request.end_date)}
+                  </p>
+                </div>
+                <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 flex flex-col items-start">
+                  <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Hari & Status</p>
+                  <p className="text-[13px] font-medium text-slate-900 mb-2">{request.total_days || 0} hari kerja</p>
+                  <div className="mt-auto">
+                    {getStatusBadge(request.status)}
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
+                <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Alasan</p>
+                <p className={`text-[13px] leading-relaxed break-words ${!request.reason ? 'italic text-slate-400' : 'text-slate-700'}`}>
+                  {request.reason || "Tidak ada alasan tertulis yang disertakan."}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* KOLOM KANAN: Approval Logs */}
+          <div className="md:border-l md:border-slate-100 md:pl-8">
+            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Riwayat Persetujuan</h4>
 
             <div className="flex flex-col">
               {!request.approval_logs || request.approval_logs.length === 0 ? (

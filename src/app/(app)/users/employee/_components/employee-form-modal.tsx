@@ -242,7 +242,7 @@ export function EmployeeFormModal({
                         disabled={loadingCreate || loadingUpdate}
                         className="w-full h-10 font-medium"
                     >
-                        {(loadingCreate || loadingUpdate) ? "Loading..." : "Simpan"}
+                        {(loadingCreate || loadingUpdate) ? "Loading..." : "Submit"}
                     </Button>
                 </DialogFooter>
             </DialogContent>
