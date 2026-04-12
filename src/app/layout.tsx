@@ -1,33 +1,27 @@
-"use client"
+import "@/app/globals.css"
+import { AuthProvider } from "@/components/layout/auth-provider"
+import { QueryProvider } from "@/components/providers/query-provider"
+import { Inter } from "next/font/google"
 
-import { useUserStore } from "@/store/user.store"
-import { useRouter, usePathname } from "next/navigation"
-import { useEffect } from "react"
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
 
-const RECOVERY_PATHS = ["/auth/update-password"]
-
-export default function AuthLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const { user, isLoading } = useUserStore()
-  const router = useRouter()
-  const pathname = usePathname()
-
-  const isRecoveryPage = RECOVERY_PATHS.includes(pathname)
-
-  useEffect(() => {
-    if (isRecoveryPage) return
-
-    if (!isLoading && user) {
-      router.replace("/time-off/request")
-    }
-  }, [user, isLoading, router, isRecoveryPage])
-
-  if (isLoading) return null
-  
-  if (!isRecoveryPage && user) return null
-
-  return <>{children}</>
+  return (
+    <html lang="en" className={inter.variable}>
+      <body>
+          <QueryProvider>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+        </QueryProvider>
+      </body>
+    </html>
+  )
 }
