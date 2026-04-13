@@ -74,15 +74,15 @@ export function RequestTimeOffFormModal() {
       <DialogTrigger asChild>
         <Button>
           <Plus className="h-4 w-4 mr-2" />
-          Pengajuan Cuti
+          Request Time Off
         </Button>
       </DialogTrigger>
-      
+
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Pengajuan Cuti</DialogTitle>
+          <DialogTitle>Request Time Off</DialogTitle>
           <DialogDescription>
-            Ajukan pengajuan cuti baru untuk karyawan
+            Ajukan Request Time Off baru untuk karyawan
           </DialogDescription>
         </DialogHeader>
 
@@ -182,7 +182,7 @@ export function RequestTimeOffFormModal() {
             <Label htmlFor="reason">Alasan</Label>
             <Textarea
               id="reason"
-              placeholder="Berikan alasan pengajuan cuti"
+              placeholder="Berikan alasan Request Time Off"
               value={formData.reason}
               onChange={(e) =>
                 setFormData({ ...formData, reason: e.target.value })

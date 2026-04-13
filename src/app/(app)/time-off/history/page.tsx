@@ -86,7 +86,7 @@ export default function TimeOffReportPage() {
     requests.forEach((req) => {
       // Memastikan format CSV tidak pecah jika ada tanda koma (,) atau newline pada alasan
       const reasonSafe = (req.reason || "").replace(/"/g, '""').replace(/\n/g, " ")
-      
+
       const row = [
         `"${req.employee?.name || "-"}"`,
         `"${req.time_off?.name || "-"}"`,
@@ -102,7 +102,7 @@ export default function TimeOffReportPage() {
     const csvString = csvRows.join("\n")
     const blob = new Blob([csvString], { type: "text/csv;charset=utf-8;" })
     const url = URL.createObjectURL(blob)
-    
+
     const link = document.createElement("a")
     link.href = url
     link.setAttribute("download", `time-off-report-${new Date().toISOString().split('T')[0]}.csv`)
@@ -126,18 +126,18 @@ export default function TimeOffReportPage() {
 
   return (
     <div className="space-y-6">
-      
+
       {/* HEADER & ACTIONS */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Laporan Cuti</h1>
           <p className="text-sm text-muted-foreground">
-            Filter dan unduh laporan pengajuan cuti karyawan
+            Filter dan unduh laporan Request Time Off karyawan
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <Button 
-            onClick={handleExportCSV} 
+          <Button
+            onClick={handleExportCSV}
             disabled={isLoading || requests.length === 0}
             className="bg-emerald-600 hover:bg-emerald-700 text-white"
           >
@@ -158,7 +158,7 @@ export default function TimeOffReportPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          
+
           <div className="space-y-1.5">
             <Label className="text-xs text-muted-foreground">Karyawan</Label>
             <Select
@@ -228,9 +228,8 @@ export default function TimeOffReportPage() {
                 <Badge
                   key={status}
                   variant={isSelected ? "default" : "outline"}
-                  className={`cursor-pointer transition-all ${
-                    isSelected ? "bg-slate-800 hover:bg-slate-700 text-white" : "hover:bg-slate-100 text-slate-600"
-                  }`}
+                  className={`cursor-pointer transition-all ${isSelected ? "bg-slate-800 hover:bg-slate-700 text-white" : "hover:bg-slate-100 text-slate-600"
+                    }`}
                   onClick={() => toggleStatusFilter(status)}
                 >
                   {status}

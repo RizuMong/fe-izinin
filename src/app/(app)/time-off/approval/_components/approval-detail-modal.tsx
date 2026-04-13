@@ -27,7 +27,7 @@ const getInitials = (name: string) => {
 // Styling Badge yang spesifik seperti di desain HTML
 const getStatusBadge = (status: string) => {
   const baseClass = "text-[11px] font-medium px-3 py-1 rounded-full whitespace-nowrap"
-  
+
   switch (status) {
     case "APPROVED":
       return <span className={`${baseClass} bg-[#DCFCE7] text-[#15803D]`}>APPROVED</span>
@@ -57,10 +57,10 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* Menggunakan p-0 agar kita bisa custom padding dalam sesuai HTML */}
       <DialogContent className="p-0 sm:max-w-3xl w-full max-w-[calc(100%-2rem)] md:max-w-3xl rounded-[20px] overflow-hidden gap-0 border-slate-200 shadow-xl" aria-describedby={undefined}>
-        <DialogTitle className="sr-only">Detail Pengajuan Cuti</DialogTitle>
+        <DialogTitle className="sr-only">Detail Request Time Off</DialogTitle>
 
         <div className="p-7 pb-0 grid grid-cols-1 md:grid-cols-2 gap-8 overflow-y-auto max-h-[80vh]">
-          
+
           {/* KOLOM KIRI: Informasi & Detail Cuti */}
           <div>
             {/* Nama & Profil Karyawan */}
@@ -88,7 +88,7 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
                 <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
                   <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Tanggal</p>
                   <p className="text-[12px] font-medium text-slate-900 leading-snug">
-                    {formatDate(request.start_date)} -<br/> {formatDate(request.end_date)}
+                    {formatDate(request.start_date)} -<br /> {formatDate(request.end_date)}
                   </p>
                 </div>
                 <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 flex flex-col items-start">
@@ -99,7 +99,7 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
                   </div>
                 </div>
               </div>
-              
+
               <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
                 <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Alasan</p>
                 <p className={`text-[13px] leading-relaxed break-words ${!request.reason ? 'italic text-slate-400' : 'text-slate-700'}`}>
@@ -115,22 +115,21 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
 
             <div className="flex flex-col">
               {!request.approval_logs || request.approval_logs.length === 0 ? (
-                 <p className="text-[13px] text-slate-500 italic">Belum ada riwayat persetujuan.</p>
+                <p className="text-[13px] text-slate-500 italic">Belum ada riwayat persetujuan.</p>
               ) : (
                 request.approval_logs.map((log, idx) => {
                   const isLast = idx === request.approval_logs.length - 1;
                   const isApproved = log.status === "APPROVED";
                   const isPending = log.status === "PENDING";
-                  
+
                   return (
                     <div key={idx} className="flex gap-3.5 relative">
-                      
+
                       {/* Timeline Line & Dot */}
                       <div className="flex flex-col items-center shrink-0">
-                        <div className={`w-2 h-2 rounded-full mt-4 ${
-                          isApproved ? 'bg-green-500' : 
-                          log.status === 'REJECTED' ? 'bg-red-500' : 'bg-slate-300'
-                        }`} />
+                        <div className={`w-2 h-2 rounded-full mt-4 ${isApproved ? 'bg-green-500' :
+                            log.status === 'REJECTED' ? 'bg-red-500' : 'bg-slate-300'
+                          }`} />
                         {!isLast && <div className="w-px flex-1 bg-slate-200 min-h-6" />}
                       </div>
 
@@ -147,7 +146,7 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
                               {getStatusBadge(log.status)}
                             </div>
                           </div>
-                          
+
                           {/* Optional Comment Display if exist inside logs */}
                           {log.comment && (
                             <p className="text-[12px] text-slate-600 mt-2 bg-white/60 p-2 rounded border border-slate-100">
@@ -156,7 +155,7 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
                             </p>
                           )}
                         </div>
-                        
+
                         {/* Tanggal Approve (Ditampilkan di bawah card sesuai desain) */}
                         {log.approved_at && (
                           <p className="text-[11px] text-slate-400 mt-2 ml-1">
@@ -166,7 +165,7 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
                           </p>
                         )}
                       </div>
-                      
+
                     </div>
                   )
                 })
@@ -178,16 +177,16 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
 
         {/* FOOTER ACTIONS */}
         <div className="flex items-center justify-between p-4 px-7 mt-5 border-t border-slate-200 bg-white">
-          <button 
+          <button
             className="text-[13px] text-slate-500 hover:text-slate-800 transition-colors"
             onClick={() => onOpenChange(false)}
           >
             Tutup
           </button>
-          
+
           {(request.status === "PENDING" || request.status === "SUBMITTED") && (
             <div className="flex items-center gap-2">
-              <button 
+              <button
                 className="text-[13px] font-medium px-4.5 py-2 rounded-md border border-red-300 bg-red-50 text-red-700 hover:bg-red-100 transition-colors"
                 onClick={() => {
                   onOpenChange(false)
@@ -196,7 +195,7 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
               >
                 Reject
               </button>
-              <button 
+              <button
                 className="text-[13px] font-medium px-4.5 py-2 rounded-md bg-green-600 text-white hover:bg-green-700 transition-colors"
                 onClick={() => {
                   onOpenChange(false)

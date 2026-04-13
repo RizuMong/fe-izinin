@@ -8,9 +8,9 @@ export default function Page() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">Adjustment Cuti</h1>
+          <h1 className="text-2xl font-semibold">Adjustment Time Off</h1>
           <p className="text-sm text-muted-foreground">
-            Kelola adjustment cuti karyawan
+            Kelola Adjustment Time Off karyawan
           </p>
         </div>
 

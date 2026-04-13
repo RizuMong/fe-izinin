@@ -11,7 +11,7 @@ export default function Page() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-semibold">
-            Master Cuti
+            Master Time Off
           </h1>
           <p className="text-sm text-muted-foreground">
             Kelola data cuti

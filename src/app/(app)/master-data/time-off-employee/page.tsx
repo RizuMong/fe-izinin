@@ -9,7 +9,7 @@ export default function Page() {
       {/* HEADER */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">Master Cuti Employee</h1>
+          <h1 className="text-2xl font-semibold">Master Time Off Employee</h1>
           <p className="text-sm text-muted-foreground">
             Kelola data cuti employee
           </p>

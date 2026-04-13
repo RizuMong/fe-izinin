@@ -9,7 +9,7 @@ export default function Page() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Approval Cuti</h1>
           <p className="text-sm text-muted-foreground">
-            Daftar pengajuan cuti karyawan yang membutuhkan persetujuan
+            Daftar Request Time Off karyawan yang membutuhkan persetujuan
           </p>
         </div>
       </div>

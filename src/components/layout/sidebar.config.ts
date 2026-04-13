@@ -26,20 +26,20 @@ export type SidebarSection = {
 
 export const sidebarMenu: SidebarSection[] = [
   {
-    label: "Pengajuan Cuti",
+    label: "Request Time Off",
     children: [
       {
-        label: "Pengajuan Cuti",
+        label: "Request Time Off",
         href: "/time-off/request",
         icon: FileText,
       },
       {
-        label: "Persetujuan Cuti",
+        label: "Approval Time Off",
         href: "/time-off/approval",
         icon: CheckSquare,
       },
       {
-        label: "History Cuti",
+        label: "History Time Off ",
         href: "/time-off/history",
         icon: History,
       },
@@ -49,12 +49,12 @@ export const sidebarMenu: SidebarSection[] = [
     label: "Master Data",
     children: [
       {
-        label: "Master Cuti",
+        label: "Master Time Off",
         href: "/master-data/time-off",
         icon: Database,
       },
       {
-        label: "Master Cuti Employee",
+        label: "Master Time Off Employee",
         href: "/master-data/time-off-employee",
         icon: Users,
       },
@@ -79,7 +79,7 @@ export const sidebarMenu: SidebarSection[] = [
         icon: Building,
       },
       {
-        label: "Adjustment Cuti",
+        label: "Adjustment Time Off",
         href: "/master-data/adjustment",
         icon: Settings,
       },

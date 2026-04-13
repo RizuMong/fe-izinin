@@ -24,9 +24,9 @@ import {
 import { Loader2, Send } from "lucide-react"
 
 // Hooks mapped to the strict @/ alias
-import { 
-  useRequestTimeOffList, 
-  useSubmitRequestTimeOff 
+import {
+  useRequestTimeOffList,
+  useSubmitRequestTimeOff
 } from "@/services/time-off/request/hook"
 
 const getStatusBadge = (status: string) => {
@@ -86,7 +86,7 @@ export function RequestTimeOffTable() {
             <TableRow>
               {/* colSpan updated to 7 to span across all headers including Action */}
               <TableCell colSpan={7} className="text-center h-24 text-muted-foreground">
-                Tidak ada data pengajuan cuti.
+                Tidak ada data Request Time Off.
               </TableCell>
             </TableRow>
           ) : (
@@ -108,15 +108,15 @@ export function RequestTimeOffTable() {
                 <TableCell className="max-w-50 truncate" title={request.reason}>
                   {request.reason || "-"}
                 </TableCell>
-                
+
                 {/* ACTION COLUMN */}
                 <TableCell className="text-center">
                   {request.status === "DRAFT" ? (
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
-                        <Button 
-                          variant="default" 
-                          size="sm" 
+                        <Button
+                          variant="default"
+                          size="sm"
                           disabled={submitMutation.isPending}
                         >
                           {submitMutation.isPending && submitMutation.variables === request.id ? (
@@ -131,9 +131,9 @@ export function RequestTimeOffTable() {
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>Submit Pengajuan Cuti?</AlertDialogTitle>
+                          <AlertDialogTitle>Submit Request Time Off?</AlertDialogTitle>
                           <AlertDialogDescription>
-                            Apakah Anda yakin ingin mengirim pengajuan cuti ini?
+                            Apakah Anda yakin ingin mengirim Request Time Off ini?
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>

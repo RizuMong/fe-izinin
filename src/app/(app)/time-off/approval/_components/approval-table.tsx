@@ -26,8 +26,8 @@ import { Label } from "@/components/ui/label"
 import { Loader2, Eye, CheckCircle, XCircle } from "lucide-react"
 import { toast } from "sonner"
 
-import { 
-  useApprovalRequestTimeOffList, 
+import {
+  useApprovalRequestTimeOffList,
   useApproveRequestTimeOff,
   useRejectRequestTimeOff // <-- new hook
 } from "@/services/time-off/request/hook"
@@ -55,7 +55,7 @@ export function ApprovalTable() {
   const rejectMutation = useRejectRequestTimeOff()
 
   const [detailRequest, setDetailRequest] = useState<RequestTimeOff | null>(null)
-  
+
   // Prompt Modal States
   const [approveRequest, setApproveRequest] = useState<RequestTimeOff | null>(null)
   const [rejectRequest, setRejectRequest] = useState<RequestTimeOff | null>(null)
@@ -123,7 +123,7 @@ export function ApprovalTable() {
           ) : requests.length === 0 ? (
             <TableRow className="hover:bg-transparent">
               <TableCell colSpan={7} className="p-0">
-                <EmptyState title="Tidak ada data persetujuan" description="Belum ada data pengajuan cuti untuk disetujui." />
+                <EmptyState title="Tidak ada data persetujuan" description="Belum ada data Request Time Off untuk disetujui." />
               </TableCell>
             </TableRow>
           ) : (
@@ -143,7 +143,7 @@ export function ApprovalTable() {
                   >
                     <Eye className="h-4 w-4 mr-1" /> Detail
                   </Button>
-                  
+
                   {/* Show Approve/Reject ONLY if status is PENDING / SUBMITTED */}
                   {(request.status === "PENDING" || request.status === "SUBMITTED") && (
                     <>
@@ -172,10 +172,10 @@ export function ApprovalTable() {
       </Table>
 
       {/* DETAIL MODAL (Receives prop hooks to open prompt dialogs directly from detail view) */}
-      <ApprovalDetailModal 
-        request={detailRequest} 
-        open={!!detailRequest} 
-        onOpenChange={(open) => !open && setDetailRequest(null)} 
+      <ApprovalDetailModal
+        request={detailRequest}
+        open={!!detailRequest}
+        onOpenChange={(open) => !open && setDetailRequest(null)}
         onApprove={(req) => setApproveRequest(req)}
         onReject={(req) => setRejectRequest(req)}
       />
@@ -186,7 +186,7 @@ export function ApprovalTable() {
       }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Approve Pengajuan Cuti</DialogTitle>
+            <DialogTitle>Approve Request Time Off</DialogTitle>
             <DialogDescription>
               Berikan catatan persetujuan untuk cuti {approveRequest?.employee?.name || "Karyawan"}.
             </DialogDescription>
@@ -194,8 +194,8 @@ export function ApprovalTable() {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label>Catatan (Opsional)</Label>
-              <Textarea 
-                placeholder="Masukkan catatan persetujuan..." 
+              <Textarea
+                placeholder="Masukkan catatan persetujuan..."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 disabled={approveMutation.isPending}
@@ -220,7 +220,7 @@ export function ApprovalTable() {
       }}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Reject Pengajuan Cuti</DialogTitle>
+            <DialogTitle>Reject Request Time Off</DialogTitle>
             <DialogDescription>
               Mohon berikan alasan penolakan untuk cuti {rejectRequest?.employee?.name || "Karyawan"}.
             </DialogDescription>
@@ -228,8 +228,8 @@ export function ApprovalTable() {
           <div className="space-y-3 py-2">
             <div className="space-y-2">
               <Label>Catatan Penolakan <span className="text-red-500">*</span></Label>
-              <Textarea 
-                placeholder="Masukkan alasan reject (Wajib)..." 
+              <Textarea
+                placeholder="Masukkan alasan reject (Wajib)..."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 disabled={rejectMutation.isPending}
