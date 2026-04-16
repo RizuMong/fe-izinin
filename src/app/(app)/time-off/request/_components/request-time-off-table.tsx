@@ -76,6 +76,7 @@ export function RequestTimeOffTable() {
             <TableHead>Time Off Type</TableHead>
             <TableHead>Start Date</TableHead>
             <TableHead>End Date</TableHead>
+            <TableHead>Total Days</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Reason</TableHead>
             <TableHead className="text-center w-30">Action</TableHead>
@@ -101,6 +102,9 @@ export function RequestTimeOffTable() {
                 </TableCell>
                 <TableCell>
                   {new Date(request.end_date).toLocaleDateString("id-ID")}
+                </TableCell>
+                <TableCell>
+                  {request.total_days}
                 </TableCell>
                 <TableCell>
                   {getStatusBadge(request.status)}
