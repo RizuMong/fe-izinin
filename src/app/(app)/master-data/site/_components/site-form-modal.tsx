@@ -51,7 +51,7 @@ export function SiteFormModal({
     const validateForm = () => {
         const newErrors: { name?: string } = {}
         if (!name.trim()) {
-            newErrors.name = "Nama site harus diisi"
+            newErrors.name = "Name site harus diisi"
         }
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
@@ -89,7 +89,7 @@ export function SiteFormModal({
                     </Button>
                 ) : (
                     <Button>
-                        <Plus className="w-4 h-4" /> Tambah Site
+                        <Plus className="w-4 h-4" /> Add Site
                     </Button>
                 )}
             </DialogTrigger>
@@ -97,19 +97,19 @@ export function SiteFormModal({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Site" : "Tambah Site Baru"}
+                        {isEdit ? "Edit Site" : "Add Site Baru"}
                     </DialogTitle>                    <DialogDescription>
-                        {isEdit ? "Ubah data site yang sudah ada" : "Tambahkan site baru ke dalam sistem"}
+                        {isEdit ? "Ubah data site yang sudah ada" : "Addkan site baru ke dalam sistem"}
                     </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="name" className="text-sm font-medium">
-                            Nama Site <span className="text-red-500">*</span>
+                            Name Site <span className="text-red-500">*</span>
                         </Label>
                         <Input
                             id="name"
-                            placeholder="Masukkan nama site"
+                            placeholder="Masukkan Name site"
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
@@ -131,7 +131,7 @@ export function SiteFormModal({
                         onClick={handleClose}
                         disabled={isLoading}
                     >
-                        Batal
+                        Cancel
                     </Button>
                     <Button
                         onClick={handleSubmit}

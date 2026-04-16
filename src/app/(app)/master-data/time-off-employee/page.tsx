@@ -11,7 +11,7 @@ export default function Page() {
         <div>
           <h1 className="text-2xl font-semibold">Master Time Off Employee</h1>
           <p className="text-sm text-muted-foreground">
-            Kelola data cuti employee
+            Time Off Management employee
           </p>
         </div>
 

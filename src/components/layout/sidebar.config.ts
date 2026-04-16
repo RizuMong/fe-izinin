@@ -59,7 +59,7 @@ export const sidebarMenu: SidebarSection[] = [
         icon: Users,
       },
       {
-        label: "Master Posisi",
+        label: "Master Job Position",
         href: "/master-data/job-position",
         icon: Briefcase,
       },

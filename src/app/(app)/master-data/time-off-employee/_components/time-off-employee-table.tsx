@@ -47,7 +47,7 @@ export function TimeOffEmployeeTable() {
             ) : !data?.data || data.data.length === 0 ? (
               <TableRow className="hover:bg-transparent">
                 <TableCell colSpan={6} className="p-0">
-                  <EmptyState title="Tidak ada data cuti karyawan" description="Belum ada tipe cuti karyawan didata." />
+                  <EmptyState title="Tidak ada data cuti Employee" description="Belum ada Time Off Type Employee didata." />
                 </TableCell>
               </TableRow>
             ) : (

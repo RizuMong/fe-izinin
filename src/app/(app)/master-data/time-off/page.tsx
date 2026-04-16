@@ -14,7 +14,7 @@ export default function Page() {
             Master Time Off
           </h1>
           <p className="text-sm text-muted-foreground">
-            Kelola data cuti
+            Time Off Management
           </p>
         </div>
 

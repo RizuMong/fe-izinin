@@ -72,13 +72,13 @@ export function RequestTimeOffTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Karyawan</TableHead>
-            <TableHead>Tipe Cuti</TableHead>
-            <TableHead>Tanggal Mulai</TableHead>
-            <TableHead>Tanggal Selesai</TableHead>
+            <TableHead>Employee</TableHead>
+            <TableHead>Time Off Type</TableHead>
+            <TableHead>Start Date</TableHead>
+            <TableHead>End Date</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>Alasan</TableHead>
-            <TableHead className="text-center w-30">Aksi</TableHead>
+            <TableHead>Reason</TableHead>
+            <TableHead className="text-center w-30">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -133,12 +133,12 @@ export function RequestTimeOffTable() {
                         <AlertDialogHeader>
                           <AlertDialogTitle>Submit Request Time Off?</AlertDialogTitle>
                           <AlertDialogDescription>
-                            Apakah Anda yakin ingin mengirim Request Time Off ini?
+                            Are you sure you want to submit this time off request?
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel disabled={submitMutation.isPending}>
-                            Batal
+                            Cancel
                           </AlertDialogCancel>
                           <AlertDialogAction
                             onClick={() => submitMutation.mutate(request.id)}

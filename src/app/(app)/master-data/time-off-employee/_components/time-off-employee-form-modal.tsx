@@ -152,7 +152,7 @@ export function TimeOffEmployeeFormModal({
           </Button>
         ) : (
           <Button>
-            <Plus /> Tambah Leave Employee
+            <Plus /> Add Leave Employee
           </Button>
         )}
       </DialogTrigger>
@@ -160,12 +160,12 @@ export function TimeOffEmployeeFormModal({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {isEdit ? "Edit Leave Employee" : "Tambah Leave Employee"}
+            {isEdit ? "Edit Leave Employee" : "Add Leave Employee"}
           </DialogTitle>
           <DialogDescription>
             {isEdit
               ? "Ubah data leave employee yang sudah ada"
-              : "Tambahkan data leave employee baru"}
+              : "Addkan data leave employee baru"}
           </DialogDescription>
         </DialogHeader>
 
@@ -289,7 +289,7 @@ export function TimeOffEmployeeFormModal({
             onClick={() => handleOpenChange(false)}
             disabled={loadingCreate || loadingUpdate}
           >
-            Batal
+            Cancel
           </Button>
           <Button
             onClick={handleSubmit}

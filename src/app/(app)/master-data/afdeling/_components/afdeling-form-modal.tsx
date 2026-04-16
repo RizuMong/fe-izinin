@@ -49,7 +49,7 @@ export function AfdelingFormModal({
     const validateForm = () => {
         const newErrors: { name?: string } = {}
         if (!name.trim()) {
-            newErrors.name = "Nama afdeling harus diisi"
+            newErrors.name = "Name afdeling harus diisi"
         }
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
@@ -87,7 +87,7 @@ export function AfdelingFormModal({
                     </Button>
                 ) : (
                     <Button>
-                        <Plus className="w-4 h-4" /> Tambah Afdeling
+                        <Plus className="w-4 h-4" /> Add Afdeling
                     </Button>
                 )}
             </DialogTrigger>
@@ -95,19 +95,19 @@ export function AfdelingFormModal({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Afdeling" : "Tambah Afdeling Baru"}
+                        {isEdit ? "Edit Afdeling" : "Add Afdeling Baru"}
                     </DialogTitle>                    <DialogDescription>
-                        {isEdit ? "Ubah data afdeling yang sudah ada" : "Tambahkan afdeling baru ke dalam sistem"}
+                        {isEdit ? "Ubah data afdeling yang sudah ada" : "Addkan afdeling baru ke dalam sistem"}
                     </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="name" className="text-sm font-medium">
-                            Nama Afdeling <span className="text-red-500">*</span>
+                            Name Afdeling <span className="text-red-500">*</span>
                         </Label>
                         <Input
                             id="name"
-                            placeholder="Masukkan nama afdeling"
+                            placeholder="Masukkan Name afdeling"
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
@@ -129,7 +129,7 @@ export function AfdelingFormModal({
                         onClick={handleClose}
                         disabled={isLoading}
                     >
-                        Batal
+                        Cancel
                     </Button>
                     <Button
                         onClick={handleSubmit}

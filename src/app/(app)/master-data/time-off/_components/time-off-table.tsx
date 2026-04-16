@@ -28,7 +28,7 @@ export function TimeOffTable() {
                 <Table className="min-w-full">
                     <TableHeader className="bg-muted/50">
                         <TableRow>
-                            <TableHead>Nama</TableHead>
+                            <TableHead>Name</TableHead>
                             <TableHead>Type</TableHead>
                             <TableHead className="w-25">Action</TableHead>
                         </TableRow>
@@ -40,7 +40,7 @@ export function TimeOffTable() {
                         ) : !data?.data || data.data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={3} className="p-0">
-                                    <EmptyState title="Tidak ada tipe cuti" description="Belum ada tipe cuti yang ditambahkan." />
+                                    <EmptyState title="Tidak ada Time Off Type" description="Belum ada Time Off Type yang diAddkan." />
                                 </TableCell>
                             </TableRow>
                         ) : (

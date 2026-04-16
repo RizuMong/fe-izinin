@@ -14,7 +14,7 @@ export default function Page() {
             Request Time Off
           </h1>
           <p className="text-sm text-muted-foreground">
-            Kelola dan ajukan cuti Anda dengan mudah
+            Manage and request leave effortlessly
           </p>
         </div>
         <RequestTimeOffFormModal />

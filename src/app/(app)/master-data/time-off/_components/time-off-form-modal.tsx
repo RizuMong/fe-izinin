@@ -28,11 +28,11 @@ import {
 import { useState, useEffect } from "react"
 
 const LEAVE_TYPES = [
-  "CUTI TAHUNAN",
-  "CUTI SAKIT",
-  "CUTI MELAHIRKAN",
-  "CUTI DARURAT",
-  "CUTI MENIKAH",
+    "CUTI TAHUNAN",
+    "CUTI SAKIT",
+    "CUTI MELAHIRKAN",
+    "CUTI DARURAT",
+    "CUTI MENIKAH",
 ]
 
 export function TimeOffFormModal({
@@ -71,10 +71,10 @@ export function TimeOffFormModal({
     const validateForm = () => {
         const newErrors: { name?: string; timeoffType?: string } = {}
         if (!name.trim()) {
-            newErrors.name = "Nama cuti harus diisi"
+            newErrors.name = "Name cuti harus diisi"
         }
         if (!timeoffType) {
-            newErrors.timeoffType = "Tipe cuti harus dipilih"
+            newErrors.timeoffType = "Time Off Type harus dipilih"
         }
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
@@ -119,7 +119,7 @@ export function TimeOffFormModal({
                     </Button>
                 ) : (
                     <Button>
-                        <Plus className="w-4 h-4" /> Tambah Cuti
+                        <Plus className="w-4 h-4" /> Add Cuti
                     </Button>
                 )}
             </DialogTrigger>
@@ -127,19 +127,19 @@ export function TimeOffFormModal({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Cuti" : "Tambah Cuti Baru"}
+                        {isEdit ? "Edit Cuti" : "Add Cuti Baru"}
                     </DialogTitle>                    <DialogDescription>
-                        {isEdit ? "Ubah data cuti yang sudah ada" : "Tambahkan cuti baru ke dalam sistem"}
+                        {isEdit ? "Ubah data cuti yang sudah ada" : "Addkan cuti baru ke dalam sistem"}
                     </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="name" className="text-sm font-medium">
-                            Nama Cuti <span className="text-red-500">*</span>
+                            Name Cuti <span className="text-red-500">*</span>
                         </Label>
                         <Input
                             id="name"
-                            placeholder="Masukkan nama cuti"
+                            placeholder="Masukkan Name cuti"
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
@@ -155,7 +155,7 @@ export function TimeOffFormModal({
 
                     <div className="space-y-2">
                         <Label htmlFor="type" className="text-sm font-medium">
-                            Tipe Cuti <span className="text-red-500">*</span>
+                            Time Off Type <span className="text-red-500">*</span>
                         </Label>
                         <Select
                             value={timeoffType}
@@ -166,7 +166,7 @@ export function TimeOffFormModal({
                             disabled={isLoading}
                         >
                             <SelectTrigger className={errors.timeoffType ? "border-red-500" : ""}>
-                                <SelectValue placeholder="Pilih tipe cuti" />
+                                <SelectValue placeholder="Pilih Time Off Type" />
                             </SelectTrigger>
                             <SelectContent>
                                 {LEAVE_TYPES.map((type) => (
@@ -189,7 +189,7 @@ export function TimeOffFormModal({
                         onClick={handleClose}
                         disabled={isLoading}
                     >
-                        Batal
+                        Cancel
                     </Button>
                     {/* <Button
                         onClick={handleSubmit}

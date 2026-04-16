@@ -49,7 +49,7 @@ export function JobPositionFormModal({
   const validateForm = () => {
     const newErrors: { name?: string } = {}
     if (!name.trim()) {
-      newErrors.name = "Nama job position harus diisi"
+      newErrors.name = "Name job position harus diisi"
     }
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -93,27 +93,27 @@ export function JobPositionFormModal({
           </Button>
         ) : (
           <Button>
-            <Plus className="w-4 h-4" /> Tambah Job Position
+            <Plus className="w-4 h-4" /> Add Job Position
           </Button>
         )}
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Edit Job Position" : "Tambah Job Position Baru"}</DialogTitle>
+          <DialogTitle>{isEdit ? "Edit Job Position" : "Add Job Position Baru"}</DialogTitle>
           <DialogDescription>
-            {isEdit ? "Ubah data job position yang sudah ada" : "Tambahkan job position baru ke dalam sistem"}
+            {isEdit ? "Ubah data job position yang sudah ada" : "Addkan job position baru ke dalam sistem"}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name" className="text-sm font-medium">
-              Nama Job Position <span className="text-red-500">*</span>
+              Name Job Position <span className="text-red-500">*</span>
             </Label>
             <Input
               id="name"
-              placeholder="Masukkan nama job position"
+              placeholder="Masukkan Name job position"
               value={name}
               onChange={(e) => {
                 setName(e.target.value)
@@ -135,7 +135,7 @@ export function JobPositionFormModal({
             onClick={handleClose}
             disabled={isLoading}
           >
-            Batal
+            Cancel
           </Button>
           <Button
             onClick={handleSubmit}

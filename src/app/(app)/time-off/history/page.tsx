@@ -72,19 +72,19 @@ export default function TimeOffReportPage() {
     if (requests.length === 0) return
 
     const headers = [
-      "Karyawan",
-      "Tipe Cuti",
-      "Tanggal Mulai",
-      "Tanggal Selesai",
-      "Total Hari",
+      "Employee",
+      "Time Off Type",
+      "Start Date",
+      "End Date",
+      "Total Days",
       "Status",
-      "Alasan"
+      "Reason"
     ]
 
     const csvRows = [headers.join(",")]
 
     requests.forEach((req) => {
-      // Memastikan format CSV tidak pecah jika ada tanda koma (,) atau newline pada alasan
+      // Memastikan format CSV tidak pecah jika ada tanda koma (,) atau newline pada Reason
       const reasonSafe = (req.reason || "").replace(/"/g, '""').replace(/\n/g, " ")
 
       const row = [
@@ -132,7 +132,7 @@ export default function TimeOffReportPage() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Laporan Cuti</h1>
           <p className="text-sm text-muted-foreground">
-            Filter dan unduh laporan Request Time Off karyawan
+            Filter and download employee time off request reports
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -160,16 +160,16 @@ export default function TimeOffReportPage() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">Karyawan</Label>
+            <Label className="text-xs text-muted-foreground">Employee</Label>
             <Select
               value={filters.employee_id?.toString()}
               onValueChange={(val) => setFilters({ ...filters, employee_id: val === "ALL" ? "" : val })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={isEmployeeLoading ? "Memuat..." : "Semua Karyawan"} />
+                <SelectValue placeholder={isEmployeeLoading ? "Memuat..." : "Semua Employee"} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="ALL">Semua Karyawan</SelectItem>
+                <SelectItem value="ALL">Semua Employee</SelectItem>
                 {employeeData?.data?.map((emp: any) => (
                   <SelectItem key={emp.id} value={emp.id.toString()}>
                     {emp.name || emp.full_name}
@@ -180,16 +180,16 @@ export default function TimeOffReportPage() {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">Tipe Cuti</Label>
+            <Label className="text-xs text-muted-foreground">Time Off Type</Label>
             <Select
               value={filters.timeoff_id?.toString()}
               onValueChange={(val) => setFilters({ ...filters, timeoff_id: val === "ALL" ? "" : val })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={isTimeoffLoading ? "Memuat..." : "Semua Tipe Cuti"} />
+                <SelectValue placeholder={isTimeoffLoading ? "Memuat..." : "Semua Time Off Type"} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="ALL">Semua Tipe Cuti</SelectItem>
+                <SelectItem value="ALL">Semua Time Off Type</SelectItem>
                 {timeoffData?.data?.map((type: any) => (
                   <SelectItem key={type.id} value={type.id.toString()}>
                     {type.name}
@@ -200,7 +200,7 @@ export default function TimeOffReportPage() {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">Tanggal Mulai</Label>
+            <Label className="text-xs text-muted-foreground">Start Date</Label>
             <Input
               type="date"
               value={filters.start_date}
@@ -209,7 +209,7 @@ export default function TimeOffReportPage() {
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">Tanggal Selesai</Label>
+            <Label className="text-xs text-muted-foreground">End Date</Label>
             <Input
               type="date"
               value={filters.end_date}
@@ -220,7 +220,7 @@ export default function TimeOffReportPage() {
 
         {/* STATUS MULTI-SELECT (Interactive Badges) */}
         <div className="pt-2 border-t border-slate-100">
-          <Label className="text-xs text-muted-foreground mb-2 block">Status Pengajuan</Label>
+          <Label className="text-xs text-muted-foreground mb-2 block">Request Status</Label>
           <div className="flex flex-wrap gap-2">
             {STATUS_OPTIONS.map((status) => {
               const isSelected = filters.status?.includes(status)
@@ -252,11 +252,11 @@ export default function TimeOffReportPage() {
         <Table>
           <TableHeader className="bg-slate-50">
             <TableRow>
-              <TableHead className="font-semibold text-slate-700">Karyawan</TableHead>
-              <TableHead className="font-semibold text-slate-700">Tipe Cuti</TableHead>
-              <TableHead className="font-semibold text-slate-700">Tanggal Mulai</TableHead>
-              <TableHead className="font-semibold text-slate-700">Tanggal Selesai</TableHead>
-              <TableHead className="font-semibold text-slate-700 text-center">Total Hari</TableHead>
+              <TableHead className="font-semibold text-slate-700">Employee</TableHead>
+              <TableHead className="font-semibold text-slate-700">Time Off Type</TableHead>
+              <TableHead className="font-semibold text-slate-700">Start Date</TableHead>
+              <TableHead className="font-semibold text-slate-700">End Date</TableHead>
+              <TableHead className="font-semibold text-slate-700 text-center">Total Days</TableHead>
               <TableHead className="font-semibold text-slate-700 text-center">Status</TableHead>
             </TableRow>
           </TableHeader>

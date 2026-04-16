@@ -50,7 +50,7 @@ export function JobPositionTable() {
                 <Table className="min-w-full">
                     <TableHeader className="bg-muted/50">
                         <TableRow>
-                            <TableHead>Nama</TableHead>
+                            <TableHead>Name</TableHead>
                             <TableHead>Created At</TableHead>
                             <TableHead>Updated At</TableHead>
                             <TableHead className="w-25">Action</TableHead>
@@ -63,7 +63,7 @@ export function JobPositionTable() {
                         ) : !data || data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={4} className="p-0">
-                                    <EmptyState title="Tidak ada data posisi" description="Belum ada data posisi pekerjaan yang ditambahkan." />
+                                    <EmptyState title="Tidak ada data posisi" description="Belum ada data posisi pekerjaan yang diAddkan." />
                                 </TableCell>
                             </TableRow>
                         ) : (

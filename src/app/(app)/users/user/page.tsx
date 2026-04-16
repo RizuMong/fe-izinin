@@ -7,7 +7,7 @@ export default function Page() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-semibold">Master User</h1>
-        <p className="text-sm text-muted-foreground">Kelola data User</p>
+        <p className="text-sm text-muted-foreground">User Management</p>
       </div>
 
       <UserTable />

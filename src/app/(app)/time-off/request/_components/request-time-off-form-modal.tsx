@@ -55,10 +55,10 @@ export function RequestTimeOffFormModal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!formData.employee_id) return toast.error("Employee wajib dipilih")
-    if (!formData.timeoff_id) return toast.error("Time Off wajib dipilih")
-    if (!formData.start_date) return toast.error("Start date wajib diisi")
-    if (!formData.end_date) return toast.error("End date wajib diisi")
+    if (!formData.employee_id) return toast.error("Employee Mandatory dipilih")
+    if (!formData.timeoff_id) return toast.error("Time Off Mandatory dipilih")
+    if (!formData.start_date) return toast.error("Start date Mandatory diisi")
+    if (!formData.end_date) return toast.error("End date Mandatory diisi")
 
     if (new Date(formData.start_date) > new Date(formData.end_date)) {
       return toast.error("Start date tidak boleh lebih dari end date")
@@ -82,18 +82,18 @@ export function RequestTimeOffFormModal() {
         <DialogHeader>
           <DialogTitle>Request Time Off</DialogTitle>
           <DialogDescription>
-            Ajukan Request Time Off baru untuk karyawan
+            Submit a New Time Off Request
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Employee Reference */}
           <div className="space-y-2">
-            <Label htmlFor="employee_id">Karyawan</Label>
+            <Label htmlFor="employee_id">Employee</Label>
             {employeesLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Memuat karyawan...
+                Memuat Employee...
               </div>
             ) : (
               <Select
@@ -106,7 +106,7 @@ export function RequestTimeOffFormModal() {
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Karyawan" />
+                  <SelectValue placeholder="Pilih Employee" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {employeeData?.data?.map((employee: any) => (
@@ -121,11 +121,11 @@ export function RequestTimeOffFormModal() {
 
           {/* Time Off Reference */}
           <div className="space-y-2">
-            <Label htmlFor="timeoff_id">Tipe Cuti</Label>
+            <Label htmlFor="timeoff_id">Time Off Type</Label>
             {timeoffsLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Memuat tipe cuti...
+                Memuat Time Off Type...
               </div>
             ) : (
               <Select
@@ -138,7 +138,7 @@ export function RequestTimeOffFormModal() {
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Tipe Cuti" />
+                  <SelectValue placeholder="Pilih Time Off Type" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {timeoffData?.data?.map((timeoff: any) => (
@@ -153,7 +153,7 @@ export function RequestTimeOffFormModal() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="start_date">Tanggal Mulai</Label>
+              <Label htmlFor="start_date">Start Date</Label>
               <Input
                 id="start_date"
                 type="date"
@@ -165,7 +165,7 @@ export function RequestTimeOffFormModal() {
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="end_date">Tanggal Selesai</Label>
+              <Label htmlFor="end_date">End Date</Label>
               <Input
                 id="end_date"
                 type="date"
@@ -179,10 +179,10 @@ export function RequestTimeOffFormModal() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="reason">Alasan</Label>
+            <Label htmlFor="reason">Reason</Label>
             <Textarea
               id="reason"
-              placeholder="Berikan alasan Request Time Off"
+              placeholder="Submit a New Time Off Requestst Time Off"
               value={formData.reason}
               onChange={(e) =>
                 setFormData({ ...formData, reason: e.target.value })

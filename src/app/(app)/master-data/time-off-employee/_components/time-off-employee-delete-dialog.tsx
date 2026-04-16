@@ -45,7 +45,7 @@ export function TimeOffEmployeeDeleteDialog({ id }: { id: number }) {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>Batal</AlertDialogCancel>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={handleDelete} disabled={isPending}>
             {isPending ? "Menghapus..." : "Hapus"}
           </AlertDialogAction>

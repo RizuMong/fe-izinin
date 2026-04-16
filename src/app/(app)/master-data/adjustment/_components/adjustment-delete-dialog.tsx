@@ -43,7 +43,7 @@ export function AdjustmentDeleteDialog({
       </AlertDialogHeader>
       <div className="flex justify-end gap-2">
         <AlertDialogCancel disabled={deleteMutation.isPending}>
-          Batal
+          Cancel
         </AlertDialogCancel>
         <AlertDialogAction
           onClick={handleDelete}

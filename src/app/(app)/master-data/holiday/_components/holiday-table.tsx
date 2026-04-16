@@ -30,10 +30,10 @@ export function HolidayTable() {
                 <Table className="min-w-full">
                     <TableHeader className="bg-muted/50">
                         <TableRow>
-                            <TableHead>Nama</TableHead>
+                            <TableHead>Name</TableHead>
                             <TableHead>Libur Nasional</TableHead>
-                            <TableHead>Tanggal</TableHead>
-                            <TableHead className="w-25">Aksi</TableHead>
+                            <TableHead>Date</TableHead>
+                            <TableHead className="w-25">Action</TableHead>
                         </TableRow>
                     </TableHeader>
 
@@ -43,26 +43,26 @@ export function HolidayTable() {
                         ) : !data || data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={4} className="p-0">
-                                    <EmptyState title="Tidak ada hari libur" description="Data hari libur belum ditambahkan." />
+                                    <EmptyState title="Tidak ada hari libur" description="Data hari libur belum diAddkan." />
                                 </TableCell>
                             </TableRow>
                         ) : (
                             data.map((item) => (
                                 <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>
-                                    <Badge variant={item.is_national_holiday ? "default" : "secondary"}>
-                                        {item.is_national_holiday ? "Ya" : "Tidak"}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell>{formatDate(item.date)}</TableCell>
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>
+                                        <Badge variant={item.is_national_holiday ? "default" : "secondary"}>
+                                            {item.is_national_holiday ? "Ya" : "Tidak"}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell>{formatDate(item.date)}</TableCell>
 
-                                <TableCell className="flex gap-2">
-                                    <HolidayFormModal initialData={item} />
-                                    <HolidayDeleteDialog id={item.id} />
-                                </TableCell>
-                            </TableRow>
-                        )))}
+                                    <TableCell className="flex gap-2">
+                                        <HolidayFormModal initialData={item} />
+                                        <HolidayDeleteDialog id={item.id} />
+                                    </TableCell>
+                                </TableRow>
+                            )))}
                     </TableBody>
                 </Table>
             </CardContent>

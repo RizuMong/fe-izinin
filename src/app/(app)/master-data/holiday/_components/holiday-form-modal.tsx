@@ -67,10 +67,10 @@ export function HolidayFormModal({
     const validateForm = () => {
         const newErrors: { name?: string; date?: string } = {}
         if (!name.trim()) {
-            newErrors.name = "Nama holiday harus diisi"
+            newErrors.name = "Name holiday harus diisi"
         }
         if (!date) {
-            newErrors.date = "Tanggal harus diisi"
+            newErrors.date = "Date harus diisi"
         }
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
@@ -117,7 +117,7 @@ export function HolidayFormModal({
                     </Button>
                 ) : (
                     <Button>
-                        <Plus className="w-4 h-4" /> Tambah Holiday
+                        <Plus className="w-4 h-4" /> Add Holiday
                     </Button>
                 )}
             </DialogTrigger>
@@ -125,19 +125,19 @@ export function HolidayFormModal({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Holiday" : "Tambah Holiday Baru"}
+                        {isEdit ? "Edit Holiday" : "Add Holiday Baru"}
                     </DialogTitle>                    <DialogDescription>
-                        {isEdit ? "Ubah data holiday yang sudah ada" : "Tambahkan holiday baru ke dalam sistem"}
+                        {isEdit ? "Ubah data holiday yang sudah ada" : "Addkan holiday baru ke dalam sistem"}
                     </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="name" className="text-sm font-medium">
-                            Nama Holiday <span className="text-red-500">*</span>
+                            Name Holiday <span className="text-red-500">*</span>
                         </Label>
                         <Input
                             id="name"
-                            placeholder="Masukkan nama holiday"
+                            placeholder="Masukkan Name holiday"
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
@@ -172,7 +172,7 @@ export function HolidayFormModal({
 
                     <div className="space-y-2">
                         <Label htmlFor="date" className="text-sm font-medium">
-                            Tanggal <span className="text-red-500">*</span>
+                            Date <span className="text-red-500">*</span>
                         </Label>
                         <Input
                             id="date"
@@ -198,7 +198,7 @@ export function HolidayFormModal({
                         onClick={handleClose}
                         disabled={isLoading}
                     >
-                        Batal
+                        Cancel
                     </Button>
                     <Button
                         onClick={handleSubmit}

@@ -14,7 +14,7 @@ export default function Page() {
             Master Employee
           </h1>
           <p className="text-sm text-muted-foreground">
-            Kelola data employee
+            Employee Management
           </p>
         </div>
 

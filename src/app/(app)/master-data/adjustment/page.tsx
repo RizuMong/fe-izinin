@@ -10,7 +10,7 @@ export default function Page() {
         <div>
           <h1 className="text-2xl font-semibold">Adjustment Time Off</h1>
           <p className="text-sm text-muted-foreground">
-            Kelola Adjustment Time Off karyawan
+            Manage Employee Time Off Adjustments
           </p>
         </div>
 

@@ -45,7 +45,7 @@ export function SiteTable() {
                 <Table className="min-w-full">
                     <TableHeader className="bg-muted/50">
                         <TableRow>
-                            <TableHead>Nama</TableHead>
+                            <TableHead>Name</TableHead>
                             <TableHead>Created At</TableHead>
                             <TableHead>Updated At</TableHead>
                             <TableHead className="w-25">Action</TableHead>
@@ -58,7 +58,7 @@ export function SiteTable() {
                         ) : !data || data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={4} className="p-0">
-                                    <EmptyState title="Tidak ada data site" description="Belum ada data site (lokasi) yang ditambahkan." />
+                                    <EmptyState title="Tidak ada data site" description="Belum ada data site (lokasi) yang diAddkan." />
                                 </TableCell>
                             </TableRow>
                         ) : (

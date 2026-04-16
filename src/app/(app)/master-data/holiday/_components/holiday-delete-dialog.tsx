@@ -32,7 +32,7 @@ export function HolidayDeleteDialog({ id }: { id: number }) {
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
         <Button variant="destructive" size="sm">
-          <Trash2/>
+          <Trash2 />
         </Button>
       </AlertDialogTrigger>
 
@@ -44,7 +44,7 @@ export function HolidayDeleteDialog({ id }: { id: number }) {
         </AlertDialogHeader>
 
         <AlertDialogFooter>
-          <AlertDialogCancel>Batal</AlertDialogCancel>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={handleDelete}
             disabled={isPending}

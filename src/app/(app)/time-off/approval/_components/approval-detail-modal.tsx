@@ -16,7 +16,7 @@ interface ApprovalDetailModalProps {
   onReject?: (request: RequestTimeOff) => void
 }
 
-// Helper untuk mengambil inisial nama (Misal: "Rizki Haddi" -> "RH")
+// Helper untuk mengambil inisial Name (Misal: "Rizki Haddi" -> "RH")
 const getInitials = (name: string) => {
   if (!name) return "UK"
   const words = name.split(" ")
@@ -46,7 +46,7 @@ const getStatusBadge = (status: string) => {
 export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, onReject }: ApprovalDetailModalProps) {
   if (!request) return null
 
-  // Format tanggal sesuai desain (Contoh: "13 Apr 2026")
+  // Format Date sesuai desain (Contoh: "13 Apr 2026")
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("id-ID", {
       day: 'numeric', month: 'short', year: 'numeric'
@@ -63,8 +63,8 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
 
           {/* KOLOM KIRI: Informasi & Detail Cuti */}
           <div>
-            {/* Nama & Profil Karyawan */}
-            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Informasi Karyawan</h4>
+            {/* Name & Profil Employee */}
+            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Employee Details</h4>
             <div className="flex flex-col gap-4 mb-6">
               <div className="flex items-center gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100">
                 <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center font-semibold text-base text-blue-700 shrink-0">
@@ -81,19 +81,19 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
               </div>
             </div>
 
-            {/* Structured Detail Pengajuan */}
-            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Detail Pengajuan</h4>
+            {/* Structured Request Details */}
+            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Request Details</h4>
             <div className="space-y-4 mb-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
-                  <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Tanggal</p>
+                  <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Date</p>
                   <p className="text-[12px] font-medium text-slate-900 leading-snug">
                     {formatDate(request.start_date)} -<br /> {formatDate(request.end_date)}
                   </p>
                 </div>
                 <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 flex flex-col items-start">
-                  <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Hari & Status</p>
-                  <p className="text-[13px] font-medium text-slate-900 mb-2">{request.total_days || 0} hari kerja</p>
+                  <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Day & Status</p>
+                  <p className="text-[13px] font-medium text-slate-900 mb-2">{request.total_days || 0} Days</p>
                   <div className="mt-auto">
                     {getStatusBadge(request.status)}
                   </div>
@@ -101,9 +101,9 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
               </div>
 
               <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5">
-                <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Alasan</p>
+                <p className="text-[11px] text-slate-500 mb-1 uppercase tracking-wide">Reason</p>
                 <p className={`text-[13px] leading-relaxed break-words ${!request.reason ? 'italic text-slate-400' : 'text-slate-700'}`}>
-                  {request.reason || "Tidak ada alasan tertulis yang disertakan."}
+                  {request.reason || "Tidak ada Reason tertulis yang disertakan."}
                 </p>
               </div>
             </div>
@@ -111,11 +111,11 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
 
           {/* KOLOM KANAN: Approval Logs */}
           <div className="md:border-l md:border-slate-100 md:pl-8">
-            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Riwayat Persetujuan</h4>
+            <h4 className="text-[11px] uppercase tracking-wider font-semibold text-slate-500 mb-4">Approval Activity</h4>
 
             <div className="flex flex-col">
               {!request.approval_logs || request.approval_logs.length === 0 ? (
-                <p className="text-[13px] text-slate-500 italic">Belum ada riwayat persetujuan.</p>
+                <p className="text-[13px] text-slate-500 italic">Belum ada Approval Activity.</p>
               ) : (
                 request.approval_logs.map((log, idx) => {
                   const isLast = idx === request.approval_logs.length - 1;
@@ -128,7 +128,7 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
                       {/* Timeline Line & Dot */}
                       <div className="flex flex-col items-center shrink-0">
                         <div className={`w-2 h-2 rounded-full mt-4 ${isApproved ? 'bg-green-500' :
-                            log.status === 'REJECTED' ? 'bg-red-500' : 'bg-slate-300'
+                          log.status === 'REJECTED' ? 'bg-red-500' : 'bg-slate-300'
                           }`} />
                         {!isLast && <div className="w-px flex-1 bg-slate-200 min-h-6" />}
                       </div>
@@ -150,13 +150,13 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
                           {/* Optional Comment Display if exist inside logs */}
                           {log.comment && (
                             <p className="text-[12px] text-slate-600 mt-2 bg-white/60 p-2 rounded border border-slate-100">
-                              <span className="font-medium text-slate-500">Catatan: </span>
+                              <span className="font-medium text-slate-500">Note: </span>
                               {log.comment}
                             </p>
                           )}
                         </div>
 
-                        {/* Tanggal Approve (Ditampilkan di bawah card sesuai desain) */}
+                        {/* Date Approve (Ditampilkan di bawah card sesuai desain) */}
                         {log.approved_at && (
                           <p className="text-[11px] text-slate-400 mt-2 ml-1">
                             {new Date(log.approved_at).toLocaleDateString("id-ID", {
@@ -181,7 +181,7 @@ export function ApprovalDetailModal({ request, open, onOpenChange, onApprove, on
             className="text-[13px] text-slate-500 hover:text-slate-800 transition-colors"
             onClick={() => onOpenChange(false)}
           >
-            Tutup
+            Close
           </button>
 
           {(request.status === "PENDING" || request.status === "SUBMITTED") && (

@@ -14,7 +14,7 @@ export default function Page() {
             Master Afdeling
           </h1>
           <p className="text-sm text-muted-foreground">
-            Kelola data afdeling
+            Afdeling Management
           </p>
         </div>
 

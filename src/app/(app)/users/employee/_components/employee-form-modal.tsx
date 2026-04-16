@@ -116,14 +116,14 @@ export function EmployeeFormModal({
                         <Pencil />
                     </Button>
                 ) : (
-                    <Button> <Plus /> Tambah Employee</Button>
+                    <Button> <Plus /> Add Employee</Button>
                 )}
             </DialogTrigger>
 
             <DialogContent className="max-w-2xl">
                 <DialogHeader className="p-0">
                     <DialogTitle className="text-lg font-semibold">
-                        {isEdit ? "Edit Employee" : "Tambah Employee"}
+                        {isEdit ? "Edit Employee" : "Add Employee"}
                     </DialogTitle>
                 </DialogHeader>
 

@@ -14,7 +14,7 @@ export default function Page() {
             Master Holiday
           </h1>
           <p className="text-sm text-muted-foreground">
-            Kelola data holiday
+            Holiday Management
           </p>
         </div>
 

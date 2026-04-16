@@ -21,7 +21,7 @@ import { EmployeeDeleteDialog } from "./employee-delete-dialog"
 export function EmployeeTable() {
     const { data, isLoading, error } = useEmployeeList()
 
-    if (error) return <div>Gagal memuat daftar karyawan</div>
+    if (error) return <div>Gagal memuat daftar Employee</div>
 
     return (
         <Card className="p-0 overflow-hidden">
@@ -29,13 +29,13 @@ export function EmployeeTable() {
                 <Table className="min-w-full">
                     <TableHeader className="bg-muted/50">
                         <TableRow>
-                            <TableHead>Nama Lengkap</TableHead>
+                            <TableHead>Name Lengkap</TableHead>
                             <TableHead>NPK</TableHead>
                             <TableHead>Site</TableHead>
                             <TableHead>Afdeling</TableHead>
                             <TableHead>Posisi Pekerjaan</TableHead>
                             <TableHead>TMK</TableHead>
-                            <TableHead className="w-25">Aksi</TableHead>
+                            <TableHead className="w-25">Action</TableHead>
                         </TableRow>
                     </TableHeader>
 
@@ -45,25 +45,25 @@ export function EmployeeTable() {
                         ) : !data?.data || data.data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={7} className="p-0">
-                                    <EmptyState title="Tidak ada karyawan" description="Data karyawan belum ditambahkan." />
+                                    <EmptyState title="Tidak ada Employee" description="Data Employee belum diAddkan." />
                                 </TableCell>
                             </TableRow>
                         ) : (
                             data.data.map((item) => (
                                 <TableRow key={item.id} className="hover:bg-muted/40 transition-colors">
-                                <TableCell>{item.full_name}</TableCell>
-                                <TableCell>{item.npk}</TableCell>
-                                <TableCell>{item.site.name}</TableCell>
-                                <TableCell>{item.afdeling.name}</TableCell>
-                                <TableCell>{item.job_position.name}</TableCell>
-                                <TableCell>{formatDate(item.tmk)}</TableCell>
+                                    <TableCell>{item.full_name}</TableCell>
+                                    <TableCell>{item.npk}</TableCell>
+                                    <TableCell>{item.site.name}</TableCell>
+                                    <TableCell>{item.afdeling.name}</TableCell>
+                                    <TableCell>{item.job_position.name}</TableCell>
+                                    <TableCell>{formatDate(item.tmk)}</TableCell>
 
-                                <TableCell className="flex gap-2">
-                                    <EmployeeFormModal initialData={item} />
-                                    <EmployeeDeleteDialog id={item.id} />
-                                </TableCell>
-                            </TableRow>
-                        )))}
+                                    <TableCell className="flex gap-2">
+                                        <EmployeeFormModal initialData={item} />
+                                        <EmployeeDeleteDialog id={item.id} />
+                                    </TableCell>
+                                </TableRow>
+                            )))}
                     </TableBody>
                 </Table>
             </CardContent>

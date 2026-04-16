@@ -78,7 +78,7 @@ export function ApprovalTable() {
     if (!rejectRequest) return
     // Strict validation for reject
     if (!comment.trim()) {
-      toast.error("Catatan wajib diisi untuk melakukan reject.")
+      toast.error("Note Mandatory diisi untuk melakukan reject.")
       return
     }
 
@@ -108,13 +108,13 @@ export function ApprovalTable() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Karyawan</TableHead>
-            <TableHead>Tipe Cuti</TableHead>
-            <TableHead>Tanggal Mulai</TableHead>
-            <TableHead>Tanggal Selesai</TableHead>
-            <TableHead>Total Hari</TableHead>
+            <TableHead>Employee</TableHead>
+            <TableHead>Time Off Type</TableHead>
+            <TableHead>Start Date</TableHead>
+            <TableHead>End Date</TableHead>
+            <TableHead>Total Days</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead className="text-center min-w-70">Aksi</TableHead>
+            <TableHead className="text-center min-w-70">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -187,15 +187,12 @@ export function ApprovalTable() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Approve Request Time Off</DialogTitle>
-            <DialogDescription>
-              Berikan catatan persetujuan untuk cuti {approveRequest?.employee?.name || "Karyawan"}.
-            </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-4">
             <div className="space-y-2">
-              <Label>Catatan (Opsional)</Label>
+              <Label>Note</Label>
               <Textarea
-                placeholder="Masukkan catatan persetujuan..."
+                placeholder="Enter approval notes..."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 disabled={approveMutation.isPending}
@@ -204,7 +201,7 @@ export function ApprovalTable() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setApproveRequest(null)} disabled={approveMutation.isPending}>
-              Batal
+              Cancel
             </Button>
             <Button onClick={handleApproveSubmit} disabled={approveMutation.isPending} className="bg-green-600 hover:bg-green-700 text-white">
               {approveMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
@@ -222,14 +219,13 @@ export function ApprovalTable() {
           <DialogHeader>
             <DialogTitle>Reject Request Time Off</DialogTitle>
             <DialogDescription>
-              Mohon berikan alasan penolakan untuk cuti {rejectRequest?.employee?.name || "Karyawan"}.
+              Please provide a reason
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-3 py-2">
             <div className="space-y-2">
-              <Label>Catatan Penolakan <span className="text-red-500">*</span></Label>
+              <Label>Please provide a reason <span className="text-red-500">*</span></Label>
               <Textarea
-                placeholder="Masukkan alasan reject (Wajib)..."
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 disabled={rejectMutation.isPending}
@@ -239,7 +235,7 @@ export function ApprovalTable() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setRejectRequest(null)} disabled={rejectMutation.isPending}>
-              Batal
+              Cancel
             </Button>
             <Button onClick={handleRejectSubmit} disabled={rejectMutation.isPending} variant="destructive">
               {rejectMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}

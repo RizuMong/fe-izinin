@@ -108,30 +108,30 @@ export function AdjustmentFormModal({
         ) : (
           <Button>
             <Plus className="h-4 w-4 mr-2" />
-            Tambah Penyesuaian
+            Add Adjustment
           </Button>
         )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {isEditMode ? "Edit Penyesuaian" : "Tambah Penyesuaian"}
+            {isEditMode ? "Edit Adjustment" : "Add Adjustment"}
           </DialogTitle>
           <DialogDescription>
             {isEditMode
-              ? "Ubah data penyesuaian"
-              : "Tambahkan penyesuaian baru"}
+              ? "Ubah data Adjustment"
+              : "Addkan Adjustment baru"}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Employee */}
           <div className="space-y-2">
-            <Label htmlFor="employee_id">Karyawan</Label>
+            <Label htmlFor="employee_id">Employee</Label>
             {employeesLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Memuat data karyawan...
+                Memuat data Employee...
               </div>
             ) : (
               <Select
@@ -144,7 +144,7 @@ export function AdjustmentFormModal({
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Karyawan" />
+                  <SelectValue placeholder="Pilih Employee" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {employeeData?.data?.map((employee: any) => (
