@@ -33,22 +33,22 @@ export function UpdatePasswordForm({
     const errs: string[] = []
     
     if (pass.length < 6) {
-      errs.push('Kata sandi minimal 6 karakter')
+      errs.push('Password must be at least 6 characters')
     }
     if (!/[A-Z]/.test(pass)) {
-      errs.push('Kata sandi harus mengandung huruf besar')
+      errs.push('Password must contain at least one uppercase letter')
     }
     if (!/[a-z]/.test(pass)) {
-      errs.push('Kata sandi harus mengandung huruf kecil')
+      errs.push('Password must contain at least one lowercase letter')
     }
     if (!/[0-9]/.test(pass)) {
-      errs.push('Kata sandi harus mengandung angka')
+      errs.push('Password must contain at least one number')
     }
     if (!/[^A-Za-z0-9]/.test(pass)) {
-      errs.push('Kata sandi harus mengandung simbol')
+      errs.push('Password must contain at least one special character')
     }
     if (confirm && pass !== confirm) {
-      errs.push('Kata sandi tidak cocok')
+      errs.push('Passwords do not match')
     }
     
     return errs
@@ -90,7 +90,7 @@ export function UpdatePasswordForm({
       await supabase.auth.signOut()
       router.replace("/auth/login")
     } catch (error: unknown) {
-      setErrors([error instanceof Error ? error.message : "Terjadi kesalahan"])
+      setErrors([error instanceof Error ? error.message : "Something went wrong. Please try again."])
     } finally {
       setIsLoading(false)
     }
@@ -102,20 +102,20 @@ export function UpdatePasswordForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Atur Ulang Kata Sandi</CardTitle>
-          <CardDescription>Silakan masukkan kata sandi baru Anda di bawah ini.</CardDescription>
+          <CardTitle className="text-2xl">Reset Password</CardTitle>
+          <CardDescription>Enter your new password below to complete the reset.</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleUpdatePassword}>
             <div className="flex flex-col gap-6">
               {/* New Password Field */}
               <div className="grid gap-2">
-                <Label htmlFor="password">Kata sandi baru</Label>
+                <Label htmlFor="password">New Password</Label>
                 <div className="relative">
                   <Input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Kata sandi baru"
+                    placeholder="New password"
                     required
                     value={password}
                     onChange={(e) => {
@@ -133,7 +133,7 @@ export function UpdatePasswordForm({
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
-                    aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -142,12 +142,12 @@ export function UpdatePasswordForm({
 
               {/* Confirm Password Field */}
               <div className="grid gap-2">
-                <Label htmlFor="confirm-password">Konfirmasi kata sandi baru</Label>
+                <Label htmlFor="confirm-password">Confirm New Password</Label>
                 <div className="relative">
                   <Input
                     id="confirm-password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Ulangi kata sandi baru"
+                    placeholder="Repeat new password"
                     required
                     value={confirmPassword}
                     onChange={(e) => {
@@ -165,7 +165,7 @@ export function UpdatePasswordForm({
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none"
-                    aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -181,7 +181,7 @@ export function UpdatePasswordForm({
               )}
 
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Menyimpan..." : "Submit kata sandi baru"}
+                {isLoading ? "Saving..." : "Save New Password"}
               </Button>
             </div>
           </form>

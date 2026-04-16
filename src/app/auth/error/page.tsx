@@ -9,13 +9,13 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ e
         <div className="flex flex-col gap-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Sorry, something went wrong.</CardTitle>
+              <CardTitle className="text-2xl">Something went wrong</CardTitle>
             </CardHeader>
             <CardContent>
               {params?.error ? (
-                <p className="text-sm text-muted-foreground">Code error: {params.error}</p>
+                <p className="text-sm text-muted-foreground">Error code: {params.error}</p>
               ) : (
-                <p className="text-sm text-muted-foreground">An unspecified error occurred.</p>
+                <p className="text-sm text-muted-foreground">An unexpected error occurred. Please try again.</p>
               )}
             </CardContent>
           </Card>

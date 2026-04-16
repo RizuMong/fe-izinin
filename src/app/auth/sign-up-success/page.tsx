@@ -13,12 +13,12 @@ export default function Page() {
         <div className="flex flex-col gap-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl">Terima kasih telah mendaftar!</CardTitle>
-              <CardDescription>Periksa email Anda untuk konfirmasi</CardDescription>
+              <CardTitle className="text-2xl">Thanks for signing up!</CardTitle>
+              <CardDescription>Check your email to confirm your account</CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                Anda telah berhasil mendaftar. Silakan periksa email Anda untuk mengonfirmasi akun sebelum masuk.
+                You&apos;ve successfully created your account. Please check your email to confirm it before signing in.
               </p>
             </CardContent>
           </Card>

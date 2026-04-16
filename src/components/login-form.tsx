@@ -47,7 +47,7 @@ const handleLogin = async (e: React.FormEvent) => {
     router.replace("/time-off/request")
 
   } catch (error: unknown) {
-    setError(error instanceof Error ? error.message : "Login gagal")
+    setError(error instanceof Error ? error.message : "Sign in failed. Please try again.")
   } finally {
     setIsLoading(false)
   }
@@ -57,14 +57,14 @@ const handleLogin = async (e: React.FormEvent) => {
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">Masuk</CardTitle>
-          <CardDescription>Masukkan email Anda di bawah untuk masuk ke akun Anda</CardDescription>
+          <CardTitle className="text-2xl">Sign In</CardTitle>
+          <CardDescription>Enter your email below to sign in to your account</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Email Address</Label>
                 <Input
                   id="email"
                   type="email"
@@ -76,12 +76,12 @@ const handleLogin = async (e: React.FormEvent) => {
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Kata sandi</Label>
+                  <Label htmlFor="password">Password</Label>
                   <Link
                     href="/auth/forgot-password"
                     className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                   >
-                    Lupa kata sandi?
+                    Forgot your password?
                   </Link>
                 </div>
                 <Input
@@ -94,13 +94,13 @@ const handleLogin = async (e: React.FormEvent) => {
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
               <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? 'Sedang masuk...' : 'Masuk'}
+                {isLoading ? 'Signing in...' : 'Sign In'}
               </Button>
             </div>
             <div className="mt-4 text-center text-sm">
-              Belum punya akun?{' '}
+              Don&apos;t have an account?{' '}
               <Link href="/auth/sign-up" className="underline underline-offset-4">
-                Daftar
+                Sign Up
               </Link>
             </div>
           </form>

@@ -36,7 +36,7 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
       if (error) throw error
       setSuccess(true)
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : 'Terjadi kesalahan')
+      setError(error instanceof Error ? error.message : 'Something went wrong. Please try again.')
     } finally {
       setIsLoading(false)
     }
@@ -47,28 +47,28 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
       {success ? (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Periksa Email Anda</CardTitle>
-            <CardDescription>Instruksi atur ulang kata sandi telah dikirim</CardDescription>
+            <CardTitle className="text-2xl">Check Your Email</CardTitle>
+            <CardDescription>Password reset instructions have been sent</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Jika Anda mendaftar menggunakan email dan kata sandi, Anda akan menerima email atur ulang kata sandi.
+              If you signed up with an email and password, you will receive a password reset email shortly.
             </p>
           </CardContent>
         </Card>
       ) : (
         <Card>
           <CardHeader>
-            <CardTitle className="text-2xl">Atur Ulang Kata Sandi</CardTitle>
+            <CardTitle className="text-2xl">Reset Password</CardTitle>
             <CardDescription>
-              Masukkan email Anda dan kami akan mengirimkan tautan untuk mengatur ulang kata sandi Anda
+              Enter your email address and we&apos;ll send you a link to reset your password
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleForgotPassword}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
@@ -80,13 +80,13 @@ export function ForgotPasswordForm({ className, ...props }: React.ComponentProps
                 </div>
                 {error && <p className="text-sm text-red-500">{error}</p>}
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Mengirim...' : 'Submit email atur ulang'}
+                  {isLoading ? 'Sending...' : 'Send Reset Link'}
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Sudah punya akun?{' '}
+                Remember your password?{' '}
                 <Link href="/auth/login" className="underline underline-offset-4">
-                  Masuk
+                  Sign In
                 </Link>
               </div>
             </form>
