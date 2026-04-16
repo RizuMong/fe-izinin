@@ -31,7 +31,7 @@ export function HolidayTable() {
                     <TableHeader className="bg-muted/50">
                         <TableRow>
                             <TableHead>Name</TableHead>
-                            <TableHead>Libur Nasional</TableHead>
+                            <TableHead>National Holiday</TableHead>
                             <TableHead>Date</TableHead>
                             <TableHead className="w-25">Action</TableHead>
                         </TableRow>
@@ -52,11 +52,12 @@ export function HolidayTable() {
                                     <TableCell>{item.name}</TableCell>
                                     <TableCell>
                                         <Badge variant={item.is_national_holiday ? "default" : "secondary"}>
-                                            {item.is_national_holiday ? "Ya" : "Tidak"}
+                                            {item.is_national_holiday ? "Yes" : "No"}
                                         </Badge>
                                     </TableCell>
-                                    <TableCell>{formatDate(item.date)}</TableCell>
-
+                                    <TableCell>
+                                        {item.is_national_holiday ? formatDate(item.date) : "--"}
+                                    </TableCell>
                                     <TableCell className="flex gap-2">
                                         <HolidayFormModal initialData={item} />
                                         <HolidayDeleteDialog id={item.id} />
