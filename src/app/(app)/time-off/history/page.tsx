@@ -257,6 +257,7 @@ export default function TimeOffReportPage() {
               <TableHead className="font-semibold text-slate-700">Start Date</TableHead>
               <TableHead className="font-semibold text-slate-700">End Date</TableHead>
               <TableHead className="font-semibold text-slate-700 text-center">Total Days</TableHead>
+              <TableHead className="font-semibold text-slate-700 text-center">Reason</TableHead>
               <TableHead className="font-semibold text-slate-700 text-center">Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -281,6 +282,7 @@ export default function TimeOffReportPage() {
                     {new Date(request.end_date).toLocaleDateString("id-ID", { day: 'numeric', month: 'short', year: 'numeric' })}
                   </TableCell>
                   <TableCell className="text-center font-medium text-slate-700">{request.total_days || 0}</TableCell>
+                  <TableCell className="text-center font-medium text-slate-700">{request.reason || "-"}</TableCell>
                   <TableCell className="text-center">{getStatusBadge(request.status)}</TableCell>
                 </TableRow>
               ))
