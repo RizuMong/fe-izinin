@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { createRequestTimeOff, getRequestTimeOffList, getApprovalRequestTimeOffList, submitRequestTimeOff, approveRequestTimeOff, rejectRequestTimeOff, getRequestTimeOffListWithFilter } from "./api"
+import { createRequestTimeOff, getRequestTimeOffList, getApprovalRequestTimeOffList, submitRequestTimeOff, approveRequestTimeOff, rejectRequestTimeOff, getRequestTimeOffListWithFilter, cancelRequestTimeOff } from "./api"
 import { toast } from "sonner"
 import { FilterRequestTimeOffParams } from "./types"
 
@@ -110,6 +110,22 @@ export const useRejectRequestTimeOff = () => {
     },
     onError: (error: any) => {
       const message = error?.response?.data?.message || error?.response?.data?.error || "Terjadi kesalahan saat reject request"
+      toast.error(message)
+    },
+  })
+}
+
+export const useCancelRequestTimeOff = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: cancelRequestTimeOff,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["time-off-request"] })
+      toast.success(data.message || "Berhasil membatalkan request time off")
+    },
+    onError: (error: any) => {
+      const message = error?.response?.data?.message || error?.response?.data?.error || "Terjadi kesalahan saat membatalkan request"
       toast.error(message)
     },
   })

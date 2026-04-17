@@ -21,12 +21,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
-import { Loader2, Send } from "lucide-react"
+import { Loader2, Send, XCircle } from "lucide-react"
 
 // Hooks mapped to the strict @/ alias
 import {
   useRequestTimeOffList,
-  useSubmitRequestTimeOff
+  useSubmitRequestTimeOff,
+  useCancelRequestTimeOff
 } from "@/services/time-off/request/hook"
 
 const getStatusBadge = (status: string) => {
@@ -48,6 +49,7 @@ const getStatusBadge = (status: string) => {
 export function RequestTimeOffTable() {
   const { data, isLoading, isError } = useRequestTimeOffList()
   const submitMutation = useSubmitRequestTimeOff()
+  const cancelMutation = useCancelRequestTimeOff()
 
   if (isLoading) {
     return (
@@ -114,49 +116,88 @@ export function RequestTimeOffTable() {
                 </TableCell>
 
                 {/* ACTION COLUMN */}
-                <TableCell className="text-center">
-                  {request.status === "DRAFT" ? (
-                    <AlertDialog>
-                      <AlertDialogTrigger asChild>
-                        <Button
-                          variant="default"
-                          size="sm"
-                          disabled={submitMutation.isPending}
-                        >
-                          {submitMutation.isPending && submitMutation.variables === request.id ? (
-                            <Loader2 className="h-4 w-4 animate-spin" />
-                          ) : (
-                            <>
-                              <Send className="h-3 w-3 mr-2" />
-                              Submit
-                            </>
-                          )}
-                        </Button>
-                      </AlertDialogTrigger>
-                      <AlertDialogContent>
-                        <AlertDialogHeader>
-                          <AlertDialogTitle>Submit Request Time Off?</AlertDialogTitle>
-                          <AlertDialogDescription>
-                            Are you sure you want to submit this time off request?
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel disabled={submitMutation.isPending}>
-                            Cancel
-                          </AlertDialogCancel>
-                          <AlertDialogAction
-                            onClick={() => submitMutation.mutate(request.id)}
+                  <TableCell className="text-center">
+                    {request.status === "DRAFT" ? (
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="default"
+                            size="sm"
                             disabled={submitMutation.isPending}
                           >
-                            Submit
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  ) : (
-                    <span className="text-sm text-muted-foreground">-</span>
-                  )}
-                </TableCell>
+                            {submitMutation.isPending && submitMutation.variables === request.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <>
+                                <Send className="h-3 w-3 mr-2" />
+                                Submit
+                              </>
+                            )}
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Submit Request Time Off?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to submit this time off request?
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel disabled={submitMutation.isPending}>
+                              Cancel
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => submitMutation.mutate(request.id)}
+                              disabled={submitMutation.isPending}
+                            >
+                              Submit
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    ) : (request.status === "SUBMITTED" || request.status === "PENDING") ? (
+                      <AlertDialog>
+                        <AlertDialogTrigger asChild>
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            disabled={cancelMutation.isPending}
+                          >
+                            {cancelMutation.isPending && cancelMutation.variables === request.id ? (
+                              <Loader2 className="h-4 w-4 animate-spin" />
+                            ) : (
+                              <>
+                                <XCircle className="h-3 w-3 mr-2" />
+                                Cancel
+                              </>
+                            )}
+                          </Button>
+                        </AlertDialogTrigger>
+                        <AlertDialogContent>
+                          <AlertDialogHeader>
+                            <AlertDialogTitle>Cancel Request Time Off?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                              Are you sure you want to cancel this time off request? This action cannot be undone and your quota will be restored.
+                            </AlertDialogDescription>
+                          </AlertDialogHeader>
+                          <AlertDialogFooter>
+                            <AlertDialogCancel disabled={cancelMutation.isPending}>
+                              No, Keep It
+                            </AlertDialogCancel>
+                            <AlertDialogAction
+                              onClick={() => cancelMutation.mutate(request.id)}
+                              disabled={cancelMutation.isPending}
+                              className="bg-red-600 hover:bg-red-700"
+                            >
+                              Yes, Cancel
+                            </AlertDialogAction>
+                          </AlertDialogFooter>
+                        </AlertDialogContent>
+                      </AlertDialog>
+                    ) : (
+                      <span className="text-sm text-muted-foreground">-</span>
+                    )}
+                  </TableCell>
               </TableRow>
             ))
           )}

@@ -1,7 +1,7 @@
 import { client } from "@/services/auth/client"
 import type { CreateRequestTimeOffPayload, RequestTimeOff, ApproveRequestTimeOffPayload,FilterRequestTimeOffParams, PaginationMeta } from "./types"
 
-// GET LIST (ONLY DRAFT)
+// GET LIST (DRAFT and SUBMITTED only)
 export const getRequestTimeOffList = async (params?: {
   page?: number
   limit?: number
@@ -9,7 +9,7 @@ export const getRequestTimeOffList = async (params?: {
   const res = await client.get("/time-off-request", {
     params: {
       ...params,
-      status: "DRAFT",
+      status: "DRAFT,SUBMITTED",
     },
   })
 
@@ -120,5 +120,20 @@ export const rejectRequestTimeOff = async (id: number, payload: { comment: strin
   if (res.data?.error) {
     throw { response: { data: res.data } }
   }
+  return res.data
+}
+
+// CANCEL
+export const cancelRequestTimeOff = async (id: number) => {
+  const res = await client.put(`/time-off-request/cancel/${id}`, {})
+
+  if (res.data?.success === false) {
+    throw {
+      response: {
+        data: res.data,
+      },
+    }
+  }
+
   return res.data
 }
