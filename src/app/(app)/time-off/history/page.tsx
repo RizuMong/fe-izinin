@@ -130,9 +130,9 @@ export default function TimeOffReportPage() {
       {/* HEADER & ACTIONS */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">Laporan Cuti</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">History Time Off</h1>
           <p className="text-sm text-muted-foreground">
-            Filter and download employee time off request reports
+            Filter and download employee time-off requests
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -166,10 +166,10 @@ export default function TimeOffReportPage() {
               onValueChange={(val) => setFilters({ ...filters, employee_id: val === "ALL" ? "" : val })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={isEmployeeLoading ? "Memuat..." : "Semua Employee"} />
+                <SelectValue placeholder={isEmployeeLoading ? "Memuat..." : "All Employees"} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="ALL">Semua Employee</SelectItem>
+                <SelectItem value="ALL">All Employees</SelectItem>
                 {employeeData?.data?.map((emp: any) => (
                   <SelectItem key={emp.id} value={emp.id.toString()}>
                     {emp.name || emp.full_name}
@@ -186,10 +186,10 @@ export default function TimeOffReportPage() {
               onValueChange={(val) => setFilters({ ...filters, timeoff_id: val === "ALL" ? "" : val })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={isTimeoffLoading ? "Memuat..." : "Semua Time Off Type"} />
+                <SelectValue placeholder={isTimeoffLoading ? "Memuat..." : "All Time Off Type"} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="ALL">Semua Time Off Type</SelectItem>
+                <SelectItem value="ALL">All Time Off Type</SelectItem>
                 {timeoffData?.data?.map((type: any) => (
                   <SelectItem key={type.id} value={type.id.toString()}>
                     {type.name}
@@ -266,7 +266,7 @@ export default function TimeOffReportPage() {
             ) : requests.length === 0 ? (
               <TableRow className="hover:bg-transparent">
                 <TableCell colSpan={6} className="p-0">
-                  <EmptyState title="Laporan Cuti Kosong" description="Tidak ada data laporan cuti yang sesuai dengan filter." />
+                  <EmptyState title="History Time Off Kosong" description="Tidak ada data History Time Off yang sesuai dengan filter." />
                 </TableCell>
               </TableRow>
             ) : (
