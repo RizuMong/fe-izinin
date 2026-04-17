@@ -29,7 +29,7 @@ import { useEmployeeList } from "@/services/users/employee"
 import { useTimeOffList } from "@/services/master-data/time-off/timeoff"
 import type { FilterRequestTimeOffParams } from "@/services/time-off/request/types"
 
-const STATUS_OPTIONS = ["DRAFT", "SUBMITTED", "PENDING", "APPROVED", "REJECTED"]
+const STATUS_OPTIONS = ["DRAFT", "SUBMITTED", "PENDING", "APPROVED", "REJECTED", "CANCELLED"]
 
 const INITIAL_FILTERS: FilterRequestTimeOffParams = {
   page: 1,

@@ -19,16 +19,13 @@ export const getRequestTimeOffList = async (params?: {
   }
 }
 
-// GET APPROVAL LIST (Filtered by SUBMITTED and APPROVED)
+// GET APPROVAL LIST (Using new dedicated approval endpoint)
 export const getApprovalRequestTimeOffList = async (params?: {
   page?: number
   limit?: number
 }): Promise<{ data: RequestTimeOff[]; meta: PaginationMeta }> => {
-  const res = await client.get("/time-off-request", {
-    params: {
-      ...params,
-      status: "SUBMITTED", 
-    },
+  const res = await client.get("/time-off-approval", {
+    params,
   })
 
   return {
