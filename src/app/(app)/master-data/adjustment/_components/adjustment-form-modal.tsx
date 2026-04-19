@@ -260,9 +260,9 @@ export function AdjustmentFormModal({
             <Input
               id="total_quota"
               type="number"
-              placeholder="Total Kuota"
+              placeholder="0"
               className="w-full appearance-none"
-              value={formData.total_quota ? formData.total_quota : ""}
+              value={formData.total_quota || ""}
               onChange={(e) =>
                 setFormData({
                   ...formData,
