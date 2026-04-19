@@ -88,19 +88,19 @@ export const useDeleteTimeOffEmployee = () => {
 }
 
 // GET EMPLOYEES (for dropdown)
-export const useEmployeeList = () => {
+export const useEmployeeList = (params?: { page?: number; limit?: number }) => {
   return useQuery({
-    queryKey: ["employees"],
-    queryFn: getEmployees,
+    queryKey: ["employees", params],
+    queryFn: () => getEmployees(params),
     staleTime: 10 * 60 * 1000, // 10 minutes
   })
 }
 
 // GET TIME-OFFS (for dropdown)
-export const useTimeOffList = () => {
+export const useTimeOffList = (params?: { page?: number; limit?: number }) => {
   return useQuery({
-    queryKey: ["time-offs"],
-    queryFn: getTimeOffs,
+    queryKey: ["time-offs", params],
+    queryFn: () => getTimeOffs(params),
     staleTime: 10 * 60 * 1000, // 10 minutes
   })
 }

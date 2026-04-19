@@ -79,13 +79,13 @@ export const deleteTimeOffEmployee = async (
 }
 
 // GET EMPLOYEES
-export const getEmployees = async () => {
-  const res = await client.get("/employee")
+export const getEmployees = async (params?: { page?: number; limit?: number }) => {
+  const res = await client.get("/employee", { params })
   return res.data
 }
 
 // GET TIME-OFFS
-export const getTimeOffs = async () => {
-  const res = await client.get("/time-off")
+export const getTimeOffs = async (params?: { page?: number; limit?: number }) => {
+  const res = await client.get("/time-off", { params })
   return res.data
 }

@@ -64,8 +64,8 @@ export function TimeOffEmployeeFormModal({
     useUpdateTimeOffEmployee()
 
   // Fetch dropdown data
-  const { data: employeeData } = useEmployeeList()
-  const { data: timeoffData } = useTimeOffList()
+  const { data: employeeData } = useEmployeeList({ limit: 1000 })
+  const { data: timeoffData } = useTimeOffList({ limit: 1000 })
 
   const [employeeSearch, setEmployeeSearch] = useState("")
   const [employeePopoverOpen, setEmployeePopoverOpen] = useState(false)
@@ -150,7 +150,6 @@ export function TimeOffEmployeeFormModal({
       )
     }
   }
-
 
   // Find timeoff name by ID
   const selectedTimeOff = timeoffData?.data?.find(

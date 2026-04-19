@@ -47,8 +47,8 @@ export function RequestTimeOffFormModal() {
   const [formData, setFormData] = useState<RequestTimeOffPayload>(INITIAL_STATE)
 
   const createMutation = useCreateRequestTimeOff()
-  const { data: employeeData, isLoading: employeesLoading } = useEmployeeList()
-  const { data: timeoffData, isLoading: timeoffsLoading } = useTimeOffList()
+  const { data: employeeData, isLoading: employeesLoading } = useEmployeeList({ limit: 1000 })
+  const { data: timeoffData, isLoading: timeoffsLoading } = useTimeOffList({ limit: 1000 })
 
   const [employeeSearch, setEmployeeSearch] = useState("")
   const [employeePopoverOpen, setEmployeePopoverOpen] = useState(false)
