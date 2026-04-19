@@ -23,6 +23,7 @@ import {
 import { Loader2, Download, FilterX } from "lucide-react"
 import { TableSkeleton } from "@/components/ui/table-skeleton"
 import { EmptyState } from "@/components/ui/empty-state"
+import { formatDate } from "@/lib/utils"
 
 import { useRequestTimeOffListWithFilter } from "@/services/time-off/request/hook"
 import { useEmployeeList } from "@/services/users/employee"
@@ -78,7 +79,11 @@ export default function TimeOffReportPage() {
       "End Date",
       "Total Days",
       "Status",
-      "Reason"
+      "Reason",
+      "Created By",
+      "Created At",
+      "Updated By",
+      "Updated At"
     ]
 
     const csvRows = [headers.join(",")]
@@ -90,11 +95,15 @@ export default function TimeOffReportPage() {
       const row = [
         `"${req.employee?.name || "-"}"`,
         `"${req.time_off?.name || "-"}"`,
-        `"${new Date(req.start_date).toLocaleDateString("id-ID")}"`,
-        `"${new Date(req.end_date).toLocaleDateString("id-ID")}"`,
+        `"${formatDate(req.start_date)}"`,
+        `"${formatDate(req.end_date)}"`,
         req.total_days || 0,
         `"${req.status}"`,
-        `"${reasonSafe}"`
+        `"${reasonSafe}"`,
+        `"${req.created_by_email || "-"}"`,
+        `"${formatDate(req.created_at)}"`,
+        `"${req.updated_by_email || "-"}"`,
+        `"${formatDate(req.updated_at)}"`
       ]
       csvRows.push(row.join(","))
     })
@@ -241,7 +250,7 @@ export default function TimeOffReportPage() {
       </div>
 
       {/* DATA TABLE */}
-      <div className="rounded-xl border bg-white overflow-hidden shadow-sm relative">
+      <div className="w-full min-w-0 rounded-xl border bg-white overflow-hidden shadow-sm relative">
         {/* Loading Overlay saat Fetching Ulang Filter */}
         {isFetching && !isLoading && (
           <div className="absolute inset-0 z-10 bg-white/50 backdrop-blur-[1px] flex items-center justify-center">
@@ -259,14 +268,18 @@ export default function TimeOffReportPage() {
               <TableHead className="font-semibold text-slate-700 text-center">Total Days</TableHead>
               <TableHead className="font-semibold text-slate-700 text-center">Reason</TableHead>
               <TableHead className="font-semibold text-slate-700 text-center">Status</TableHead>
+              <TableHead className="font-semibold text-slate-700">Created By</TableHead>
+              <TableHead className="font-semibold text-slate-700">Created At</TableHead>
+              <TableHead className="font-semibold text-slate-700">Updated By</TableHead>
+              <TableHead className="font-semibold text-slate-700">Updated At</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {isLoading ? (
-              <TableSkeleton columns={7} />
+              <TableSkeleton columns={11} />
             ) : requests.length === 0 ? (
               <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={7} className="p-0">
+                <TableCell colSpan={11} className="p-0">
                   <EmptyState title="History Time Off is Empty" description="No results found matching your filters." />
                 </TableCell>
               </TableRow>
@@ -276,14 +289,18 @@ export default function TimeOffReportPage() {
                   <TableCell className="font-medium text-slate-900">{request.employee?.name || "-"}</TableCell>
                   <TableCell className="text-slate-600">{request.time_off?.name || "-"}</TableCell>
                   <TableCell className="text-slate-600">
-                    {new Date(request.start_date).toLocaleDateString("id-ID", { day: 'numeric', month: 'short', year: 'numeric' })}
+                    {formatDate(request.start_date)}
                   </TableCell>
                   <TableCell className="text-slate-600">
-                    {new Date(request.end_date).toLocaleDateString("id-ID", { day: 'numeric', month: 'short', year: 'numeric' })}
+                    {formatDate(request.end_date)}
                   </TableCell>
                   <TableCell className="text-center font-medium text-slate-700">{request.total_days || 0}</TableCell>
                   <TableCell className="text-center font-medium text-slate-700">{request.reason || "-"}</TableCell>
                   <TableCell className="text-center">{getStatusBadge(request.status)}</TableCell>
+                  <TableCell className="text-slate-600">{request.created_by_email || "-"}</TableCell>
+                  <TableCell className="text-slate-600">{formatDate(request.created_at)}</TableCell>
+                  <TableCell className="text-slate-600">{request.updated_by_email || "-"}</TableCell>
+                  <TableCell className="text-slate-600">{formatDate(request.updated_at)}</TableCell>
                 </TableRow>
               ))
             )}

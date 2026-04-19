@@ -52,7 +52,7 @@ export function AdjustmentTable() {
   }
 
   return (
-    <Card className="p-0 overflow-hidden">
+    <Card className="w-full min-w-0 p-0 overflow-hidden">
       <CardContent className="p-0">
         <div className="overflow-x-auto">
           <Table>

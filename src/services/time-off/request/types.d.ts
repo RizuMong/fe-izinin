@@ -42,6 +42,8 @@ export type RequestTimeOff = {
   time_off: IDName
   created_at: string
   updated_at: string
+  created_by_email?: string
+  updated_by_email?: string
 }
 
 export type PaginationMeta = {

@@ -26,7 +26,7 @@ export function TimeOffEmployeeTable() {
   if (error) return <div>Error loading leave employees</div>
 
   return (
-    <Card className="p-0 overflow-hidden">
+    <Card className="w-full min-w-0 p-0 overflow-hidden">
       <CardContent className="p-0">
         <Table className="min-w-full">
           <TableHeader className="bg-muted/50">

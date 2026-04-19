@@ -70,7 +70,7 @@ export function RequestTimeOffTable() {
   const requests = data?.data || []
 
   return (
-    <div className="rounded-md border bg-white overflow-hidden">
+    <div className="w-full min-w-0 rounded-md border bg-white overflow-hidden">
       <Table>
         <TableHeader>
           <TableRow>

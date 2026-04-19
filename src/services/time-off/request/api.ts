@@ -6,7 +6,7 @@ export const getRequestTimeOffList = async (params?: {
   page?: number
   limit?: number
 }): Promise<{ data: RequestTimeOff[]; meta: PaginationMeta }> => {
-  const res = await client.get("/time-off-request", {
+  const res = await client.get("/time-off-request/request", {
     params: {
       ...params,
       status: "DRAFT,SUBMITTED",
@@ -53,7 +53,7 @@ export const getRequestTimeOffListWithFilter = async (
     delete queryParams.status
   }
 
-  const res = await client.get("/time-off-request", {
+  const res = await client.get("/time-off-request/history/all", {
     params: queryParams,
   })
 

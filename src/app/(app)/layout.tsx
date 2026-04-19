@@ -24,7 +24,7 @@ export default function AppLayout({
 
             <AppSidebar />
 
-            <SidebarInset className="flex flex-col w-full">
+            <SidebarInset className="flex flex-col w-full min-w-0 overflow-hidden">
 
               <header className="flex items-center justify-between border-b px-6 lg:px-8 h-16 bg-white/80 backdrop-blur-md sticky top-0 z-30 transition-all">
                 <div className="flex items-center gap-2">
@@ -35,7 +35,7 @@ export default function AppLayout({
                 <Header />
               </header>
 
-              <main className="flex-1 w-full bg-background overflow-auto">
+              <main className="flex-1 w-full bg-background overflow-y-auto overflow-x-hidden min-w-0">
                 <div className="max-w-screen-xl mx-auto w-full p-6 lg:p-8 space-y-6">
                   {children}
                 </div>

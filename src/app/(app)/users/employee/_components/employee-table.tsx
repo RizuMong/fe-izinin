@@ -24,7 +24,7 @@ export function EmployeeTable() {
     if (error) return <div>Failed to load employee list</div>
 
     return (
-        <Card className="p-0 overflow-hidden">
+        <Card className="w-full min-w-0 p-0 overflow-hidden">
             <CardContent className="p-0">
                 <Table className="min-w-full">
                     <TableHeader className="bg-muted/50">
