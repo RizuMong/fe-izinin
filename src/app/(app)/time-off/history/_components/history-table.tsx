@@ -57,16 +57,18 @@ export function HistoryTable({ requests, isLoading, isFetching }: HistoryTablePr
             <TableHead className="font-semibold text-slate-700 text-center">Total Days</TableHead>
             <TableHead className="font-semibold text-slate-700 text-center">Reason</TableHead>
             <TableHead className="font-semibold text-slate-700 text-center">Status</TableHead>
+            <TableHead className="font-semibold text-slate-700">Created By</TableHead>
             <TableHead className="font-semibold text-slate-700">Created At</TableHead>
+            <TableHead className="font-semibold text-slate-700">Updated By</TableHead>
             <TableHead className="font-semibold text-slate-700">Updated At</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {isLoading ? (
-            <TableSkeleton columns={9} />
+            <TableSkeleton columns={11} />
           ) : requests.length === 0 ? (
             <TableRow className="hover:bg-transparent">
-              <TableCell colSpan={9} className="p-0">
+              <TableCell colSpan={11} className="p-0">
                 <EmptyState title="History Time Off is Empty" description="No results found matching your filters." />
               </TableCell>
             </TableRow>
@@ -84,10 +86,16 @@ export function HistoryTable({ requests, isLoading, isFetching }: HistoryTablePr
                 <TableCell className="text-center font-medium text-slate-700">{request.total_days || 0}</TableCell>
                 <TableCell className="text-center font-medium text-slate-700">{request.reason || "-"}</TableCell>
                 <TableCell className="text-center">{getStatusBadge(request.status)}</TableCell>
-                <TableCell className="text-slate-600 truncate max-w-[120px]" title={formatDate(request.created_at)}>
+                <TableCell className="text-slate-600 truncate max-w-[150px]" title={request.created_by_email || "-"}>
+                  {request.created_by_email || "-"}
+                </TableCell>
+                <TableCell className="text-slate-600">
                   {formatDate(request.created_at)}
                 </TableCell>
-                <TableCell className="text-slate-600 truncate max-w-[120px]" title={formatDate(request.updated_at)}>
+                <TableCell className="text-slate-600 truncate max-w-[150px]" title={request.updated_by_email || "-"}>
+                  {request.updated_by_email || "-"}
+                </TableCell>
+                <TableCell className="text-slate-600">
                   {formatDate(request.updated_at)}
                 </TableCell>
               </TableRow>
