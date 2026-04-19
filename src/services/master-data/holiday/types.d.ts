@@ -1,3 +1,5 @@
+import { PaginationMeta } from "@/services/base-types"
+
 export type Holiday = {
   id: number
   name: string
@@ -5,6 +7,13 @@ export type Holiday = {
   date: string
   created_at: string
   updated_at: string
+}
+
+export type HolidayResponse = {
+  data: Holiday[]
+  meta: PaginationMeta
+  message: string
+  error: boolean
 }
 
 export type CreateHolidayPayload = {

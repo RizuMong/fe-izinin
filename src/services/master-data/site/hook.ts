@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { Site } from "./types"
+import { Site, SiteResponse } from "./types"
 import {
   getSiteList,
   createSite,
@@ -18,10 +18,10 @@ interface ApiError {
 }
 
 // GET LIST
-export const useSiteList = () => {
-  return useQuery<Site[]>({
-    queryKey: ["site"],
-    queryFn: getSiteList,
+export const useSiteList = (params?: { page?: number; limit?: number }) => {
+  return useQuery<SiteResponse>({
+    queryKey: ["site", params],
+    queryFn: () => getSiteList(params),
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000, // 5 minutes
   })

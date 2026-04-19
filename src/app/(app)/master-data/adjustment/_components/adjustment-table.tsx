@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { useAdjustmentList } from "@/services/master-data/adjustment"
+import { DataTablePagination } from "@/components/ui/data-table-pagination"
 import {
   Table,
   TableBody,
@@ -29,13 +30,17 @@ import { formatDate } from "@/lib/utils"
 import type { Adjustment } from "@/services/master-data/adjustment"
 
 export function AdjustmentTable() {
-  const { data, isLoading, error, refetch } = useAdjustmentList()
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(10)
+
+  const { data, isLoading, error, refetch } = useAdjustmentList({ page, limit })
   const [editingAdjustment, setEditingAdjustment] = useState<Adjustment | null>(
     null
   )
   const [deleteId, setDeleteId] = useState<number | null>(null)
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const adjustments = data?.data ?? []
+  const meta = data?.meta
 
   if (error) {
     return (
@@ -52,100 +57,79 @@ export function AdjustmentTable() {
   }
 
   return (
-    <Card className="w-full min-w-0 p-0 overflow-hidden">
-      <CardContent className="p-0">
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow className="bg-muted/50">
-                <TableHead>Employee</TableHead>
-                <TableHead>Timeoff</TableHead>
-                <TableHead>Total Quota</TableHead>
-                <TableHead>Period</TableHead>
-                <TableHead>Operation</TableHead>
-                <TableHead>Created At</TableHead>
-                <TableHead>Updated At</TableHead>
-                {/* <TableHead>Action</TableHead> */}
-              </TableRow>
-            </TableHeader>
-            <TableBody> 
-              {isLoading ? (
-                <TableSkeleton columns={7} />
-              ) : adjustments.length === 0 ? (
-                <TableRow className="hover:bg-transparent">
-                  <TableCell colSpan={7} className="p-0">
-                    <EmptyState title="No Adjustments Found" description="No quota adjustment data has been added yet." />
-                  </TableCell>
+    <div className="space-y-4">
+      <Card className="w-full min-w-0 p-0 overflow-hidden">
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50">
+                  <TableHead>Employee</TableHead>
+                  <TableHead>Timeoff</TableHead>
+                  <TableHead>Total Quota</TableHead>
+                  <TableHead>Period</TableHead>
+                  <TableHead>Operation</TableHead>
+                  <TableHead>Created At</TableHead>
+                  <TableHead>Updated At</TableHead>
+                  {/* <TableHead>Action</TableHead> */}
                 </TableRow>
-              ) : (
-                adjustments.map((adjustment) => (
-                  <TableRow
-                    key={adjustment.id}
-                    className="hover:bg-muted/40 transition-colors"
-                  >
-                  <TableCell className="font-medium">
-                    {adjustment.employee.full_name}
-                  </TableCell>
-                  <TableCell>{adjustment.time_off.name}</TableCell>
-                  <TableCell>{adjustment.total_quota}</TableCell>
-                  <TableCell>{adjustment.period}</TableCell>
-                  <TableCell>
-                    <span
-                      className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                        adjustment.operation === "PENAMBAHAN"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
+              </TableHeader>
+              <TableBody> 
+                {isLoading ? (
+                  <TableSkeleton columns={7} />
+                ) : adjustments.length === 0 ? (
+                  <TableRow className="hover:bg-transparent">
+                    <TableCell colSpan={7} className="p-0">
+                      <EmptyState title="No Adjustments Found" description="No quota adjustment data has been added yet." />
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  adjustments.map((adjustment) => (
+                    <TableRow
+                      key={adjustment.id}
+                      className="hover:bg-muted/40 transition-colors"
                     >
-                      {adjustment.operation}
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-sm">
-                    {formatDate(adjustment.created_at)}
-                  </TableCell>
-                  <TableCell className="text-sm">
-                    {formatDate(adjustment.updated_at)}
-                  </TableCell>
-                  {/* <TableCell>
-                    <div className="flex items-center gap-2">
-                      <AdjustmentFormModal
-                        initialData={adjustment}
-                        onEdit={() => setEditingAdjustment(adjustment)}
-                      />
-                      <AlertDialog
-                        open={
-                          isDeleteDialogOpen && deleteId === adjustment.id
-                        }
-                        onOpenChange={(open) => {
-                          setIsDeleteDialogOpen(open)
-                          if (!open) setDeleteId(null)
-                        }}
+                    <TableCell className="font-medium">
+                      {adjustment.employee.full_name}
+                    </TableCell>
+                    <TableCell>{adjustment.time_off.name}</TableCell>
+                    <TableCell>{adjustment.total_quota}</TableCell>
+                    <TableCell>{adjustment.period}</TableCell>
+                    <TableCell>
+                      <span
+                        className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                          adjustment.operation === "PENAMBAHAN"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
                       >
-                        <AlertDialogTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => setDeleteId(adjustment.id)}
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </Button>
-                        </AlertDialogTrigger>
-                        <AdjustmentDeleteDialog
-                          id={adjustment.id}
-                          onOpenChange={(open) => {
-                            setIsDeleteDialogOpen(open)
-                            if (!open) setDeleteId(null)
-                          }}
-                        />
-                      </AlertDialog>
-                    </div>
-                  </TableCell> */}
-                </TableRow>
-              )))}
-            </TableBody>
-          </Table>
-        </div>
-      </CardContent>
-    </Card>
+                        {adjustment.operation}
+                      </span>
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {formatDate(adjustment.created_at)}
+                    </TableCell>
+                    <TableCell className="text-sm">
+                      {formatDate(adjustment.updated_at)}
+                    </TableCell>
+                  </TableRow>
+                )))}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
+      
+      {meta && (
+        <DataTablePagination 
+          meta={meta} 
+          onPageChange={setPage} 
+          onLimitChange={(l) => {
+            setLimit(l)
+            setPage(1)
+          }} 
+        />
+      )}
+    </div>
   )
 }

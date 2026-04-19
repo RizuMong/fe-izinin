@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { Holiday } from "./types"
+import { Holiday, HolidayResponse } from "./types"
 import {
   getHolidays,
   createHoliday,
@@ -9,10 +9,10 @@ import {
 import { toast } from "sonner"
 
 // GET LIST
-export const useHolidayList = () => {
-  return useQuery<Holiday[]>({
-    queryKey: ["holiday"],
-    queryFn: getHolidays,
+export const useHolidayList = (params?: { page?: number; limit?: number }) => {
+  return useQuery<HolidayResponse>({
+    queryKey: ["holiday", params],
+    queryFn: () => getHolidays(params),
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000, // 5 minutes
   })

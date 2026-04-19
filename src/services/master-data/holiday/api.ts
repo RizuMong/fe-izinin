@@ -1,16 +1,20 @@
 import { client } from "@/services/auth/client"
 import type {
   Holiday,
+  HolidayResponse,
   CreateHolidayPayload,
   UpdateHolidayPayload,
   DeleteHolidayPayload,
 } from "./types"
 
 // GET LIST
-export const getHolidays = async (): Promise<Holiday[]> => {
-  const res = await client.get("/holiday")
+export const getHolidays = async (params?: {
+  page?: number
+  limit?: number
+}): Promise<HolidayResponse> => {
+  const res = await client.get("/holiday", { params })
 
-  return res.data.data
+  return res.data
 }
 
 // CREATE

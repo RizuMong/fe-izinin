@@ -9,10 +9,10 @@ import {
 import { toast } from "sonner"
 
 // GET LIST
-export const useAdjustmentList = () => {
+export const useAdjustmentList = (params?: { page?: number; limit?: number }) => {
   return useQuery({
-    queryKey: ["adjustment-time-off"],
-    queryFn: () => getAdjustmentList(),
+    queryKey: ["adjustment-time-off", params],
+    queryFn: () => getAdjustmentList(params),
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000, // 5 minutes
   })

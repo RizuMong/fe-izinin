@@ -1,14 +1,18 @@
 import { client } from "@/services/auth/client"
 import type {
   JobPosition,
+  JobPositionResponse,
   CreateJobPositionPayload,
   UpdateJobPositionPayload,
   DeleteJobPositionPayload,
 } from "./types"
 
-export const getJobPositionList = async (): Promise<JobPosition[]> => {
-  const res = await client.get("/job-position")
-  return res.data.data
+export const getJobPositionList = async (params?: {
+  page?: number
+  limit?: number
+}): Promise<JobPositionResponse> => {
+  const res = await client.get("/job-position", { params })
+  return res.data
 }
 
 export const createJobPosition = async (payload: CreateJobPositionPayload) => {

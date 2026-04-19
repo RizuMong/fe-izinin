@@ -1,16 +1,20 @@
 import { client } from "@/services/auth/client"
 import type {
   Afdeling,
+  AfdelingResponse,
   CreateAfdelingPayload,
   UpdateAfdelingPayload,
   DeleteAfdelingPayload,
 } from "./types"
 
 // GET LIST
-export const getAfdelingList = async (): Promise<Afdeling[]> => {
-  const res = await client.get("/afdeling")
+export const getAfdelingList = async (params?: {
+  page?: number
+  limit?: number
+}): Promise<AfdelingResponse> => {
+  const res = await client.get("/afdeling", { params })
 
-  return res.data.data
+  return res.data
 }
 
 // CREATE

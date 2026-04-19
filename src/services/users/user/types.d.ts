@@ -23,3 +23,15 @@ export type User = {
   updated_at: string
   is_anonymous: boolean
 }
+
+export type PaginationMeta = {
+  page: number
+  limit: number
+  total: number
+  totalPages: number
+}
+
+export type UserResponse = {
+  data: User[]
+  meta: PaginationMeta
+}

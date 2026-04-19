@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { Afdeling } from "./types"
+import { Afdeling, AfdelingResponse } from "./types"
 import {
   getAfdelingList,
   createAfdeling,
@@ -9,10 +9,10 @@ import {
 import { toast } from "sonner"
 
 // GET LIST
-export const useAfdelingList = () => {
-  return useQuery<Afdeling[]>({
-    queryKey: ["afdeling"],
-    queryFn: getAfdelingList,
+export const useAfdelingList = (params?: { page?: number; limit?: number }) => {
+  return useQuery<AfdelingResponse>({
+    queryKey: ["afdeling", params],
+    queryFn: () => getAfdelingList(params),
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000, // 5 minutes
   })

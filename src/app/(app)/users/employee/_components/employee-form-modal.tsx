@@ -168,7 +168,7 @@ export function EmployeeFormModal({
                                     <SelectValue placeholder="Select site" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {sites?.map((site) => (
+                                    {sites?.data?.map((site) => (
                                         <SelectItem key={site.id} value={site.id.toString()}>
                                             {site.name}
                                         </SelectItem>
@@ -190,7 +190,7 @@ export function EmployeeFormModal({
                                     <SelectValue placeholder="Select afdeling" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {afdelings?.map((afdeling) => (
+                                    {afdelings?.data?.map((afdeling) => (
                                         <SelectItem key={afdeling.id} value={afdeling.id.toString()}>
                                             {afdeling.name}
                                         </SelectItem>
@@ -212,7 +212,7 @@ export function EmployeeFormModal({
                                     <SelectValue placeholder="Select job position" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {positions?.map((position) => (
+                                    {positions?.data?.map((position) => (
                                         <SelectItem key={position.id} value={position.id.toString()}>
                                             {position.name}
                                         </SelectItem>

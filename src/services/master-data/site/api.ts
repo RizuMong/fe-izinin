@@ -1,16 +1,20 @@
 import { client } from "@/services/auth/client"
 import type {
   Site,
+  SiteResponse,
   CreateSitePayload,
   UpdateSitePayload,
   DeleteSitePayload,
 } from "./types"
 
 // GET LIST
-export const getSiteList = async (): Promise<Site[]> => {
-  const res = await client.get("/site")
+export const getSiteList = async (params?: {
+  page?: number
+  limit?: number
+}): Promise<SiteResponse> => {
+  const res = await client.get("/site", { params })
 
-  return res.data.data
+  return res.data
 }
 
 // CREATE

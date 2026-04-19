@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { JobPosition } from "./types"
+import { JobPosition, JobPositionResponse } from "./types"
 import {
   getJobPositionList,
   createJobPosition,
@@ -8,10 +8,13 @@ import {
 } from "./api"
 import { toast } from "sonner"
 
-export const useJobPositionList = () => {
-  return useQuery<JobPosition[]>({
-    queryKey: ["job-position"],
-    queryFn: getJobPositionList,
+export const useJobPositionList = (params?: {
+  page?: number
+  limit?: number
+}) => {
+  return useQuery<JobPositionResponse>({
+    queryKey: ["job-position", params],
+    queryFn: () => getJobPositionList(params),
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000,
   })
