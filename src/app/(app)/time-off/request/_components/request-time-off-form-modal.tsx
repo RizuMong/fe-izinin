@@ -20,8 +20,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Plus, Loader2 } from "lucide-react"
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Plus, Loader2, Search, Check, ChevronsUpDown } from "lucide-react"
 import { toast } from "sonner"
+import { cn } from "@/lib/utils"
 
 import { useCreateRequestTimeOff } from "@/services/time-off/request/hook"
 import { useEmployeeList } from "@/services/users/employee"
@@ -43,6 +49,17 @@ export function RequestTimeOffFormModal() {
   const createMutation = useCreateRequestTimeOff()
   const { data: employeeData, isLoading: employeesLoading } = useEmployeeList()
   const { data: timeoffData, isLoading: timeoffsLoading } = useTimeOffList()
+
+  const [employeeSearch, setEmployeeSearch] = useState("")
+  const [employeePopoverOpen, setEmployeePopoverOpen] = useState(false)
+
+  const employees = employeeData?.data || []
+  const filteredEmployees = employees.filter((emp: any) =>
+    emp.full_name.toLowerCase().includes(employeeSearch.toLowerCase()) ||
+    emp.npk.toLowerCase().includes(employeeSearch.toLowerCase())
+  )
+
+  const selectedEmployee = employees.find((emp: any) => emp.id === formData.employee_id)
 
   // Close dialog and reset form on success
   useEffect(() => {
@@ -96,26 +113,74 @@ export function RequestTimeOffFormModal() {
                 Loading employees...
               </div>
             ) : (
-              <Select
-                value={formData.employee_id ? formData.employee_id.toString() : ""}
-                onValueChange={(value) =>
-                  setFormData({
-                    ...formData,
-                    employee_id: parseInt(value) || 0,
-                  })
-                }
-              >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select Employee" />
-                </SelectTrigger>
-                <SelectContent className="w-full">
-                  {employeeData?.data?.map((employee: any) => (
-                    <SelectItem key={employee.id} value={employee.id.toString()}>
-                      {employee.full_name} (NPK: {employee.npk})
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <Popover open={employeePopoverOpen} onOpenChange={setEmployeePopoverOpen}>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    className="w-full justify-between h-10 px-3 font-normal"
+                  >
+                    {selectedEmployee ? (
+                      <span className="truncate">
+                        {selectedEmployee.full_name} (NPK: {selectedEmployee.npk})
+                      </span>
+                    ) : (
+                      <span className="text-muted-foreground">Select employee...</span>
+                    )}
+                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[var(--radix-popover-trigger-width)] p-0" align="start">
+                  <div className="flex items-center border-b px-3">
+                    <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+                    <input
+                      className="flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+                      placeholder="Search employee..."
+                      value={employeeSearch}
+                      onChange={(e) => setEmployeeSearch(e.target.value)}
+                    />
+                  </div>
+                  <div 
+                    className="max-h-60 overflow-y-auto p-1"
+                    onWheel={(e) => e.stopPropagation()}
+                  >
+                    {filteredEmployees.length === 0 ? (
+                      <div className="py-6 text-center text-sm text-muted-foreground">
+                        No employee found.
+                      </div>
+                    ) : (
+                      filteredEmployees.map((employee: any) => (
+                        <div
+                          key={employee.id}
+                          className={cn(
+                            "relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground transition-colors",
+                            formData.employee_id === employee.id && "bg-accent text-accent-foreground"
+                          )}
+                          onClick={() => {
+                            setFormData({
+                              ...formData,
+                              employee_id: employee.id,
+                            })
+                            setEmployeePopoverOpen(false)
+                            setEmployeeSearch("")
+                          }}
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              formData.employee_id === employee.id ? "opacity-100" : "opacity-0"
+                            )}
+                          />
+                          <div className="flex flex-col">
+                            <span>{employee.full_name}</span>
+                            <span className="text-xs text-muted-foreground">NPK: {employee.npk}</span>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </PopoverContent>
+              </Popover>
             )}
           </div>
 

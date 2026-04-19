@@ -29,10 +29,11 @@ import { useState, useEffect } from "react"
 
 const LEAVE_TYPES = [
     "CUTI TAHUNAN",
-    "CUTI SAKIT",
-    "CUTI MELAHIRKAN",
-    "CUTI DARURAT",
-    "CUTI MENIKAH",
+    "CUTI BESAR",
+    // "CUTI SAKIT",
+    // "CUTI MELAHIRKAN",
+    // "CUTI DARURAT",
+    // "CUTI MENIKAH",
 ]
 
 export function TimeOffFormModal({
