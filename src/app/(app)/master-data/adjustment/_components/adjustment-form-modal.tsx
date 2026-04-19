@@ -252,8 +252,8 @@ export function AdjustmentFormModal({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="w-full">
-                <SelectItem value="PENAMBAHAN">Increase</SelectItem>
-                <SelectItem value="PENGURANGAN">Decrease</SelectItem>
+                <SelectItem value="PENAMBAHAN">PENAMBAHAN</SelectItem>
+                <SelectItem value="PENGURANGAN">PENGURANGAN</SelectItem>
               </SelectContent>
             </Select>
           </div>
