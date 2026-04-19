@@ -35,10 +35,9 @@ export function AdjustmentDeleteDialog({
   return (
     <AlertDialogContent>
       <AlertDialogHeader>
-        <AlertDialogTitle>Hapus Adjustment?</AlertDialogTitle>
+        <AlertDialogTitle>Delete Adjustment?</AlertDialogTitle>
         <AlertDialogDescription>
-          Data yang dihapus tidak dapat dipulihkan. Pastikan Anda benar-benar
-          ingin menghapus adjustment ini.
+          Deleted adjustments cannot be recovered. Are you sure you want to delete this adjustment?
         </AlertDialogDescription>
       </AlertDialogHeader>
       <div className="flex justify-end gap-2">
@@ -50,7 +49,7 @@ export function AdjustmentDeleteDialog({
           disabled={deleteMutation.isPending}
           className="bg-red-600 hover:bg-red-700"
         >
-          {deleteMutation.isPending ? "Deleting..." : "Hapus"}
+          {deleteMutation.isPending ? "Deleting..." : "Delete"}
         </AlertDialogAction>
       </div>
     </AlertDialogContent>

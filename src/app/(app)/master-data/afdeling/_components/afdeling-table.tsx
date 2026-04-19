@@ -47,7 +47,7 @@ export function AfdelingTable() {
                         ) : !data || data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={4} className="p-0">
-                                    <EmptyState title="Tidak ada data afdeling" description="Belum ada data afdeling yang diAddkan." />
+                                    <EmptyState title="No Afdeling Data" description="No afdeling data has been added yet." />
                                 </TableCell>
                             </TableRow>
                         ) : (

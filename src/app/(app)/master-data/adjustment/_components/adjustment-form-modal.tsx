@@ -119,8 +119,8 @@ export function AdjustmentFormModal({
           </DialogTitle>
           <DialogDescription>
             {isEditMode
-              ? "Ubah data Adjustment"
-              : "Addkan Adjustment baru"}
+              ? "Update adjustment details"
+              : "Create a new quota adjustment"}
           </DialogDescription>
         </DialogHeader>
 
@@ -131,7 +131,7 @@ export function AdjustmentFormModal({
             {employeesLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Memuat data Employee...
+                Loading employee data...
               </div>
             ) : (
               <Select
@@ -144,7 +144,7 @@ export function AdjustmentFormModal({
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Employee" />
+                  <SelectValue placeholder="Select Employee" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {employeeData?.data?.map((employee: any) => (
@@ -163,7 +163,7 @@ export function AdjustmentFormModal({
             {timeoffsLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Memuat data cuti...
+                Loading time-off data...
               </div>
             ) : (
               <Select
@@ -176,7 +176,7 @@ export function AdjustmentFormModal({
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Cuti" />
+                  <SelectValue placeholder="Select Time Off" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {timeoffData?.data?.map((timeoff: any) => (
@@ -221,7 +221,7 @@ export function AdjustmentFormModal({
               }
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Pilih tahun" />
+                <SelectValue placeholder="Select year" />
               </SelectTrigger>
               <SelectContent className="w-full">
                 {Array.from({ length: 3 }, (_, idx) => {
@@ -252,14 +252,14 @@ export function AdjustmentFormModal({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="w-full">
-                <SelectItem value="PENAMBAHAN">Penambahan</SelectItem>
-                <SelectItem value="PENGURANGAN">Pengurangan</SelectItem>
+                <SelectItem value="PENAMBAHAN">Increase</SelectItem>
+                <SelectItem value="PENGURANGAN">Decrease</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Memuat..." : isEditMode ? "Perbarui" : "Submit"}
+            {isLoading ? "Processing..." : isEditMode ? "Update" : "Submit"}
           </Button>
         </form>
       </DialogContent>

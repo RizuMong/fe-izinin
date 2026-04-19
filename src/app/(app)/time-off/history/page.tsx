@@ -166,7 +166,7 @@ export default function TimeOffReportPage() {
               onValueChange={(val) => setFilters({ ...filters, employee_id: val === "ALL" ? "" : val })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={isEmployeeLoading ? "Memuat..." : "All Employees"} />
+                <SelectValue placeholder={isEmployeeLoading ? "Loading..." : "All Employees"} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">All Employees</SelectItem>
@@ -186,7 +186,7 @@ export default function TimeOffReportPage() {
               onValueChange={(val) => setFilters({ ...filters, timeoff_id: val === "ALL" ? "" : val })}
             >
               <SelectTrigger>
-                <SelectValue placeholder={isTimeoffLoading ? "Memuat..." : "All Time Off Type"} />
+                <SelectValue placeholder={isTimeoffLoading ? "Loading..." : "All Time Off Type"} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="ALL">All Time Off Type</SelectItem>
@@ -263,11 +263,11 @@ export default function TimeOffReportPage() {
           </TableHeader>
           <TableBody>
             {isLoading ? (
-              <TableSkeleton columns={6} />
+              <TableSkeleton columns={7} />
             ) : requests.length === 0 ? (
               <TableRow className="hover:bg-transparent">
-                <TableCell colSpan={6} className="p-0">
-                  <EmptyState title="History Time Off Kosong" description="Tidak ada data History Time Off yang sesuai dengan filter." />
+                <TableCell colSpan={7} className="p-0">
+                  <EmptyState title="History Time Off is Empty" description="No results found matching your filters." />
                 </TableCell>
               </TableRow>
             ) : (

@@ -49,7 +49,7 @@ export function AfdelingFormModal({
     const validateForm = () => {
         const newErrors: { name?: string } = {}
         if (!name.trim()) {
-            newErrors.name = "Name afdeling harus diisi"
+            newErrors.name = "Afdeling name is required"
         }
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
@@ -95,19 +95,19 @@ export function AfdelingFormModal({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Afdeling" : "Add Afdeling Baru"}
+                        {isEdit ? "Edit Afdeling" : "Add New Afdeling"}
                     </DialogTitle>                    <DialogDescription>
-                        {isEdit ? "Ubah data afdeling yang sudah ada" : "Addkan afdeling baru ke dalam sistem"}
+                        {isEdit ? "Modify existing afdeling information" : "Add a new afdeling to the system"}
                     </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="name" className="text-sm font-medium">
-                            Name Afdeling <span className="text-red-500">*</span>
+                            Afdeling Name <span className="text-red-500">*</span>
                         </Label>
                         <Input
                             id="name"
-                            placeholder="Masukkan Name afdeling"
+                            placeholder="Enter afdeling name"
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
@@ -135,7 +135,7 @@ export function AfdelingFormModal({
                         onClick={handleSubmit}
                         disabled={isLoading}
                     >
-                        {isLoading ? "Menyimpan..." : "Submit"}
+                        {isLoading ? "Saving..." : "Save"}
                     </Button>
                 </DialogFooter>
             </DialogContent>

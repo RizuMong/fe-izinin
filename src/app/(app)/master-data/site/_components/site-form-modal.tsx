@@ -51,7 +51,7 @@ export function SiteFormModal({
     const validateForm = () => {
         const newErrors: { name?: string } = {}
         if (!name.trim()) {
-            newErrors.name = "Name site harus diisi"
+            newErrors.name = "Site name is required"
         }
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
@@ -97,19 +97,19 @@ export function SiteFormModal({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Site" : "Add Site Baru"}
+                        {isEdit ? "Edit Site" : "Add New Site"}
                     </DialogTitle>                    <DialogDescription>
-                        {isEdit ? "Ubah data site yang sudah ada" : "Addkan site baru ke dalam sistem"}
+                        {isEdit ? "Modify existing site information" : "Add a new site to the system"}
                     </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="name" className="text-sm font-medium">
-                            Name Site <span className="text-red-500">*</span>
+                            Site Name <span className="text-red-500">*</span>
                         </Label>
                         <Input
                             id="name"
-                            placeholder="Masukkan Name site"
+                            placeholder="Enter site name"
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
@@ -137,7 +137,7 @@ export function SiteFormModal({
                         onClick={handleSubmit}
                         disabled={isLoading}
                     >
-                        {isLoading ? "Menyimpan..." : "Submit"}
+                        {isLoading ? "Saving..." : "Save"}
                     </Button>
                 </DialogFooter>
             </DialogContent>

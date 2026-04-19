@@ -49,7 +49,7 @@ export function JobPositionFormModal({
   const validateForm = () => {
     const newErrors: { name?: string } = {}
     if (!name.trim()) {
-      newErrors.name = "Name job position harus diisi"
+      newErrors.name = "Job position name is required"
     }
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
@@ -100,20 +100,20 @@ export function JobPositionFormModal({
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{isEdit ? "Edit Job Position" : "Add Job Position Baru"}</DialogTitle>
+          <DialogTitle>{isEdit ? "Edit Job Position" : "Add New Job Position"}</DialogTitle>
           <DialogDescription>
-            {isEdit ? "Ubah data job position yang sudah ada" : "Addkan job position baru ke dalam sistem"}
+            {isEdit ? "Modify existing job position information" : "Add a new job position to the system"}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="name" className="text-sm font-medium">
-              Name Job Position <span className="text-red-500">*</span>
+              Job Position Name <span className="text-red-500">*</span>
             </Label>
             <Input
               id="name"
-              placeholder="Masukkan Name job position"
+              placeholder="Enter job position name"
               value={name}
               onChange={(e) => {
                 setName(e.target.value)
@@ -141,7 +141,7 @@ export function JobPositionFormModal({
             onClick={handleSubmit}
             disabled={isLoading}
           >
-            {isLoading ? "Menyimpan..." : "Submit"}
+            {isLoading ? "Saving..." : "Save"}
           </Button>
         </DialogFooter>
       </DialogContent>

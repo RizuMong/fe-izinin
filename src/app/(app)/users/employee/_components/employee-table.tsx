@@ -21,7 +21,7 @@ import { EmployeeDeleteDialog } from "./employee-delete-dialog"
 export function EmployeeTable() {
     const { data, isLoading, error } = useEmployeeList()
 
-    if (error) return <div>Gagal memuat daftar Employee</div>
+    if (error) return <div>Failed to load employee list</div>
 
     return (
         <Card className="p-0 overflow-hidden">
@@ -29,11 +29,11 @@ export function EmployeeTable() {
                 <Table className="min-w-full">
                     <TableHeader className="bg-muted/50">
                         <TableRow>
-                            <TableHead>Name Lengkap</TableHead>
+                            <TableHead>Full Name</TableHead>
                             <TableHead>NPK</TableHead>
                             <TableHead>Site</TableHead>
                             <TableHead>Afdeling</TableHead>
-                            <TableHead>Posisi Pekerjaan</TableHead>
+                            <TableHead>Job Position</TableHead>
                             <TableHead>TMK</TableHead>
                             <TableHead className="w-25">Action</TableHead>
                         </TableRow>
@@ -45,7 +45,7 @@ export function EmployeeTable() {
                         ) : !data?.data || data.data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={7} className="p-0">
-                                    <EmptyState title="Tidak ada Employee" description="Data Employee belum diAddkan." />
+                                    <EmptyState title="No Employees Found" description="No employee data added yet." />
                                 </TableCell>
                             </TableRow>
                         ) : (

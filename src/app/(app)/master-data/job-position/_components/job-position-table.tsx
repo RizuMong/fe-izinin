@@ -35,10 +35,10 @@ export function JobPositionTable() {
         return (
             <div className="flex flex-col items-center justify-center py-12">
                 <div className="text-red-500 mb-4">
-                    Terjadi kesalahan saat memuat data
+                    An error occurred while loading data
                 </div>
                 <Button onClick={() => refetch()} variant="outline">
-                    Coba lagi
+                    Try again
                 </Button>
             </div>
         )
@@ -63,7 +63,7 @@ export function JobPositionTable() {
                         ) : !data || data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={4} className="p-0">
-                                    <EmptyState title="Tidak ada data posisi" description="Belum ada data posisi pekerjaan yang diAddkan." />
+                                    <EmptyState title="No Position Data" description="No job position data has been added yet." />
                                 </TableCell>
                             </TableRow>
                         ) : (

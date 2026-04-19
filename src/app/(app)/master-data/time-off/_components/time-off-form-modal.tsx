@@ -71,10 +71,10 @@ export function TimeOffFormModal({
     const validateForm = () => {
         const newErrors: { name?: string; timeoffType?: string } = {}
         if (!name.trim()) {
-            newErrors.name = "Name cuti harus diisi"
+            newErrors.name = "Time-off type name is required"
         }
         if (!timeoffType) {
-            newErrors.timeoffType = "Time Off Type harus dipilih"
+            newErrors.timeoffType = "Please select a time-off category"
         }
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
@@ -127,19 +127,19 @@ export function TimeOffFormModal({
             <DialogContent>
                 <DialogHeader>
                     <DialogTitle>
-                        {isEdit ? "Edit Cuti" : "Add Cuti Baru"}
+                        {isEdit ? "Edit Time-off Type" : "Add New Time-off Type"}
                     </DialogTitle>                    <DialogDescription>
-                        {isEdit ? "Ubah data cuti yang sudah ada" : "Addkan cuti baru ke dalam sistem"}
+                        {isEdit ? "Modify existing time-off information" : "Add a new time-off type to the system"}
                     </DialogDescription>                </DialogHeader>
 
                 <div className="space-y-4">
                     <div className="space-y-2">
                         <Label htmlFor="name" className="text-sm font-medium">
-                            Name Cuti <span className="text-red-500">*</span>
+                            Time-off Name <span className="text-red-500">*</span>
                         </Label>
                         <Input
                             id="name"
-                            placeholder="Masukkan Name cuti"
+                            placeholder="Enter time-off name"
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
@@ -166,7 +166,7 @@ export function TimeOffFormModal({
                             disabled={isLoading}
                         >
                             <SelectTrigger className={errors.timeoffType ? "border-red-500" : ""}>
-                                <SelectValue placeholder="Pilih Time Off Type" />
+                                <SelectValue placeholder="Select Category" />
                             </SelectTrigger>
                             <SelectContent>
                                 {LEAVE_TYPES.map((type) => (
@@ -191,12 +191,12 @@ export function TimeOffFormModal({
                     >
                         Cancel
                     </Button>
-                    {/* <Button
+                    <Button
                         onClick={handleSubmit}
                         disabled={isLoading}
                     >
-                        {isLoading ? "Menyimpan..." : "Submit"}
-                    </Button> */}
+                        {isLoading ? "Saving..." : "Save"}
+                    </Button>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

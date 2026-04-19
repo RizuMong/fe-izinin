@@ -55,13 +55,13 @@ export function RequestTimeOffFormModal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!formData.employee_id) return toast.error("Employee Mandatory dipilih")
-    if (!formData.timeoff_id) return toast.error("Time Off Mandatory dipilih")
-    if (!formData.start_date) return toast.error("Start date Mandatory diisi")
-    if (!formData.end_date) return toast.error("End date Mandatory diisi")
+    if (!formData.employee_id) return toast.error("Please select an employee.")
+    if (!formData.timeoff_id) return toast.error("Please select a time-off type.")
+    if (!formData.start_date) return toast.error("Start date is required.")
+    if (!formData.end_date) return toast.error("End date is required.")
 
     if (new Date(formData.start_date) > new Date(formData.end_date)) {
-      return toast.error("Start date tidak boleh lebih dari end date")
+      return toast.error("Start date cannot be after end date.")
     }
 
     createMutation.mutate(formData)
@@ -93,7 +93,7 @@ export function RequestTimeOffFormModal() {
             {employeesLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Memuat Employee...
+                Loading employees...
               </div>
             ) : (
               <Select
@@ -106,7 +106,7 @@ export function RequestTimeOffFormModal() {
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Employee" />
+                  <SelectValue placeholder="Select Employee" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {employeeData?.data?.map((employee: any) => (
@@ -125,7 +125,7 @@ export function RequestTimeOffFormModal() {
             {timeoffsLoading ? (
               <div className="flex items-center gap-2 p-2 text-sm text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Memuat Time Off Type...
+                Loading time-off types...
               </div>
             ) : (
               <Select
@@ -138,7 +138,7 @@ export function RequestTimeOffFormModal() {
                 }
               >
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Pilih Time Off Type" />
+                  <SelectValue placeholder="Select Time Off Type" />
                 </SelectTrigger>
                 <SelectContent className="w-full">
                   {timeoffData?.data?.map((timeoff: any) => (
@@ -191,7 +191,7 @@ export function RequestTimeOffFormModal() {
           </div>
 
           <Button type="submit" disabled={isLoading} className="w-full">
-            {isLoading ? "Memuat..." : "Submit Pengajuan"}
+            {isLoading ? "Submitting..." : "Submit Request"}
           </Button>
         </form>
       </DialogContent>

@@ -24,9 +24,9 @@ export function UserTable() {
       <Card className="p-0 overflow-hidden">
         <CardContent className="p-6">
           <div className="text-center space-y-4">
-            <p className="text-red-500 font-medium">Gagal memuat data</p>
+            <p className="text-red-500 font-medium">Failed to load data</p>
             <Button onClick={() => refetch()} variant="outline">
-              Coba lagi
+              Try again
             </Button>
           </div>
         </CardContent>
@@ -53,7 +53,7 @@ export function UserTable() {
             ) : !data || data.length === 0 ? (
               <TableRow className="hover:bg-transparent">
                 <TableCell colSpan={4} className="p-0">
-                  <EmptyState title="Tidak ada data akun" description="Belum ada data akun yang diAddkan." />
+                  <EmptyState title="No account data" description="No accounts found." />
                 </TableCell>
               </TableRow>
             ) : (

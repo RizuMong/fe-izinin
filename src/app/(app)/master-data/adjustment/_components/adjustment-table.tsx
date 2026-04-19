@@ -42,10 +42,10 @@ export function AdjustmentTable() {
       <Card>
         <CardHeader>
           <CardTitle>Error</CardTitle>
-          <CardDescription>Gagal memuat data adjustment</CardDescription>
+          <CardDescription>Failed to load adjustment data</CardDescription>
         </CardHeader>
         <CardContent>
-          <Button onClick={() => refetch()}>Coba Lagi</Button>
+          <Button onClick={() => refetch()}>Try Again</Button>
         </CardContent>
       </Card>
     )
@@ -74,7 +74,7 @@ export function AdjustmentTable() {
               ) : adjustments.length === 0 ? (
                 <TableRow className="hover:bg-transparent">
                   <TableCell colSpan={7} className="p-0">
-                    <EmptyState title="Tidak ada data adjustment" description="Belum ada data adjustment kuota cuti." />
+                    <EmptyState title="No Adjustments Found" description="No quota adjustment data has been added yet." />
                   </TableCell>
                 </TableRow>
               ) : (

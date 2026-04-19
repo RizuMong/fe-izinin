@@ -26,13 +26,13 @@ export function SiteTable() {
             <Card className="p-6">
                 <div className="text-center space-y-4">
                     <div className="text-red-500">
-                        Terjadi kesalahan saat memuat data
+                        An error occurred while loading data
                     </div>
                     <button
                         onClick={() => refetch()}
                         className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
                     >
-                        Coba lagi
+                        Try again
                     </button>
                 </div>
             </Card>
@@ -58,7 +58,7 @@ export function SiteTable() {
                         ) : !data || data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={4} className="p-0">
-                                    <EmptyState title="Tidak ada data site" description="Belum ada data site (lokasi) yang diAddkan." />
+                                    <EmptyState title="No Site Data" description="No site (location) data has been added yet." />
                                 </TableCell>
                             </TableRow>
                         ) : (

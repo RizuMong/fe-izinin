@@ -22,7 +22,7 @@ import { HolidayDeleteDialog } from "./holiday-delete-dialog"
 export function HolidayTable() {
     const { data, isLoading, error } = useHolidayList()
 
-    if (error) return <div>Gagal memuat daftar libur</div>
+    if (error) return <div>Failed to load holiday list</div>
 
     return (
         <Card className="p-0 overflow-hidden">
@@ -43,7 +43,7 @@ export function HolidayTable() {
                         ) : !data || data.length === 0 ? (
                             <TableRow className="hover:bg-transparent">
                                 <TableCell colSpan={4} className="p-0">
-                                    <EmptyState title="Tidak ada hari libur" description="Data hari libur belum diAddkan." />
+                                    <EmptyState title="No Holidays Found" description="No holiday data has been added yet." />
                                 </TableCell>
                             </TableRow>
                         ) : (

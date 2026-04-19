@@ -78,7 +78,7 @@ export function ApprovalTable() {
     if (!rejectRequest) return
     // Strict validation for reject
     if (!comment.trim()) {
-      toast.error("Note Mandatory diisi untuk melakukan reject.")
+      toast.error("Reason is required for rejection.")
       return
     }
 
@@ -96,7 +96,7 @@ export function ApprovalTable() {
   if (isError) {
     return (
       <div className="flex justify-center items-center h-48 border rounded-md bg-white text-destructive">
-        Terjadi kesalahan saat memuat data persetujuan.
+        An error occurred while loading approval data.
       </div>
     )
   }
@@ -123,7 +123,7 @@ export function ApprovalTable() {
           ) : requests.length === 0 ? (
             <TableRow className="hover:bg-transparent">
               <TableCell colSpan={7} className="p-0">
-                <EmptyState title="Tidak ada data persetujuan" description="Belum ada data Request Time Off untuk disetujui." />
+                <EmptyState title="No Approvals Pending" description="There are no time-off requests waiting for your approval." />
               </TableCell>
             </TableRow>
           ) : (

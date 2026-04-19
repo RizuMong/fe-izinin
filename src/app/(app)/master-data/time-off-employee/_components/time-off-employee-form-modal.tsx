@@ -164,8 +164,8 @@ export function TimeOffEmployeeFormModal({
           </DialogTitle>
           <DialogDescription>
             {isEdit
-              ? "Ubah data leave employee yang sudah ada"
-              : "Addkan data leave employee baru"}
+              ? "Modify existing employee leave entitlement"
+              : "Register new employee leave entitlement"}
           </DialogDescription>
         </DialogHeader>
 
@@ -184,7 +184,7 @@ export function TimeOffEmployeeFormModal({
                     placeholder={
                       selectedEmployee
                         ? selectedEmployee.full_name
-                        : "Pilih employee"
+                        : "Select employee"
                     }
                   />
                 </SelectTrigger>
@@ -210,7 +210,7 @@ export function TimeOffEmployeeFormModal({
                     placeholder={
                       selectedTimeOff
                         ? selectedTimeOff.name
-                        : "Pilih time off"
+                        : "Select time off"
                     }
                   />
                 </SelectTrigger>
@@ -307,7 +307,7 @@ export function TimeOffEmployeeFormModal({
             {loadingCreate || loadingUpdate
               ? "Loading..."
               : isEdit
-                ? "Submit Perubahan"
+                ? "Save Changes"
                 : "Submit"}
           </Button>
         </DialogFooter>

@@ -62,7 +62,7 @@ export function RequestTimeOffTable() {
   if (isError) {
     return (
       <div className="flex justify-center items-center h-48 border rounded-md bg-white text-destructive">
-        Terjadi kesalahan saat memuat data.
+        An error occurred while loading data.
       </div>
     )
   }
@@ -88,8 +88,8 @@ export function RequestTimeOffTable() {
           {requests.length === 0 ? (
             <TableRow>
               {/* colSpan updated to 7 to span across all headers including Action */}
-              <TableCell colSpan={7} className="text-center h-24 text-muted-foreground">
-                Tidak ada data Request Time Off.
+              <TableCell colSpan={8} className="text-center h-24 text-muted-foreground">
+                No time-off requests found.
               </TableCell>
             </TableRow>
           ) : (
