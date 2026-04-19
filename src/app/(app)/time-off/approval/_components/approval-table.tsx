@@ -29,8 +29,9 @@ import { toast } from "sonner"
 import {
   useApprovalRequestTimeOffList,
   useApproveRequestTimeOff,
-  useRejectRequestTimeOff // <-- new hook
+  useRejectRequestTimeOff
 } from "@/services/time-off/request/hook"
+import { DataTablePagination } from "@/components/ui/data-table-pagination"
 import { ApprovalDetailModal } from "./approval-detail-modal"
 import type { RequestTimeOff } from "@/services/time-off/request/types"
 
@@ -50,7 +51,10 @@ const getStatusBadge = (status: string) => {
 }
 
 export function ApprovalTable() {
-  const { data, isLoading, isError } = useApprovalRequestTimeOffList()
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(10)
+
+  const { data, isLoading, isError } = useApprovalRequestTimeOffList({ page, limit })
   const approveMutation = useApproveRequestTimeOff()
   const rejectMutation = useRejectRequestTimeOff()
 
@@ -102,6 +106,7 @@ export function ApprovalTable() {
   }
 
   const requests = data?.data || []
+  const meta = data?.meta
 
   return (
     <div className="w-full min-w-0 rounded-md border bg-white overflow-hidden">
@@ -244,6 +249,18 @@ export function ApprovalTable() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+      {meta && (
+        <div className="pt-4">
+          <DataTablePagination 
+            meta={meta} 
+            onPageChange={setPage} 
+            onLimitChange={(l) => {
+              setLimit(l)
+              setPage(1)
+            }} 
+          />
+        </div>
+      )}
     </div>
   )
 }

@@ -4,20 +4,26 @@ import { toast } from "sonner"
 import { FilterRequestTimeOffParams } from "./types"
 
 // GET LIST
-export const useRequestTimeOffList = () => {
+export const useRequestTimeOffList = (params?: {
+  page?: number
+  limit?: number
+}) => {
   return useQuery({
-    queryKey: ["time-off-request"],
-    queryFn: () => getRequestTimeOffList(),
+    queryKey: ["time-off-request", params],
+    queryFn: () => getRequestTimeOffList(params),
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000, // 5 minutes
   })
 }
 
 // GET APPROVAL LIST
-export const useApprovalRequestTimeOffList = () => {
+export const useApprovalRequestTimeOffList = (params?: {
+  page?: number
+  limit?: number
+}) => {
   return useQuery({
-    queryKey: ["time-off-request", "approval"], 
-    queryFn: () => getApprovalRequestTimeOffList(),
+    queryKey: ["time-off-request", "approval", params], 
+    queryFn: () => getApprovalRequestTimeOffList(params),
     refetchOnWindowFocus: true,
     staleTime: 5 * 60 * 1000, // 5 minutes
   })
