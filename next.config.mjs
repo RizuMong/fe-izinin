@@ -5,7 +5,7 @@ const nextConfig = {
 
   async rewrites() {
     const rawUrl =
-      process.env.NEXT_PUBLIC_API_URL || "https://be-izinin-production.up.railway.app"
+      process.env.NEXT_PUBLIC_API_URL || "be-izinin.vercel.app"
     const baseUrl = rawUrl.replace(/\/$/, "")
 
     return [
